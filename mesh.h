@@ -5,10 +5,14 @@
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLVertexArrayObject>
-
+#include <QVector3D>
+#include <QQuaternion>
 #include "vertex.h"
 
 namespace cgl {
+/*! \class Mesh
+ * \brief This class manage Vertex
+ */
 class Mesh : public QObject
 {
     Q_OBJECT
@@ -19,41 +23,52 @@ public:
     const QVector<Vertex>& vertices() const;
     int size() const;
     int count() const;
-
-
     void addVertex(const Vertex& v);
+    void addVertex(float x, float y, float z);
+    void addVertex(float x, float y, float z, const QColor& col);
 
-
-     QMatrix4x4 * transform();
-
-    void create();
-    void bind();
-    void release();
-
-    // draw mode
-    GLenum mode();
+    GLenum mode() const;
     void setMode(GLenum m);
 
+    // return the Model matrix transformation
+    const QMatrix4x4& model() const;
 
+    //Create a Buffer and a VBO
+    void create();
 
+    // Bind the VBO
+    void bind();
 
+    // Release the VBO
+    void release();
+
+    // return the shaders programs of the mesh
     QOpenGLShaderProgram * shaders();
 
+    // define a specific shaders for the mesh
     void setShaders(const QString& vertexFile, const QString& fragmentFile);
     void setDefaultShaders();
 
 
+    // reset the model by the identity matrix
+    void resetTransform();
+    void rotate(const QQuaternion & quaternion);
+    void rotate(float angle, float x, float y, float z = 0.0f);
+    void rotate(float angle, const QVector3D& vector);
+    void scale(const QVector3D & vector);
+    void scale(float factor);
+    void translate(float x, float y, float z=0);
+    void translate(const QVector3D& vector);
+
+
 
 private:
-QVector<Vertex> mVertices;
-
-
-QOpenGLBuffer mBuffer;
-QOpenGLVertexArrayObject mVao;
-QOpenGLShaderProgram * mProgram;
-QMatrix4x4 mTransform;
-
-GLenum mMode;
+    QVector<Vertex> mVertices;
+    QOpenGLBuffer mBuffer;
+    QOpenGLVertexArrayObject mVao;
+    QOpenGLShaderProgram * mProgram;
+    QMatrix4x4 mModel;
+    GLenum mMode;
 
 };
 

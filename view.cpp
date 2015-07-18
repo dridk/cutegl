@@ -22,6 +22,18 @@ View::View()
 
     connect(mLogger,SIGNAL(messageLogged(QOpenGLDebugMessage)),this,SLOT(printLog(QOpenGLDebugMessage)));
 
+    mAnim = new QVariantAnimation(this);
+    mAnim->setStartValue(0);
+    mAnim->setEndValue(3600);
+
+
+    mAnim->setDuration(20000);
+    mAnim->setEasingCurve(QEasingCurve::OutBounce);
+
+    connect(mAnim,SIGNAL(valueChanged(QVariant)),this,SLOT(anim(QVariant)));
+
+    mAnim->start();
+
 }
 
 void View::initializeGL()
@@ -75,17 +87,19 @@ void View::keyPressEvent(QKeyEvent *event)
     if (event->key() == Qt::Key_Left)
     {
         qDebug()<<"move";
-        mesh->transform()->rotate(2, QVector3D(-1,0,0));
-        qDebug()<<*(mesh->transform());
+        mesh->rotate(2, QVector3D(-1,0,0));
+
         update();
     }
 
 
     if (event->key() == Qt::Key_Right)
     {
+        mesh->rotate(-2, QVector3D(-1,0,0));
+
         qDebug()<<"move";
-        mesh->transform()->rotate(-2, QVector3D(1,0,0));
-        qDebug()<<*(mesh->transform());
+
+
         update();
     }
 
@@ -94,6 +108,16 @@ void View::keyPressEvent(QKeyEvent *event)
 void View::printLog(const QOpenGLDebugMessage &msg)
 {
     qDebug()<<msg.id()<<" "<<msg.message();
+
+}
+
+void View::anim(const QVariant &value)
+{
+
+    mesh->resetTransform();
+    mesh->rotate(value.toFloat()/10.0, QVector3D(-1,0,0));
+
+    update();
 
 }
 

@@ -7,6 +7,9 @@
 #include "rectmesh.h"
 #include "cubemesh.h"
 #include <QKeyEvent>
+
+#include <QVariantAnimation>
+
 namespace cgl{
 
 class Scene;
@@ -31,7 +34,7 @@ protected:
 protected slots:
   void printLog(const QOpenGLDebugMessage& msg);
 
-
+    void anim(const QVariant& value);
 
 
 private:
@@ -39,6 +42,7 @@ Scene * mScene;
 CubeMesh * mesh;
 QOpenGLDebugLogger * mLogger;
 
+QVariantAnimation * mAnim;
 
 
 };

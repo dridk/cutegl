@@ -8,6 +8,9 @@
 #include "view.h"
 #include "axismesh.h"
 namespace cgl {
+/*! \class Scene
+ * \brief This class manage a collection of mesh
+ */
 class Scene : public QObject
 {
     Q_OBJECT
@@ -16,13 +19,28 @@ public:
     void addMesh(Mesh * mesh);
     void removeMesh(Mesh * mesh);
     QList<Mesh *> meshs() const;
+    int count() const;
 
     void setContext(QOpenGLContext * context);
     QOpenGLContext * context();
 
-    void createMeshs();
-    void draw();
+    //set perspective projection
     void setPerspective(float verticalAngle, float aspectRatio, float nearPlane, float farPlane);
+
+    // set ortho projection
+    void setOrtho(float left, float right, float bottom, float top, float nearPlane, float farPlane);
+
+    // set Camera
+    void lookAt(const QVector3D & eye, const QVector3D & center, const QVector3D & up);
+
+
+    // Call mesh->create() for all mesh
+    void createMeshs();
+
+    // Draw all meshs
+    void draw();
+
+
 
 
 private:

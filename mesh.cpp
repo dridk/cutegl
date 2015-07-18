@@ -1,56 +1,72 @@
 #include "mesh.h"
 namespace cgl {
+
 Mesh::Mesh(QObject * parent )
     :QObject(parent)
 {
     mProgram = new QOpenGLShaderProgram(this);
-    mTransform.setToIdentity();
-
     setMode(GL_TRIANGLE_FAN);
-
+    resetTransform();
 }
+//----------------------------------------------------------
 
 Mesh::~Mesh()
 {
     mBuffer.destroy();
     mVao.destroy();
 }
-
-
+//----------------------------------------------------------
 
 void cgl::Mesh::setVertices(const QVector<Vertex> &vertices)
 {
     mVertices = vertices;
 }
+//----------------------------------------------------------
 
 const QVector<Vertex> &Mesh::vertices() const
 {
     return mVertices;
 }
+//----------------------------------------------------------
 
 int Mesh::size() const
 {
     return count() * sizeof(Vertex);
 }
+//----------------------------------------------------------
 
 int Mesh::count() const
 {
     return mVertices.count();
 }
+//----------------------------------------------------------
 
 void Mesh::addVertex(const Vertex &v)
 {
- mVertices.append(v);
+    mVertices.append(v);
 }
+//----------------------------------------------------------
 
-QMatrix4x4 *Mesh::transform()
+void Mesh::addVertex(float x, float y, float z)
 {
-    return &mTransform;
+    addVertex(Vertex(x,y,z));
 }
+//----------------------------------------------------------
+
+void Mesh::addVertex(float x, float y, float z, const QColor &col)
+{
+    addVertex(Vertex(x,y,z,col));
+}
+//----------------------------------------------------------
+
+const QMatrix4x4& Mesh::model() const
+{
+    return mModel;
+}
+//----------------------------------------------------------
 
 void cgl::Mesh::create()
 {
-
     // Create buffer and send it to graphics card
     mBuffer.create();
     mBuffer.bind();
@@ -69,38 +85,41 @@ void cgl::Mesh::create()
     shaders()->enableAttributeArray("color");
     shaders()->setAttributeBuffer("color",GL_FLOAT,3*4 ,3, sizeof(Vertex));
 
-
-
-
     //---}
     mVao.release();
 
 }
+//----------------------------------------------------------
 
 void Mesh::bind()
 {
     mVao.bind();
 }
+//----------------------------------------------------------
 
 void Mesh::release()
 {
     mVao.release();
 }
+//----------------------------------------------------------
 
-GLenum Mesh::mode()
+GLenum Mesh::mode() const
 {
     return mMode;
 }
+//----------------------------------------------------------
 
 void Mesh::setMode(GLenum m)
 {
-   mMode = m;
+    mMode = m;
 }
+//----------------------------------------------------------
 
 QOpenGLShaderProgram *Mesh::shaders()
 {
     return mProgram;
 }
+//----------------------------------------------------------
 
 void Mesh::setShaders(const QString &vertexFile, const QString &fragmentFile)
 {
@@ -110,10 +129,54 @@ void Mesh::setShaders(const QString &vertexFile, const QString &fragmentFile)
     mProgram->link();
 
 }
+//----------------------------------------------------------
 
 void Mesh::setDefaultShaders()
 {
     setShaders(":/shaders/default_vertex.vsh",":/shaders/default_fragment.fsh");
 }
+//----------------------------------------------------------
+//--------------TRANSFORM METHODS---------------------------
 
+void Mesh::resetTransform()
+{
+    mModel.setToIdentity();
+}
+//----------------------------------------------------------
+
+void Mesh::rotate(const QQuaternion &quaternion)
+{
+    mModel.rotate(quaternion);
+}
+//----------------------------------------------------------
+void Mesh::rotate(float angle, float x, float y, float z)
+{
+    mModel.rotate(angle,x,y,z);
+}
+
+void Mesh::rotate(float angle, const QVector3D &vector)
+{
+    mModel.rotate(angle,vector);
+}
+//----------------------------------------------------------
+void Mesh::scale(const QVector3D &vector)
+{
+    mModel.scale(vector);
+}
+//----------------------------------------------------------
+void Mesh::scale(float factor)
+{
+    mModel.scale(factor);
+}
+//----------------------------------------------------------
+void Mesh::translate(float x, float y, float z)
+{
+    mModel.translate(x,y,z);
+}
+
+void Mesh::translate(const QVector3D &vector)
+{
+    mModel.translate(vector);
+}
+//----------------------------------------------------------
 }
