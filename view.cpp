@@ -19,6 +19,7 @@ View::View()
 
 
     resize(800,600);
+    lastPos = QPoint(400,300);
 
     connect(mLogger,SIGNAL(messageLogged(QOpenGLDebugMessage)),this,SLOT(printLog(QOpenGLDebugMessage)));
 
@@ -34,10 +35,16 @@ View::View()
 
     mAnim->start();
 
-    mCamera = QVector3D(5,5,5);
+    mCameraPos   = QVector3D(0,0,3);
+    mCameraFront = QVector3D(0,0,-1);
+    mCameraUp    = QVector3D(0,1,0);
 
     setMouseGrabEnabled(true);
     mClick = false;
+
+    yaw = -90.0f;
+    pitch = 0.0f;
+    aspect = 45.0f;
 }
 
 void View::initializeGL()
@@ -46,7 +53,6 @@ void View::initializeGL()
     setDebugger(true);
 
     mScene->setContext(context());
-    mScene->setPerspective(45.0, ((double)width()) / height(), 1, 100.0f);
 
     mesh = new CubeMesh(this);
 
@@ -62,9 +68,8 @@ void View::initializeGL()
 
 void View::paintGL()
 {
-
-    mScene->lookAt(mCamera, QVector3D(0,0,0), QVector3D(0,1,0));
-
+    mScene->setPerspective(aspect, ((double)width()) / height(), 1, 100.0f);
+    mScene->lookAt(mCameraPos, mCameraPos + mCameraFront, mCameraUp);
     mScene->draw();
 
 
@@ -89,32 +94,35 @@ void View::setDebugger(bool active)
 void View::keyPressEvent(QKeyEvent *event)
 {
 
-    if (event->key() == Qt::Key_Up)
+    float cameraSpeed = 2;
+
+    if (event->key() == Qt::Key_Z)
     {
-        qDebug()<<"move";
-        mCamera.setX(mCamera.x() - 2);
+        mCameraPos += cameraSpeed * mCameraFront;
         update();
     }
 
-    if (event->key() == Qt::Key_Down)
+    if (event->key() == Qt::Key_S)
     {
-        qDebug()<<"move";
-        mCamera.setX(mCamera.x() + 2);
+        mCameraPos -= cameraSpeed * mCameraFront;
         update();
     }
 
-    if (event->key() == Qt::Key_Right)
+    if (event->key() == Qt::Key_Q)
     {
-        mesh->rotate(-2, QVector3D(-1,0,0));
-        qDebug()<<"move";
+
+        QVector3D v = QVector3D::crossProduct(mCameraFront, mCameraUp);
+        v.normalize();
+        mCameraPos-= v * cameraSpeed;
         update();
     }
 
 
-    if (event->key() == Qt::Key_Left)
+    if (event->key() == Qt::Key_D)
     {
-        mesh->rotate(-2, QVector3D(-1,0,0));
-        qDebug()<<"move";
+        QVector3D v = QVector3D::crossProduct(mCameraFront, mCameraUp);
+        v.normalize();
+        mCameraPos+= v * cameraSpeed;
         update();
     }
 }
@@ -137,23 +145,34 @@ void View::mouseMoveEvent(QMouseEvent * event)
     if (mClick)
     {
 
-        oldPos = event->pos();
-        QPoint currPos = event->pos();
-        if (event->pos().x() < 60)
-            currPos.setX(60);
+        float xOffset  =  event->pos().x() - lastPos.x() ;
+        float yOffset  =  lastPos.y() - event->pos().y();
 
-        if (event->pos().y() > 450)
-            currPos.setY(450);
+        QPointF offset(xOffset,yOffset);
 
-        QPoint diff = currPos - oldPos;
+        lastPos = event->pos();
 
-        if (diff.x() > 0)
-            angle += 3.0f;
-        else if (diff.x() < 0)
-            angle -= 3.0f;
+        float sensitivity = 0.05f;
+
+        offset    *= sensitivity;
+
+        yaw   += offset.x();
+        pitch += offset.y();
+
+        if(pitch > 89.0f)
+            pitch =  89.0f;
+        if(pitch < -89.0f)
+            pitch = -89.0f;
 
 
+        float x = qCos(qDegreesToRadians(pitch))  * cos(qDegreesToRadians(yaw));
+        float y = qSin(qDegreesToRadians(pitch));
+        float z = qCos(qDegreesToRadians(pitch))  * sin(qDegreesToRadians(yaw));
 
+        mCameraFront = QVector3D(x,y,z);
+        mCameraFront.normalize();
+
+        update();
 
     }
 }
@@ -161,6 +180,21 @@ void View::mouseMoveEvent(QMouseEvent * event)
 void View::mouseReleaseEvent(QMouseEvent *)
 {
     mClick = false;
+}
+
+void View::wheelEvent(QWheelEvent * event)
+{
+
+    qDebug()<<event->angleDelta()<<aspect;
+
+    if(aspect >= 1.0f && aspect <= 45.0f)
+      aspect -= event->delta()/120;
+    if(aspect <= 1.0f)
+      aspect = 1.0f;
+    if(aspect >= 45.0f)
+      aspect = 45.0f;
+
+    update();
 }
 
 void View::printLog(const QOpenGLDebugMessage &msg)

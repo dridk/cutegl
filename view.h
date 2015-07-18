@@ -7,6 +7,7 @@
 #include "rectmesh.h"
 #include "cubemesh.h"
 #include <QKeyEvent>
+#include <QWheelEvent>
 
 #include <QVariantAnimation>
 
@@ -33,6 +34,7 @@ protected:
   void mousePressEvent(QMouseEvent *);
   void mouseMoveEvent(QMouseEvent *);
   void mouseReleaseEvent(QMouseEvent*);
+  void wheelEvent(QWheelEvent *);
 
 protected slots:
   void printLog(const QOpenGLDebugMessage& msg);
@@ -45,11 +47,15 @@ Scene * mScene;
 CubeMesh * mesh;
 QOpenGLDebugLogger * mLogger;
 QVariantAnimation * mAnim;
-QVector3D mCamera;
+QVector3D mCameraPos;
+QVector3D mCameraFront;
+QVector3D mCameraUp;
 
 bool mClick;
-QPoint oldPos;
-float angle;
+QPointF lastPos;
+float yaw;
+float pitch;
+float aspect;
 
 };
 

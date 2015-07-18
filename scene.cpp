@@ -109,12 +109,14 @@ void Scene::draw()
 
 void Scene::setPerspective(float verticalAngle, float aspectRatio, float nearPlane, float farPlane)
 {
+    mProjection.setToIdentity();
     mProjection.perspective(verticalAngle,aspectRatio,nearPlane,farPlane);
 }
 //-----------------------------------------
 
 void Scene::setOrtho(float left, float right, float bottom, float top, float nearPlane, float farPlane)
 {
+    mProjection.setToIdentity();
     mProjection.ortho(left,right,bottom,top,nearPlane, farPlane);
 }
 //-----------------------------------------
