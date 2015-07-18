@@ -7,6 +7,7 @@
 #include <QOpenGLVertexArrayObject>
 #include <QVector3D>
 #include <QQuaternion>
+#include <QOpenGLTexture>
 #include "vertex.h"
 
 namespace cgl {
@@ -26,9 +27,10 @@ public:
     void addVertex(const Vertex& v);
     void addVertex(float x, float y, float z);
     void addVertex(float x, float y, float z, const QColor& col);
-
     GLenum mode() const;
     void setMode(GLenum m);
+    void setTexture(const QImage&  image);
+    QOpenGLTexture * texture();
 
     // return the Model matrix transformation
     const QMatrix4x4& model() const;
@@ -36,14 +38,16 @@ public:
     //Create a Buffer and a VBO
     void create();
 
-    // Bind the VBO
+    // Bind the VBO & texture
     void bind();
 
-    // Release the VBO
+    // Release the VBO & texture
     void release();
 
     // return the shaders programs of the mesh
     QOpenGLShaderProgram * shaders();
+
+
 
     // define a specific shaders for the mesh
     void setShaders(const QString& vertexFile, const QString& fragmentFile);
@@ -67,8 +71,11 @@ private:
     QOpenGLBuffer mBuffer;
     QOpenGLVertexArrayObject mVao;
     QOpenGLShaderProgram * mProgram;
+    QOpenGLTexture * mTexture;
     QMatrix4x4 mModel;
     GLenum mMode;
+
+
 
 };
 

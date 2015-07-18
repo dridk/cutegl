@@ -5,6 +5,7 @@ Mesh::Mesh(QObject * parent )
     :QObject(parent)
 {
     mProgram = new QOpenGLShaderProgram(this);
+    mTexture = NULL;
     setMode(GL_TRIANGLE_FAN);
     resetTransform();
 }
@@ -57,6 +58,8 @@ void Mesh::addVertex(float x, float y, float z, const QColor &col)
 {
     addVertex(Vertex(x,y,z,col));
 }
+
+
 //----------------------------------------------------------
 
 const QMatrix4x4& Mesh::model() const
@@ -78,6 +81,9 @@ void cgl::Mesh::create()
     mVao.bind();
     //---{
     mBuffer.bind();
+
+    qDebug()<<sizeof(Vertex);
+
     shaders()->bind();
     shaders()->enableAttributeArray("position");
     shaders()->setAttributeBuffer("position",GL_FLOAT,0,3, sizeof(Vertex));
@@ -85,14 +91,27 @@ void cgl::Mesh::create()
     shaders()->enableAttributeArray("color");
     shaders()->setAttributeBuffer("color",GL_FLOAT,3*4 ,3, sizeof(Vertex));
 
+    shaders()->enableAttributeArray("texCoord");
+    shaders()->setAttributeBuffer("texCoord",GL_FLOAT,6*4 ,2, sizeof(Vertex));
+
     //---}
     mVao.release();
+
 
 }
 //----------------------------------------------------------
 
 void Mesh::bind()
 {
+    if (mTexture) {
+        mTexture->bind();
+        shaders()->setUniformValue("textureEnabled",true);
+    }
+    else
+        shaders()->setUniformValue("textureEnabled",false);
+
+
+
     mVao.bind();
 }
 //----------------------------------------------------------
@@ -100,6 +119,8 @@ void Mesh::bind()
 void Mesh::release()
 {
     mVao.release();
+    if (mTexture)
+        mTexture->release();
 }
 //----------------------------------------------------------
 
@@ -113,12 +134,30 @@ void Mesh::setMode(GLenum m)
 {
     mMode = m;
 }
+
+void Mesh::setTexture(const QImage &image)
+{
+    if (mTexture != NULL)
+        delete mTexture;
+
+    mTexture = new QOpenGLTexture(image);
+    mTexture->create();
+
+}
+
+QOpenGLTexture *Mesh::texture()
+{
+    return mTexture;
+}
 //----------------------------------------------------------
 
 QOpenGLShaderProgram *Mesh::shaders()
 {
     return mProgram;
 }
+
+
+
 //----------------------------------------------------------
 
 void Mesh::setShaders(const QString &vertexFile, const QString &fragmentFile)
@@ -179,4 +218,4 @@ void Mesh::translate(const QVector3D &vector)
     mModel.translate(vector);
 }
 //----------------------------------------------------------
-}
+} // end namespace

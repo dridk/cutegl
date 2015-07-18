@@ -51,6 +51,8 @@ private:
     QMatrix4x4 mView;
     QMatrix4x4 mModel;
 
+    QOpenGLTexture * textureTest;
+
 
 };
 }

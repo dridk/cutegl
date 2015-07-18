@@ -60,6 +60,12 @@ void Scene::createMeshs()
         mesh->setDefaultShaders();
         mesh->create();
     }
+
+
+    textureTest = new QOpenGLTexture(QImage(":/textures/wood.jpg"));
+    textureTest->create();
+
+
 }
 //-----------------------------------------
 
@@ -77,31 +83,47 @@ void Scene::draw()
     foreach (Mesh * mesh, mMeshs)
     {
 
+
+
+
+
         mesh->bind();
 
-        mesh->shaders()->setUniformValueArray("projection",&mProjection,1);
-        mesh->shaders()->setUniformValueArray("model",&mesh->model(),1);
-        mesh->shaders()->setUniformValueArray("view",&mView,1);
+
+        QMatrix4x4 all = mProjection * mView * mesh->model();
+
+        mesh->shaders()->setUniformValueArray("all",&all,1);
+
+        //        mesh->shaders()->setUniformValueArray("projection",&mProjection,1);
+        //        mesh->shaders()->setUniformValueArray("model",&mesh->model(),1);
+        //        mesh->shaders()->setUniformValueArray("view",&mView,1);
 
         context()->functions()->glDrawArrays(mesh->mode(),0,mesh->count());
         mesh->release();
+
+        textureTest->release();
+
     }
 
 }
+//-----------------------------------------
 
 void Scene::setPerspective(float verticalAngle, float aspectRatio, float nearPlane, float farPlane)
 {
     mProjection.perspective(verticalAngle,aspectRatio,nearPlane,farPlane);
 }
+//-----------------------------------------
 
 void Scene::setOrtho(float left, float right, float bottom, float top, float nearPlane, float farPlane)
 {
     mProjection.ortho(left,right,bottom,top,nearPlane, farPlane);
 }
+//-----------------------------------------
 
 void Scene::lookAt(const QVector3D &eye, const QVector3D &center, const QVector3D &up)
 {
     mProjection.lookAt(eye,center,up);
 }
+//-----------------------------------------
 
 }

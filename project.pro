@@ -11,7 +11,8 @@ SOURCES = main.cpp \
 TARGET  = cutegl 
 
 RESOURCES += \
-    shaders.qrc
+    shaders.qrc \
+    textures.qrc
 
 HEADERS += \
     view.h \
