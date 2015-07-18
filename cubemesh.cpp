@@ -4,12 +4,56 @@ namespace cgl {
 CubeMesh::CubeMesh(QObject *parent) : Mesh(parent)
 {
 
-    addVertex(Vertex(1,1,0,Qt::red));
-    addVertex(Vertex(1,-1,0,Qt::green));
-    addVertex(Vertex(-1,-1,0,Qt::blue));
-    addVertex(Vertex(-1,1,0,Qt::yellow));
+    setMode(GL_TRIANGLES);
+
+    addVertex(Vertex( 1.0f, 1.0f,-1.0f,Qt::red));
+    addVertex(Vertex(-1.0f,1.0f,-1.0f,Qt::red));
+    addVertex(Vertex( -1.0f, -1.0f,-1.0f,Qt::red));
+    addVertex(Vertex( 1.0f, 1.0f,-1.0f,Qt::red));
+    addVertex(Vertex(1.0f,-1.0f,-1.0f,Qt::red));
+    addVertex(Vertex( -1.0f, -1.0f,-1.0f,Qt::red));
+
+    addVertex(Vertex( 1.0f, 1.0f,1.0f,Qt::blue));
+    addVertex(Vertex(-1.0f,1.0f,1.0f,Qt::blue));
+    addVertex(Vertex( -1.0f, -1.0f,1.0f,Qt::blue));
+    addVertex(Vertex( 1.0f, 1.0f,1.0f,Qt::blue));
+    addVertex(Vertex(1.0f,-1.0f,1.0f,Qt::blue));
+    addVertex(Vertex( -1.0f, -1.0f,1.0f,Qt::blue));
+
+    addVertex(Vertex( 1.0f, 1.0f,1.0f,Qt::yellow));
+    addVertex(Vertex(-1.0f,1.0f,1.0f,Qt::yellow));
+    addVertex(Vertex( -1.0f,1.0f,-1.0f,Qt::yellow));
+    addVertex(Vertex( 1.0f, 1.0f,1.0f,Qt::yellow));
+    addVertex(Vertex(1.0f,1.0f,-1.0f,Qt::yellow));
+    addVertex(Vertex( -1.0f,1.0f,-1.0f,Qt::yellow));
+
+    addVertex(Vertex( 1.0f, -1.0f,1.0f,Qt::cyan));
+    addVertex(Vertex(-1.0f,-1.0f,1.0f,Qt::cyan));
+    addVertex(Vertex( -1.0f,-1.0f,-1.0f,Qt::cyan));
+    addVertex(Vertex( 1.0f, -1.0f,1.0f,Qt::cyan));
+    addVertex(Vertex(1.0f,-1.0f,-1.0f,Qt::cyan));
+    addVertex(Vertex( -1.0f,-1.0f,-1.0f,Qt::cyan));
+
+    addVertex(Vertex(1.0f, 1.0f,1.0f,Qt::green));
+    addVertex(Vertex(1.0f,-1.0f,1.0f,Qt::green));
+    addVertex(Vertex(1.0f,-1.0f,-1.0f,Qt::green));
+    addVertex(Vertex(1.0f, 1.0f,1.0f,Qt::green));
+    addVertex(Vertex(1.0f,1.0f,-1.0f,Qt::green));
+    addVertex(Vertex(1.0f,-1.0f,-1.0f,Qt::green));
+
+    addVertex(Vertex(-1.0f, 1.0f,1.0f,Qt::magenta));
+    addVertex(Vertex(-1.0f,-1.0f,1.0f,Qt::magenta));
+    addVertex(Vertex(-1.0f,-1.0f,-1.0f,Qt::magenta));
+    addVertex(Vertex(-1.0f, 1.0f,1.0f,Qt::magenta));
+    addVertex(Vertex(-1.0f,1.0f,-1.0f,Qt::magenta));
+    addVertex(Vertex(-1.0f,-1.0f,-1.0f,Qt::magenta));
+
 
 }
 
+
+
 }
+
+
 

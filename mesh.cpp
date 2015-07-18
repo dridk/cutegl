@@ -6,6 +6,8 @@ Mesh::Mesh(QObject * parent )
     mProgram = new QOpenGLShaderProgram(this);
     mTransform.setToIdentity();
 
+    setMode(GL_TRIANGLE_FAN);
+
 }
 
 Mesh::~Mesh()
@@ -83,6 +85,16 @@ void Mesh::bind()
 void Mesh::release()
 {
     mVao.release();
+}
+
+GLenum Mesh::mode()
+{
+    return mMode;
+}
+
+void Mesh::setMode(GLenum m)
+{
+   mMode = m;
 }
 
 QOpenGLShaderProgram *Mesh::shaders()

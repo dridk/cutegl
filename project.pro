@@ -6,7 +6,8 @@ SOURCES = main.cpp \
     mesh.cpp \
     rectmesh.cpp \
     cubemesh.cpp \
-    vertex.cpp
+    vertex.cpp \
+    axismesh.cpp
 TARGET  = cutegl 
 
 RESOURCES += \
@@ -18,5 +19,6 @@ HEADERS += \
     mesh.h \
     rectmesh.h \
     cubemesh.h \
-    vertex.h
+    vertex.h \
+    axismesh.h
 

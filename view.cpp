@@ -18,7 +18,7 @@ View::View()
     setFormat(format);
 
 
-    resize(600,400);
+    resize(800,600);
 
     connect(mLogger,SIGNAL(messageLogged(QOpenGLDebugMessage)),this,SLOT(printLog(QOpenGLDebugMessage)));
 
@@ -30,7 +30,7 @@ void View::initializeGL()
     setDebugger(true);
 
     mScene->setContext(context());
-    mScene->setPerspective(45.0, ((double)width()) / height(), 0, 100);
+    mScene->setPerspective(45.0, ((double)width()) / height(), 1, 100.0f);
 
     mesh = new CubeMesh(this);
 

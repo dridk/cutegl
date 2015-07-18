@@ -6,7 +6,7 @@
 #include <QOpenGLContext>
 #include "mesh.h"
 #include "view.h"
-
+#include "axismesh.h"
 namespace cgl {
 class Scene : public QObject
 {
@@ -30,7 +30,10 @@ private:
     QOpenGLContext * mContext;
 
     QMatrix4x4 mProjection;
-    QMatrix4x4 mCamera;
+    QMatrix4x4 mView;
+    QMatrix4x4 mModel;
+
+
 };
 }
 

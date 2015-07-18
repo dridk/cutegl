@@ -30,6 +30,10 @@ public:
     void bind();
     void release();
 
+    // draw mode
+    GLenum mode();
+    void setMode(GLenum m);
+
 
 
 
@@ -48,6 +52,8 @@ QOpenGLBuffer mBuffer;
 QOpenGLVertexArrayObject mVao;
 QOpenGLShaderProgram * mProgram;
 QMatrix4x4 mTransform;
+
+GLenum mMode;
 
 };
 

@@ -1,5 +1,6 @@
 #include "scene.h"
 #include "rectmesh.h"
+#include "axismesh.h"
 #include <QDebug>
 namespace  cgl {
 
@@ -8,13 +9,11 @@ Scene::Scene(QObject *parent)
     :QObject(parent), mContext(0)
 {
 
-    mCamera.setToIdentity();
+    mModel.setToIdentity();
+    mView.lookAt(QVector3D(5,5,5), QVector3D(0,0,0), QVector3D(0,1,0));
 
-
-
+    addMesh(new AxisMesh(this));
 }
-
-
 
 
 void Scene::addMesh(Mesh *mesh)
@@ -57,7 +56,8 @@ void Scene::createMeshs()
    }
 
 
-  mCamera.lookAt(QVector3D(0,0,-10), QVector3D(0,0,0), QVector3D(1,0,0));
+  addMesh(new AxisMesh);
+
 }
 
 void Scene::draw()
@@ -69,21 +69,24 @@ void Scene::draw()
     }
 
 
-    context()->functions()->glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+   context()->functions()->glEnable(GL_DEPTH_TEST);
 
+
+    context()->functions()->glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
     foreach (Mesh * mesh, mMeshs)
     {
 
         mesh->bind();
 
+        mesh->shaders()->setUniformValueArray("projection",&mProjection,1);
+        mesh->shaders()->setUniformValueArray("model",&mModel,1);
+        mesh->shaders()->setUniformValueArray("view",&mView,1);
 
-        QMatrix4x4 all = mProjection * mCamera;
 
-        mesh->shaders()->setUniformValueArray("projection",&all,1);
-        mesh->shaders()->setUniformValueArray("modelview",mesh->transform(),1);
+//        mesh->shaders()->setUniformValueArray("modelview",mesh->transform(),1);
 
-        context()->functions()->glDrawArrays(GL_TRIANGLE_FAN,0,mesh->count());
+        context()->functions()->glDrawArrays(mesh->mode(),0,mesh->count());
         mesh->release();
     }
 
@@ -95,7 +98,7 @@ void Scene::draw()
 
 void Scene::setPerspective(float verticalAngle, float aspectRatio, float nearPlane, float farPlane)
 {
-    mProjection.perspective(verticalAngle,aspectRatio,nearPlane,farPlane);
+   mProjection.perspective(verticalAngle,aspectRatio,nearPlane,farPlane);
 }
 
 }
