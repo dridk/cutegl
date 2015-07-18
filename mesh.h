@@ -6,6 +6,8 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLVertexArrayObject>
 
+#include "vertex.h"
+
 namespace cgl {
 class Mesh : public QObject
 {
@@ -13,10 +15,16 @@ class Mesh : public QObject
 public:
     Mesh(QObject * parent = 0);
     ~Mesh();
-    void setVertices(const QVector<QVector3D>& vertices);
-    const QVector<QVector3D>& vertices() const;
+    void setVertices(const QVector<Vertex>& vertices);
+    const QVector<Vertex>& vertices() const;
     int size() const;
     int count() const;
+
+
+    void addVertex(const Vertex& v);
+
+
+     QMatrix4x4 * transform();
 
     void create();
     void bind();
@@ -33,10 +41,13 @@ public:
 
 
 private:
-QVector<QVector3D> mVertices;
+QVector<Vertex> mVertices;
+
+
 QOpenGLBuffer mBuffer;
 QOpenGLVertexArrayObject mVao;
 QOpenGLShaderProgram * mProgram;
+QMatrix4x4 mTransform;
 
 };
 

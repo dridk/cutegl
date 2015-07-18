@@ -30,6 +30,7 @@ private:
     QOpenGLContext * mContext;
 
     QMatrix4x4 mProjection;
+    QMatrix4x4 mCamera;
 };
 }
 

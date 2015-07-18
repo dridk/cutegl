@@ -1,5 +1,6 @@
 #include "view.h"
 #include <QDebug>
+#include "rectmesh.h"
 namespace cgl {
 
 View::View()
@@ -30,8 +31,14 @@ void View::initializeGL()
 
     mScene->setContext(context());
     mScene->setPerspective(45.0, ((double)width()) / height(), 0, 100);
+
+    mesh = new CubeMesh(this);
+
+    mScene->addMesh(mesh);
     mScene->createMeshs();
 
+
+    context()->functions()->glViewport(0,0,width(),height());
 
 
 
@@ -49,6 +56,7 @@ void View::paintGL()
 void View::resizeGL()
 {
 
+    context()->functions()->glViewport(0,0,width(),height());
 }
 
 void View::setDebugger(bool active)
@@ -58,7 +66,29 @@ void View::setDebugger(bool active)
         mLogger->startLogging();
     }
 
-        mLogger->stopLogging();
+    mLogger->stopLogging();
+}
+
+void View::keyPressEvent(QKeyEvent *event)
+{
+
+    if (event->key() == Qt::Key_Left)
+    {
+        qDebug()<<"move";
+        mesh->transform()->rotate(2, QVector3D(-1,0,0));
+        qDebug()<<*(mesh->transform());
+        update();
+    }
+
+
+    if (event->key() == Qt::Key_Right)
+    {
+        qDebug()<<"move";
+        mesh->transform()->rotate(-2, QVector3D(1,0,0));
+        qDebug()<<*(mesh->transform());
+        update();
+    }
+
 }
 
 void View::printLog(const QOpenGLDebugMessage &msg)

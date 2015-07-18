@@ -9,23 +9,23 @@ RectMesh::RectMesh(QObject * parent)
 
 }
 
-RectMesh::RectMesh(float x, float y, float width, float height, QObject *parent)
+RectMesh::RectMesh(float top, float bottom, float left, float right, QObject *parent)
     :Mesh(parent)
 {
-    setRect(x,y,width, height);
+    setRect(top,bottom,left, right);
 }
 
-void RectMesh::setRect(float x, float y, float width, float height)
+void RectMesh::setRect(float top, float bottom, float left, float right, float z)
 {
 
-    QVector<QVector3D> list;
+//    QVector<Vert> list;
 
-    list.append(QVector3D(x,y,0));
-    list.append(QVector3D(x+width,y,0));
-    list.append(QVector3D(x+width,y+height,0));
-    list.append(QVector3D(x,y+height,0));
+//    list.append(QVector3D(left,top,z));
+//    list.append(QVector3D(left,bottom,z));
+//    list.append(QVector3D(right,top,z));
+//    list.append(QVector3D(right,bottom,z));
 
-    setVertices(list);
+//    setVertices(list);
 
 }
 

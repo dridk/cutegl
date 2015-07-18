@@ -4,6 +4,8 @@ Mesh::Mesh(QObject * parent )
     :QObject(parent)
 {
     mProgram = new QOpenGLShaderProgram(this);
+    mTransform.setToIdentity();
+
 }
 
 Mesh::~Mesh()
@@ -14,20 +16,19 @@ Mesh::~Mesh()
 
 
 
-void cgl::Mesh::setVertices(const QVector<QVector3D> &vertices)
+void cgl::Mesh::setVertices(const QVector<Vertex> &vertices)
 {
     mVertices = vertices;
-    qDebug()<<vertices;
 }
 
-const QVector<QVector3D> &Mesh::vertices() const
+const QVector<Vertex> &Mesh::vertices() const
 {
     return mVertices;
 }
 
 int Mesh::size() const
 {
-    return count() * sizeof(QVector3D);
+    return count() * sizeof(Vertex);
 }
 
 int Mesh::count() const
@@ -35,12 +36,23 @@ int Mesh::count() const
     return mVertices.count();
 }
 
+void Mesh::addVertex(const Vertex &v)
+{
+ mVertices.append(v);
+}
+
+QMatrix4x4 *Mesh::transform()
+{
+    return &mTransform;
+}
+
 void cgl::Mesh::create()
 {
+
     // Create buffer and send it to graphics card
     mBuffer.create();
     mBuffer.bind();
-    mBuffer.allocate(mVertices.data(), mVertices.count() * sizeof(QVector3D));
+    mBuffer.allocate(mVertices.data(), mVertices.count() * sizeof(Vertex));
     mBuffer.release();
 
     // Create VAO and send it to graphics cards
@@ -50,7 +62,13 @@ void cgl::Mesh::create()
     mBuffer.bind();
     shaders()->bind();
     shaders()->enableAttributeArray("position");
-    shaders()->setAttributeBuffer("position",GL_FLOAT,0,3);
+    shaders()->setAttributeBuffer("position",GL_FLOAT,0,3, sizeof(Vertex));
+
+    shaders()->enableAttributeArray("color");
+    shaders()->setAttributeBuffer("color",GL_FLOAT,3*4 ,3, sizeof(Vertex));
+
+
+
 
     //---}
     mVao.release();

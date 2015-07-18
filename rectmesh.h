@@ -8,15 +8,15 @@ class RectMesh : public Mesh
 {
 public:
     RectMesh(QObject * parent = 0);
-    RectMesh(float x, float y, float width, float height, QObject * parent = 0);
+    RectMesh(float top, float bottom, float left, float right, QObject * parent = 0);
 
-    void setRect(float x, float y, float width, float height);
+    void setRect(float top, float bottom, float left, float right, float z=0);
 
 private:
-    float mX;
-    float mY;
-    float mWidth;
-    float mHeight;
+    float top;
+    float bottom;
+    float left;
+    float right;
 
 };
 

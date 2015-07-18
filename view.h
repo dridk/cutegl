@@ -4,8 +4,9 @@
 #include <QOpenGLDebugLogger>
 #include <QMatrix4x4>
 #include "scene.h"
-
-
+#include "rectmesh.h"
+#include "cubemesh.h"
+#include <QKeyEvent>
 namespace cgl{
 
 class Scene;
@@ -24,12 +25,18 @@ public:
 public slots:
   void setDebugger(bool active);
 
+protected:
+  void keyPressEvent(QKeyEvent * event);
+
 protected slots:
   void printLog(const QOpenGLDebugMessage& msg);
 
 
+
+
 private:
 Scene * mScene;
+CubeMesh * mesh;
 QOpenGLDebugLogger * mLogger;
 
 
