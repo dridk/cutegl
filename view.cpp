@@ -34,6 +34,10 @@ View::View()
 
     mAnim->start();
 
+    mCamera = QVector3D(5,5,5);
+
+    setMouseGrabEnabled(true);
+    mClick = false;
 }
 
 void View::initializeGL()
@@ -59,6 +63,7 @@ void View::initializeGL()
 void View::paintGL()
 {
 
+    mScene->lookAt(mCamera, QVector3D(0,0,0), QVector3D(0,1,0));
 
     mScene->draw();
 
@@ -84,25 +89,78 @@ void View::setDebugger(bool active)
 void View::keyPressEvent(QKeyEvent *event)
 {
 
-    if (event->key() == Qt::Key_Left)
+    if (event->key() == Qt::Key_Up)
     {
         qDebug()<<"move";
-        mesh->rotate(2, QVector3D(-1,0,0));
-
+        mCamera.setX(mCamera.x() - 2);
         update();
     }
 
+    if (event->key() == Qt::Key_Down)
+    {
+        qDebug()<<"move";
+        mCamera.setX(mCamera.x() + 2);
+        update();
+    }
 
     if (event->key() == Qt::Key_Right)
     {
         mesh->rotate(-2, QVector3D(-1,0,0));
-
         qDebug()<<"move";
-
-
         update();
     }
 
+
+    if (event->key() == Qt::Key_Left)
+    {
+        mesh->rotate(-2, QVector3D(-1,0,0));
+        qDebug()<<"move";
+        update();
+    }
+}
+
+void View::mousePressEvent(QMouseEvent * event)
+{
+
+    if (event->button() == Qt::LeftButton)
+    {
+        mClick = true;
+    }
+
+    else
+        mClick = false;
+
+}
+
+void View::mouseMoveEvent(QMouseEvent * event)
+{
+    if (mClick)
+    {
+
+        oldPos = event->pos();
+        QPoint currPos = event->pos();
+        if (event->pos().x() < 60)
+            currPos.setX(60);
+
+        if (event->pos().y() > 450)
+            currPos.setY(450);
+
+        QPoint diff = currPos - oldPos;
+
+        if (diff.x() > 0)
+            angle += 3.0f;
+        else if (diff.x() < 0)
+            angle -= 3.0f;
+
+
+
+
+    }
+}
+
+void View::mouseReleaseEvent(QMouseEvent *)
+{
+    mClick = false;
 }
 
 void View::printLog(const QOpenGLDebugMessage &msg)

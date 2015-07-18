@@ -5,7 +5,7 @@ in vec2 texCoord;
 
 out vec3 fragColor;
 out vec2 fragTexCoord;
-
+out float depth;
 uniform mat4 all;
 
 //uniform mat4 model;
@@ -19,5 +19,7 @@ void main(void)
 
     fragColor    = color;
     fragTexCoord = texCoord;
+
+    depth = gl_Position.z * 0.1 ;
 }
 

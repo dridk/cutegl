@@ -30,6 +30,9 @@ public slots:
 
 protected:
   void keyPressEvent(QKeyEvent * event);
+  void mousePressEvent(QMouseEvent *);
+  void mouseMoveEvent(QMouseEvent *);
+  void mouseReleaseEvent(QMouseEvent*);
 
 protected slots:
   void printLog(const QOpenGLDebugMessage& msg);
@@ -41,9 +44,12 @@ private:
 Scene * mScene;
 CubeMesh * mesh;
 QOpenGLDebugLogger * mLogger;
-
 QVariantAnimation * mAnim;
+QVector3D mCamera;
 
+bool mClick;
+QPoint oldPos;
+float angle;
 
 };
 

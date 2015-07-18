@@ -7,7 +7,6 @@ namespace  cgl {
 Scene::Scene(QObject *parent)
     :QObject(parent), mContext(0)
 {
-    mView.lookAt(QVector3D(5,5,5), QVector3D(0,0,0), QVector3D(0,1,0));
     addMesh(new AxisMesh(this));
 }
 //-----------------------------------------
@@ -122,7 +121,10 @@ void Scene::setOrtho(float left, float right, float bottom, float top, float nea
 
 void Scene::lookAt(const QVector3D &eye, const QVector3D &center, const QVector3D &up)
 {
-    mProjection.lookAt(eye,center,up);
+    mView.setToIdentity();
+    mView.lookAt(eye,center,up);
+
+
 }
 //-----------------------------------------
 
