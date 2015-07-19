@@ -14,31 +14,32 @@ public:
         TEXTURE_OFFSET = 4*6,
         NORMAL_OFFSET  = 4*9
     };
-    Vertex(float x, float y, float z);
-    Vertex(const QVector3D& vertex);
-    Vertex(const QVector3D &vertex, const QVector3D& normal, const QVector2D& texCoord, const QColor& col);
-    Vertex(float x, float y, float z, const QColor& col);
-    Vertex(float x, float y, float z, const QColor& col, const QVector2D& texCoord);
-
     Vertex();
+    Vertex(float x, float y, float z, const QColor& col = Qt::white);
+    Vertex(const QVector3D& coord, const QColor& col = Qt::white);
+    Vertex(const QVector3D& coord, const QVector3D& normal, const QVector2D& texCoord, const QColor& col = Qt::white);
+
+
+
+
+    void setCoord(const QVector3D& coord);
+    void setNormal(const QVector3D& normal);
+    void setTexCoord(const QVector2D& texCoord);
+    void setColor(const QColor& col);
 
     float x() const;
     float y() const;
     float z() const;
-
     float normalX() const;
     float normalY() const;
     float normalZ() const;
-
     QColor color() const;
-    QPointF texCoord() const;
-
-
-
-
+    QVector2D texCoord() const;
 
 
 private:
+    // WARNING : DO NOT CHANGE ORDER OF PARAMETERS ..
+    // THOSE ARE BE USED BY OPENGL BUFFER ALLOCATION
     float mX;
     float mY;
     float mZ;

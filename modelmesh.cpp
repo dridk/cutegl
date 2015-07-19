@@ -6,7 +6,7 @@ ModelMesh::ModelMesh(const QString &filename, QObject *parent)
     :Mesh(parent)
 {
 
-    setMode(GL_TRIANGLE_STRIP);
+    setMode(GL_LINES);
     setTexture(QImage(":/textures/wood.jpg"));
 
     setModel(filename);

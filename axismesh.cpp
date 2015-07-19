@@ -19,9 +19,6 @@ AxisMesh::AxisMesh(QObject *parent) :
     addVertex(Vertex(0,0,0,Qt::blue));
     addVertex(Vertex(1*mFactor,0,0,Qt::blue));
 
-
-
-
 }
 
 

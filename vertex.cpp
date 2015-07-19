@@ -1,68 +1,58 @@
 #include "vertex.h"
 namespace cgl {
 
-Vertex::Vertex(float x, float y, float z)
-    :mX(x), mY(y), mZ(z),mRed(1),mGreen(1),mBlue(1),mTexCoordX(0),mTexCoordY(0)
+Vertex::Vertex()
+:mX(0), mY(0), mZ(0),mRed(1),mGreen(1),mBlue(1),mTexCoordX(0),mTexCoordY(0)
 {
 
 }
 
-Vertex::Vertex(const QVector3D &vertex)
-    :mRed(1),mGreen(1),mBlue(1),mTexCoordX(0),mTexCoordY(0)
+Vertex::Vertex(float x, float y, float z, const QColor& col)
+    :mX(x), mY(y),mTexCoordX(0),mTexCoordY(0)
 {
-    mX = vertex.x();
-    mY = vertex.y();
-    mZ = vertex.z();
+    setColor(col);
 }
 
-Vertex::Vertex(const QVector3D &vertex, const QVector3D &normal,const QVector2D &texCoord, const QColor &col)
+Vertex::Vertex(const QVector3D &coord,const QColor& col)
+    :mTexCoordX(0),mTexCoordY(0)
 {
-    mX = vertex.x();
-    mY = vertex.y();
-    mZ = vertex.z();
+   setCoord(coord);
+   setColor(col);
+}
 
+Vertex::Vertex(const QVector3D &coord, const QVector3D &normal, const QVector2D &texCoord, const QColor &col)
+{
+    setCoord(coord);
+    setNormal(normal);
+    setTexCoord(texCoord);
+    setColor(col);
+}
+
+void Vertex::setCoord(const QVector3D &coord)
+{
+    mX = coord.x();
+    mY = coord.y();
+    mZ = coord.z();
+}
+
+void Vertex::setNormal(const QVector3D &normal)
+{
     mNormalX = normal.x();
     mNormalY = normal.y();
     mNormalZ = normal.z();
-
-    mRed    = col.redF();
-    mGreen  = col.greenF();
-    mBlue   = col.blueF();
-
-    mTexCoordX = texCoord.x();
-    mTexCoordY = texCoord.y();
-
 }
 
-Vertex::Vertex(float x, float y, float z, const QColor &col)
-    :mX(x), mY(y), mZ(z),mTexCoordX(0),mTexCoordY(0)
+void Vertex::setTexCoord(const QVector2D &texCoord)
 {
-
-
-
-    mRed    = col.redF();
-    mGreen  = col.greenF();
-    mBlue   = col.blueF();
-
-
-}
-
-Vertex::Vertex(float x, float y, float z, const QColor &col, const QVector2D &texCoord)
-    :mX(x), mY(y), mZ(z)
-{
-
-    mRed    = col.redF();
-    mGreen  = col.greenF();
-    mBlue   = col.blueF();
-
     mTexCoordX = texCoord.x();
     mTexCoordY = texCoord.y();
 }
 
-Vertex::Vertex()
-    :mX(0), mY(0), mZ(0), mRed(1),mGreen(1),mBlue(1),mTexCoordX(0),mTexCoordY(0)
+void Vertex::setColor(const QColor &col)
 {
-
+    mRed    = col.redF();
+    mGreen  = col.greenF();
+    mBlue   = col.blueF();
 }
 
 float Vertex::x() const
@@ -78,7 +68,6 @@ float Vertex::y() const
 float Vertex::z() const
 {
     return mZ;
-
 }
 
 float Vertex::normalX() const
@@ -101,9 +90,9 @@ QColor Vertex::color() const
     return QColor::fromRgbF(mRed, mGreen,mBlue);
 }
 
-QPointF Vertex::texCoord() const
+QVector2D Vertex::texCoord() const
 {
-    return QPointF(mTexCoordX, mTexCoordY);
+    return QVector2D(mTexCoordX, mTexCoordY);
 }
 
 

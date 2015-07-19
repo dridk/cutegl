@@ -3,5 +3,6 @@
         <file>models/monkey.obj</file>
         <file>models/teapot.obj</file>
         <file>models/cube.obj</file>
+        <file>models/test.obj</file>
     </qresource>
 </RCC>

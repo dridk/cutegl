@@ -16,6 +16,10 @@ public:
     void load(const QString& filename);
     const QVector<Vertex>& vertices() const;
 
+    int coordVertexCount();
+    int normalVertexCount();
+    int texCoordVertexCount();
+
 
 
 private:
@@ -23,7 +27,9 @@ private:
     QVector<Vertex> mVertices;
 
 
-
+    QList<QVector3D> mVData;  // vertex Data
+    QList<QVector2D> mVtData; // texture Data
+    QList<QVector3D> mVnData; // Normal Data
 
 
 };

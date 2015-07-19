@@ -31,6 +31,17 @@ View::View()
     connect(mLogger,SIGNAL(messageLogged(QOpenGLDebugMessage)),this,SLOT(printLog(QOpenGLDebugMessage)));
     setMouseGrabEnabled(true);
 
+    mAnimation = new QVariantAnimation(this);
+    mAnimation->setStartValue(0);
+    mAnimation->setEndValue(360);
+    mAnimation->setLoopCount(-1);
+    mAnimation->setDuration(5000);
+
+//    mAnimation->start();
+    connect(mAnimation,SIGNAL(valueChanged(QVariant)),this,SLOT(anim(QVariant)));
+
+
+
 }
 
 void View::initializeGL()
@@ -40,9 +51,11 @@ void View::initializeGL()
 
     mScene->setContext(context());
 
-    mesh = new ModelMesh(":/models/cube.obj",this);
+    mesh = new ModelMesh(":/models/teapot.obj",this);
 
     mScene->addMesh(mesh);
+    mesh->scale(0.3);
+
     mScene->createMeshs();
 
 
@@ -212,6 +225,16 @@ void View::wheelEvent(QWheelEvent * event)
 void View::printLog(const QOpenGLDebugMessage &msg)
 {
     qDebug()<<msg.id()<<" "<<msg.message();
+
+}
+
+void View::anim(const QVariant &value)
+{
+
+    qDebug()<<mAnimation->currentValue().toFloat();
+    mesh->resetTransform();
+    mesh->rotate(mAnimation->currentValue().toFloat(), QVector3D(0,0,1));
+    update();
 
 }
 

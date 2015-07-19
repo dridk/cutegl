@@ -8,93 +8,52 @@ CubeMesh::CubeMesh(QObject *parent) : Mesh(parent)
 
     setTexture(QImage(":/textures/wood.jpg"));
 
+    addVertex(Vertex(QVector3D( 1.0f, 1.0f,-1.0f),QVector3D(0,0,0),    QVector2D(0,0),Qt::red));
+    addVertex(Vertex(QVector3D(-1.0f,1.0f,-1.0f),QVector3D(0,0,0),     QVector2D(0,1),Qt::red));
+    addVertex(Vertex(QVector3D( -1.0f, -1.0f,-1.0f),QVector3D(0,0,0),  QVector2D(1,1),Qt::red));
+    addVertex(Vertex(QVector3D( 1.0f, 1.0f,-1.0f),QVector3D(0,0,0),    QVector2D(1,1),Qt::red));
+    addVertex(Vertex(QVector3D(1.0f,-1.0f,-1.0f),QVector3D(0,0,0),     QVector2D(1,0),Qt::red));
+    addVertex(Vertex(QVector3D( -1.0f, -1.0f,-1.0f),QVector3D(0,0,0),  QVector2D(0,0),Qt::red));
 
+    addVertex(Vertex(QVector3D( 1.0f, 1.0f,1.0f),QVector3D(0,0,0),    QVector2D(1,1),Qt::green));
+    addVertex(Vertex(QVector3D(-1.0f,1.0f,1.0f),QVector3D(0,0,0),     QVector2D(0,1),Qt::green));
+    addVertex(Vertex(QVector3D( -1.0f, -1.0f,1.0f),QVector3D(0,0,0),  QVector2D(0,0),Qt::green));
+    addVertex(Vertex(QVector3D( 1.0f, 1.0f,1.0f),QVector3D(0,0,0),    QVector2D(1,1),Qt::green));
+    addVertex(Vertex(QVector3D(1.0f,-1.0f,1.0f),QVector3D(0,0,0),     QVector2D(1,0),Qt::green));
+    addVertex(Vertex(QVector3D( -1.0f, -1.0f,1.0f),QVector3D(0,0,0),  QVector2D(0,0),Qt::green));
 
-    addVertex(Vertex( 1.0f, 1.0f,-1.0f,Qt::red,    QVector2D(0,0)));
-    addVertex(Vertex(-1.0f,1.0f,-1.0f,Qt::red,     QVector2D(0,1)));
-    addVertex(Vertex( -1.0f, -1.0f,-1.0f,Qt::red,  QVector2D(1,1)));
-    addVertex(Vertex( 1.0f, 1.0f,-1.0f,Qt::red,    QVector2D(1,1)));
-    addVertex(Vertex(1.0f,-1.0f,-1.0f,Qt::red,     QVector2D(1,0)));
-    addVertex(Vertex( -1.0f, -1.0f,-1.0f,Qt::red,  QVector2D(0,0)));
+    addVertex(Vertex(QVector3D( 1.0f, 1.0f,1.0f),QVector3D(0,0,0),  QVector2D(1,1),Qt::blue));
+    addVertex(Vertex(QVector3D(-1.0f,1.0f,1.0f),QVector3D(0,0,0),   QVector2D(0,1),Qt::blue));
+    addVertex(Vertex(QVector3D( -1.0f,1.0f,-1.0f),QVector3D(0,0,0), QVector2D(0,0),Qt::blue));
+    addVertex(Vertex(QVector3D( 1.0f, 1.0f,1.0f),QVector3D(0,0,0),  QVector2D(1,1),Qt::blue));
+    addVertex(Vertex(QVector3D(1.0f,1.0f,-1.0f),QVector3D(0,0,0),   QVector2D(1,0),Qt::blue));
+    addVertex(Vertex(QVector3D( -1.0f,1.0f,-1.0f),QVector3D(0,0,0), QVector2D(0,0),Qt::blue));
 
-    addVertex(Vertex( 1.0f, 1.0f,1.0f,Qt::blue,    QVector2D(1,1)));
-    addVertex(Vertex(-1.0f,1.0f,1.0f,Qt::blue,     QVector2D(0,1)));
-    addVertex(Vertex( -1.0f, -1.0f,1.0f,Qt::blue,  QVector2D(0,0)));
-    addVertex(Vertex( 1.0f, 1.0f,1.0f,Qt::blue,    QVector2D(1,1)));
-    addVertex(Vertex(1.0f,-1.0f,1.0f,Qt::blue,     QVector2D(1,0)));
-    addVertex(Vertex( -1.0f, -1.0f,1.0f,Qt::blue,  QVector2D(0,0)));
+    addVertex(Vertex(QVector3D( 1.0f, -1.0f,1.0f),QVector3D(0,0,0),   QVector2D(1,1),Qt::yellow));
+    addVertex(Vertex(QVector3D(-1.0f,-1.0f,1.0f),QVector3D(0,0,0),    QVector2D(0,1),Qt::yellow));
+    addVertex(Vertex(QVector3D( -1.0f,-1.0f,-1.0f),QVector3D(0,0,0),  QVector2D(0,0),Qt::yellow));
+    addVertex(Vertex(QVector3D( 1.0f, -1.0f,1.0f),QVector3D(0,0,0),   QVector2D(1,0),Qt::yellow));
+    addVertex(Vertex(QVector3D(1.0f,-1.0f,-1.0f),QVector3D(0,0,0),    QVector2D(1,0),Qt::yellow));
+    addVertex(Vertex(QVector3D( -1.0f,-1.0f,-1.0f),QVector3D(0,0,0),  QVector2D(0,1),Qt::yellow));
 
-    addVertex(Vertex( 1.0f, 1.0f,1.0f,Qt::yellow,  QVector2D(1,1)));
-    addVertex(Vertex(-1.0f,1.0f,1.0f,Qt::yellow,   QVector2D(0,1)));
-    addVertex(Vertex( -1.0f,1.0f,-1.0f,Qt::yellow, QVector2D(0,0)));
-    addVertex(Vertex( 1.0f, 1.0f,1.0f,Qt::yellow,  QVector2D(1,1)));
-    addVertex(Vertex(1.0f,1.0f,-1.0f,Qt::yellow,   QVector2D(1,0)));
-    addVertex(Vertex( -1.0f,1.0f,-1.0f,Qt::yellow, QVector2D(0,0)));
+    addVertex(Vertex(QVector3D(1.0f, 1.0f,1.0f),QVector3D(0,0,0),    QVector2D(1,1),Qt::cyan));
+    addVertex(Vertex(QVector3D(1.0f,-1.0f,1.0f),QVector3D(0,0,0),    QVector2D(0,1),Qt::cyan));
+    addVertex(Vertex(QVector3D(1.0f,-1.0f,-1.0f),QVector3D(0,0,0),   QVector2D(0,0),Qt::cyan));
+    addVertex(Vertex(QVector3D(1.0f, 1.0f,1.0f),QVector3D(0,0,0),    QVector2D(1,1),Qt::cyan));
+    addVertex(Vertex(QVector3D(1.0f,1.0f,-1.0f),QVector3D(0,0,0),    QVector2D(1,0),Qt::cyan));
+    addVertex(Vertex(QVector3D(1.0f,-1.0f,-1.0f),QVector3D(0,0,0),   QVector2D(0,0),Qt::cyan));
 
-    addVertex(Vertex( 1.0f, -1.0f,1.0f,Qt::cyan,   QVector2D(1,1)));
-    addVertex(Vertex(-1.0f,-1.0f,1.0f,Qt::cyan,    QVector2D(0,1)));
-    addVertex(Vertex( -1.0f,-1.0f,-1.0f,Qt::cyan,  QVector2D(0,0)));
-    addVertex(Vertex( 1.0f, -1.0f,1.0f,Qt::cyan,   QVector2D(1,0)));
-    addVertex(Vertex(1.0f,-1.0f,-1.0f,Qt::cyan,    QVector2D(1,0)));
-    addVertex(Vertex( -1.0f,-1.0f,-1.0f,Qt::cyan,  QVector2D(0,1)));
-
-    addVertex(Vertex(1.0f, 1.0f,1.0f,Qt::green,    QVector2D(1,1)));
-    addVertex(Vertex(1.0f,-1.0f,1.0f,Qt::green,    QVector2D(0,1)));
-    addVertex(Vertex(1.0f,-1.0f,-1.0f,Qt::green,   QVector2D(0,0)));
-    addVertex(Vertex(1.0f, 1.0f,1.0f,Qt::green,    QVector2D(1,1)));
-    addVertex(Vertex(1.0f,1.0f,-1.0f,Qt::green,    QVector2D(1,0)));
-    addVertex(Vertex(1.0f,-1.0f,-1.0f,Qt::green,   QVector2D(0,0)));
-
-    addVertex(Vertex(-1.0f, 1.0f,1.0f,Qt::magenta, QVector2D(1,1)));
-    addVertex(Vertex(-1.0f,-1.0f,1.0f,Qt::magenta, QVector2D(0,1)));
-    addVertex(Vertex(-1.0f,-1.0f,-1.0f,Qt::magenta,QVector2D(0,0)));
-    addVertex(Vertex(-1.0f, 1.0f,1.0f,Qt::magenta, QVector2D(1,0)));
-    addVertex(Vertex(-1.0f,1.0f,-1.0f,Qt::magenta, QVector2D(1,0)));
-    addVertex(Vertex(-1.0f,-1.0f,-1.0f,Qt::magenta,QVector2D(0,1)));
-
+    addVertex(Vertex(QVector3D(-1.0f, 1.0f,1.0f),QVector3D(0,0,0), QVector2D(1,1),Qt::magenta));
+    addVertex(Vertex(QVector3D(-1.0f,-1.0f,1.0f),QVector3D(0,0,0), QVector2D(0,1),Qt::magenta));
+    addVertex(Vertex(QVector3D(-1.0f,-1.0f,-1.0f),QVector3D(0,0,0),QVector2D(0,0),Qt::magenta));
+    addVertex(Vertex(QVector3D(-1.0f, 1.0f,1.0f),QVector3D(0,0,0), QVector2D(1,0),Qt::magenta));
+    addVertex(Vertex(QVector3D(-1.0f,1.0f,-1.0f),QVector3D(0,0,0), QVector2D(1,0),Qt::magenta));
+    addVertex(Vertex(QVector3D(-1.0f,-1.0f,-1.0f),QVector3D(0,0,0),QVector2D(0,1),Qt::magenta));
 
 
 
 
 
-
-
-
-
-//    addVertex(Vertex( 1.0f, 1.0f,1.0f,Qt::blue));
-//    addVertex(Vertex(-1.0f,1.0f,1.0f,Qt::blue));
-//    addVertex(Vertex( -1.0f, -1.0f,1.0f,Qt::blue));
-//    addVertex(Vertex( 1.0f, 1.0f,1.0f,Qt::blue));
-//    addVertex(Vertex(1.0f,-1.0f,1.0f,Qt::blue));
-//    addVertex(Vertex( -1.0f, -1.0f,1.0f,Qt::blue));
-
-//    addVertex(Vertex( 1.0f, 1.0f,1.0f,Qt::yellow));
-//    addVertex(Vertex(-1.0f,1.0f,1.0f,Qt::yellow));
-//    addVertex(Vertex( -1.0f,1.0f,-1.0f,Qt::yellow));
-//    addVertex(Vertex( 1.0f, 1.0f,1.0f,Qt::yellow));
-//    addVertex(Vertex(1.0f,1.0f,-1.0f,Qt::yellow));
-//    addVertex(Vertex( -1.0f,1.0f,-1.0f,Qt::yellow));
-
-//    addVertex(Vertex( 1.0f, -1.0f,1.0f,Qt::cyan));
-//    addVertex(Vertex(-1.0f,-1.0f,1.0f,Qt::cyan));
-//    addVertex(Vertex( -1.0f,-1.0f,-1.0f,Qt::cyan));
-//    addVertex(Vertex( 1.0f, -1.0f,1.0f,Qt::cyan));
-//    addVertex(Vertex(1.0f,-1.0f,-1.0f,Qt::cyan));
-//    addVertex(Vertex( -1.0f,-1.0f,-1.0f,Qt::cyan));
-
-//    addVertex(Vertex(1.0f, 1.0f,1.0f,Qt::green));
-//    addVertex(Vertex(1.0f,-1.0f,1.0f,Qt::green));
-//    addVertex(Vertex(1.0f,-1.0f,-1.0f,Qt::green));
-//    addVertex(Vertex(1.0f, 1.0f,1.0f,Qt::green));
-//    addVertex(Vertex(1.0f,1.0f,-1.0f,Qt::green));
-//    addVertex(Vertex(1.0f,-1.0f,-1.0f,Qt::green));
-
-//    addVertex(Vertex(-1.0f, 1.0f,1.0f,Qt::magenta));
-//    addVertex(Vertex(-1.0f,-1.0f,1.0f,Qt::magenta));
-//    addVertex(Vertex(-1.0f,-1.0f,-1.0f,Qt::magenta));
-//    addVertex(Vertex(-1.0f, 1.0f,1.0f,Qt::magenta));
-//    addVertex(Vertex(-1.0f,1.0f,-1.0f,Qt::magenta));
-//    addVertex(Vertex(-1.0f,-1.0f,-1.0f,Qt::magenta));
 
 
 }

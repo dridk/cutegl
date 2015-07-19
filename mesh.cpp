@@ -6,7 +6,7 @@ Mesh::Mesh(QObject * parent )
 {
     mProgram = new QOpenGLShaderProgram(this);
     mTexture = NULL;
-    setMode(GL_TRIANGLE_FAN);
+    setMode(GL_TRIANGLES);
     resetTransform();
 }
 //----------------------------------------------------------

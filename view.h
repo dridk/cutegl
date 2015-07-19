@@ -39,12 +39,14 @@ protected:
 
 protected slots:
   void printLog(const QOpenGLDebugMessage& msg);
-
+    void anim(const QVariant& value);
 
 private:
 Scene * mScene;
 ModelMesh * mesh;
 QOpenGLDebugLogger * mLogger;
+
+QVariantAnimation * mAnimation;
 
 
 QVector3D mCameraPos;
