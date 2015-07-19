@@ -7,12 +7,15 @@ SOURCES = main.cpp \
     rectmesh.cpp \
     cubemesh.cpp \
     vertex.cpp \
-    axismesh.cpp
+    axismesh.cpp \
+    modelmesh.cpp \
+    modelloader.cpp
 TARGET  = cutegl 
 
 RESOURCES += \
     shaders.qrc \
-    textures.qrc
+    textures.qrc \
+    models.qrc
 
 HEADERS += \
     view.h \
@@ -21,5 +24,7 @@ HEADERS += \
     rectmesh.h \
     cubemesh.h \
     vertex.h \
-    axismesh.h
+    axismesh.h \
+    modelmesh.h \
+    modelloader.h
 

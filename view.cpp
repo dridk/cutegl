@@ -19,32 +19,18 @@ View::View()
 
 
     resize(800,600);
-    mLastPos = QPoint(400,300);
-
-    connect(mLogger,SIGNAL(messageLogged(QOpenGLDebugMessage)),this,SLOT(printLog(QOpenGLDebugMessage)));
-
-    mAnim = new QVariantAnimation(this);
-    mAnim->setStartValue(0);
-    mAnim->setEndValue(3600);
-
-
-    mAnim->setDuration(20000);
-    mAnim->setEasingCurve(QEasingCurve::OutBounce);
-
-    connect(mAnim,SIGNAL(valueChanged(QVariant)),this,SLOT(anim(QVariant)));
-
-    mAnim->start();
-
+    mLastPos     = QPoint(400,300);
     mCameraPos   = QVector3D(0,0,3);
     mCameraFront = QVector3D(0,0,-1);
     mCameraUp    = QVector3D(0,1,0);
+    mClick       = false;
+    mYaw         = -90.0f;
+    mPitch       = 0.0f;
+    mAspect      = 45.0f;
 
+    connect(mLogger,SIGNAL(messageLogged(QOpenGLDebugMessage)),this,SLOT(printLog(QOpenGLDebugMessage)));
     setMouseGrabEnabled(true);
-    mClick = false;
 
-    mYaw = -90.0f;
-    mPitch = 0.0f;
-    mAspect = 45.0f;
 }
 
 void View::initializeGL()
@@ -54,7 +40,7 @@ void View::initializeGL()
 
     mScene->setContext(context());
 
-    mesh = new CubeMesh(this);
+    mesh = new ModelMesh(":/models/cube.obj",this);
 
     mScene->addMesh(mesh);
     mScene->createMeshs();
@@ -125,6 +111,33 @@ void View::keyPressEvent(QKeyEvent *event)
         mCameraPos+= v * cameraSpeed;
         update();
     }
+
+
+    if (event->key() == Qt::Key_Left)
+    {
+        mesh->rotate(10, QVector3D(0,0,1));
+        update();
+    }
+
+    if (event->key() == Qt::Key_Right)
+    {
+        mesh->rotate(-10, QVector3D(0,0,1));
+
+        update();
+    }
+
+    if (event->key() == Qt::Key_Up)
+    {
+        mesh->rotate(10, QVector3D(0,1,0));
+        update();
+    }
+
+    if (event->key() == Qt::Key_Down)
+    {
+        mesh->rotate(-10, QVector3D(0,1,0));
+
+        update();
+    }
 }
 
 void View::mousePressEvent(QMouseEvent * event)
@@ -185,7 +198,6 @@ void View::mouseReleaseEvent(QMouseEvent *)
 void View::wheelEvent(QWheelEvent * event)
 {
 
-    qDebug()<<event->angleDelta()<<mAspect;
 
     if(mAspect >= 1.0f && mAspect <= 45.0f)
       mAspect -= event->delta()/120;
@@ -203,15 +215,7 @@ void View::printLog(const QOpenGLDebugMessage &msg)
 
 }
 
-void View::anim(const QVariant &value)
-{
 
-    mesh->resetTransform();
-    mesh->rotate(value.toFloat()/10.0, QVector3D(-1,0,0));
-
-    update();
-
-}
 
 
 } // End namespace cgl

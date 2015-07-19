@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>models/monkey.obj</file>
+        <file>models/teapot.obj</file>
+        <file>models/cube.obj</file>
+    </qresource>
+</RCC>

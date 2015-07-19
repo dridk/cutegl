@@ -6,9 +6,10 @@
 #include "scene.h"
 #include "rectmesh.h"
 #include "cubemesh.h"
+#include "modelmesh.h"
+
 #include <QKeyEvent>
 #include <QWheelEvent>
-
 #include <QVariantAnimation>
 
 namespace cgl{
@@ -38,14 +39,13 @@ protected:
 
 protected slots:
   void printLog(const QOpenGLDebugMessage& msg);
-   void anim(const QVariant& value);
 
 
 private:
 Scene * mScene;
-CubeMesh * mesh;
+ModelMesh * mesh;
 QOpenGLDebugLogger * mLogger;
-QVariantAnimation * mAnim;
+
 
 QVector3D mCameraPos;
 QVector3D mCameraFront;

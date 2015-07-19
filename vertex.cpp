@@ -7,6 +7,33 @@ Vertex::Vertex(float x, float y, float z)
 
 }
 
+Vertex::Vertex(const QVector3D &vertex)
+    :mRed(1),mGreen(1),mBlue(1),mTexCoordX(0),mTexCoordY(0)
+{
+    mX = vertex.x();
+    mY = vertex.y();
+    mZ = vertex.z();
+}
+
+Vertex::Vertex(const QVector3D &vertex, const QVector3D &normal,const QVector2D &texCoord, const QColor &col)
+{
+    mX = vertex.x();
+    mY = vertex.y();
+    mZ = vertex.z();
+
+    mNormalX = normal.x();
+    mNormalY = normal.y();
+    mNormalZ = normal.z();
+
+    mRed    = col.redF();
+    mGreen  = col.greenF();
+    mBlue   = col.blueF();
+
+    mTexCoordX = texCoord.x();
+    mTexCoordY = texCoord.y();
+
+}
+
 Vertex::Vertex(float x, float y, float z, const QColor &col)
     :mX(x), mY(y), mZ(z),mTexCoordX(0),mTexCoordY(0)
 {
@@ -20,8 +47,8 @@ Vertex::Vertex(float x, float y, float z, const QColor &col)
 
 }
 
-Vertex::Vertex(float x, float y, float z, const QColor &col, const QPointF &texCoord)
-:mX(x), mY(y), mZ(z)
+Vertex::Vertex(float x, float y, float z, const QColor &col, const QVector2D &texCoord)
+    :mX(x), mY(y), mZ(z)
 {
 
     mRed    = col.redF();
@@ -45,13 +72,28 @@ float Vertex::x() const
 
 float Vertex::y() const
 {
-   return mY;
+    return mY;
 }
 
 float Vertex::z() const
 {
     return mZ;
 
+}
+
+float Vertex::normalX() const
+{
+    return mNormalX;
+}
+
+float Vertex::normalY() const
+{
+    return mNormalY;
+}
+
+float Vertex::normalZ() const
+{
+    return mNormalZ;
 }
 
 QColor Vertex::color() const
