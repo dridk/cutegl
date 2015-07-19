@@ -1,6 +1,5 @@
 #include "view.h"
 #include <QDebug>
-#include "rectmesh.h"
 namespace cgl {
 
 View::View()
@@ -20,7 +19,7 @@ View::View()
 
     resize(800,600);
     mLastPos     = QPoint(400,300);
-    mCameraPos   = QVector3D(0,0,3);
+    mCameraPos   = QVector3D(0.5,0.5,3);
     mCameraFront = QVector3D(0,0,-1);
     mCameraUp    = QVector3D(0,1,0);
     mClick       = false;
@@ -51,7 +50,7 @@ void View::initializeGL()
 
     mScene->setContext(context());
 
-    mesh = new ModelMesh(":/models/teapot.obj",this);
+    mesh = new CubeMesh(this);
 
     mScene->addMesh(mesh);
     mesh->scale(0.3);
@@ -129,6 +128,8 @@ void View::keyPressEvent(QKeyEvent *event)
     if (event->key() == Qt::Key_Left)
     {
         mesh->rotate(10, QVector3D(0,0,1));
+
+
         update();
     }
 

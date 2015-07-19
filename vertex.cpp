@@ -8,7 +8,7 @@ Vertex::Vertex()
 }
 
 Vertex::Vertex(float x, float y, float z, const QColor& col)
-    :mX(x), mY(y),mTexCoordX(0),mTexCoordY(0)
+    :mX(x), mY(y), mZ(z),mTexCoordX(0),mTexCoordY(0)
 {
     setColor(col);
 }
@@ -37,9 +37,9 @@ void Vertex::setCoord(const QVector3D &coord)
 
 void Vertex::setNormal(const QVector3D &normal)
 {
-    mNormalX = normal.x();
-    mNormalY = normal.y();
-    mNormalZ = normal.z();
+//    mNormalX = normal.x();
+//    mNormalY = normal.y();
+//    mNormalZ = normal.z();
 }
 
 void Vertex::setTexCoord(const QVector2D &texCoord)
@@ -72,17 +72,17 @@ float Vertex::z() const
 
 float Vertex::normalX() const
 {
-    return mNormalX;
+//    return mNormalX;
 }
 
 float Vertex::normalY() const
 {
-    return mNormalY;
+//    return mNormalY;
 }
 
 float Vertex::normalZ() const
 {
-    return mNormalZ;
+//    return mNormalZ;
 }
 
 QColor Vertex::color() const

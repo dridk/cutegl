@@ -1,5 +1,5 @@
 #include "scene.h"
-#include "rectmesh.h"
+#include "planemesh.h"
 #include "axismesh.h"
 #include <QDebug>
 namespace  cgl {
@@ -61,8 +61,6 @@ void Scene::createMeshs()
     }
 
 
-    textureTest = new QOpenGLTexture(QImage(":/textures/wood.jpg"));
-    textureTest->create();
 
 
 }
@@ -82,15 +80,8 @@ void Scene::draw()
     foreach (Mesh * mesh, mMeshs)
     {
 
-
-
-
-
         mesh->bind();
-
-
         QMatrix4x4 all = mProjection * mView * mesh->model();
-
         mesh->shaders()->setUniformValueArray("all",&all,1);
 
         //        mesh->shaders()->setUniformValueArray("projection",&mProjection,1);
@@ -100,9 +91,12 @@ void Scene::draw()
         context()->functions()->glDrawArrays(mesh->mode(),0,mesh->count());
         mesh->release();
 
-        textureTest->release();
-
     }
+
+
+
+
+
 
 }
 //-----------------------------------------

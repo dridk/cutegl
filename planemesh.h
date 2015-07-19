@@ -4,11 +4,11 @@
 
 namespace cgl {
 
-class RectMesh : public Mesh
+class PlaneMesh : public Mesh
 {
 public:
-    RectMesh(QObject * parent = 0);
-    RectMesh(float top, float bottom, float left, float right, QObject * parent = 0);
+    PlaneMesh(QObject * parent = 0);
+    PlaneMesh(float top, float bottom, float left, float right, QObject * parent = 0);
 
     void setRect(float top, float bottom, float left, float right, float z=0);
 

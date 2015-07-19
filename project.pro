@@ -4,12 +4,12 @@ SOURCES = main.cpp \
     view.cpp \
     scene.cpp \
     mesh.cpp \
-    rectmesh.cpp \
     cubemesh.cpp \
     vertex.cpp \
     axismesh.cpp \
     modelmesh.cpp \
-    modelloader.cpp
+    modelloader.cpp \
+    planemesh.cpp
 TARGET  = cutegl 
 
 RESOURCES += \
@@ -21,10 +21,10 @@ HEADERS += \
     view.h \
     scene.h \
     mesh.h \
-    rectmesh.h \
     cubemesh.h \
     vertex.h \
     axismesh.h \
     modelmesh.h \
-    modelloader.h
+    modelloader.h \
+    planemesh.h
 

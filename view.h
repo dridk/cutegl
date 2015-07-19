@@ -4,7 +4,7 @@
 #include <QOpenGLDebugLogger>
 #include <QMatrix4x4>
 #include "scene.h"
-#include "rectmesh.h"
+#include "planemesh.h"
 #include "cubemesh.h"
 #include "modelmesh.h"
 
@@ -43,7 +43,7 @@ protected slots:
 
 private:
 Scene * mScene;
-ModelMesh * mesh;
+CubeMesh * mesh;
 QOpenGLDebugLogger * mLogger;
 
 QVariantAnimation * mAnimation;

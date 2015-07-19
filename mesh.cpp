@@ -70,7 +70,13 @@ const QMatrix4x4& Mesh::model() const
 
 void cgl::Mesh::create()
 {
+
+
+    setDefaultShaders();
+
     // Create buffer and send it to graphics card
+    qDebug()<<Q_FUNC_INFO<<"create mesh...";
+
     mBuffer.create();
     mBuffer.bind();
     mBuffer.allocate(mVertices.data(), mVertices.count() * sizeof(Vertex));
@@ -79,10 +85,9 @@ void cgl::Mesh::create()
     // Create VAO and send it to graphics cards
     mVao.create();
     mVao.bind();
+
     //---{
     mBuffer.bind();
-
-    qDebug()<<sizeof(Vertex);
 
     shaders()->bind();
     shaders()->enableAttributeArray("position");
@@ -95,14 +100,17 @@ void cgl::Mesh::create()
     shaders()->setAttributeBuffer("texCoord",GL_FLOAT,6*4 ,2, sizeof(Vertex));
 
     //---}
-    mVao.release();
 
+    mVao.release();
+    qDebug()<<Q_FUNC_INFO<<"mesh created";
 
 }
 //----------------------------------------------------------
 
 void Mesh::bind()
 {
+    shaders()->bind();
+
     if (mTexture) {
         mTexture->bind();
         shaders()->setUniformValue("textureEnabled",true);
@@ -121,6 +129,10 @@ void Mesh::release()
     mVao.release();
     if (mTexture)
         mTexture->release();
+
+    shaders()->release();
+
+
 }
 //----------------------------------------------------------
 

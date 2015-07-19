@@ -15,8 +15,8 @@ public:
         NORMAL_OFFSET  = 4*9
     };
     Vertex();
-    Vertex(float x, float y, float z, const QColor& col = Qt::white);
-    Vertex(const QVector3D& coord, const QColor& col = Qt::white);
+    Vertex(float x, float y, float z, const QColor& col = Qt::blue);
+    Vertex(const QVector3D& coord, const QColor& col = Qt::blue);
     Vertex(const QVector3D& coord, const QVector3D& normal, const QVector2D& texCoord, const QColor& col = Qt::white);
 
 
@@ -51,9 +51,9 @@ private:
     float mTexCoordX;
     float mTexCoordY;
 
-    float mNormalX;
-    float mNormalY;
-    float mNormalZ;
+//    float mNormalX;
+//    float mNormalY;
+//    float mNormalZ;
 };
 }
 
