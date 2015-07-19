@@ -11,7 +11,7 @@ View::View()
     QSurfaceFormat format;
     format.setMajorVersion(3);
     format.setMinorVersion(4);
-    format.setProfile(QSurfaceFormat::CoreProfile);
+    format.setProfile(QSurfaceFormat::CompatibilityProfile);
     format.setSamples(4);
     format.setDepthBufferSize(24);
     setFormat(format);
@@ -50,9 +50,8 @@ void View::initializeGL()
 
     mScene->setContext(context());
 
-    mesh = new PlaneMesh(this);
+    mesh = new ModelMesh("/home/sacha/man.obj",this);
 
-    mesh->setRect(1,-1,-1,1);
 
     mScene->addMesh(mesh);
 

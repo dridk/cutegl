@@ -77,6 +77,7 @@ void Scene::draw()
     context()->functions()->glEnable(GL_DEPTH_TEST);
     context()->functions()->glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
+
     foreach (Mesh * mesh, mMeshs)
     {
 
@@ -89,10 +90,10 @@ void Scene::draw()
         //        mesh->shaders()->setUniformValueArray("view",&mView,1);
 
         if (mesh->indexes().isEmpty())
-        context()->functions()->glDrawArrays(mesh->mode(),0,mesh->count());
+            context()->functions()->glDrawArrays(mesh->mode(),0,mesh->count());
 
         else
-        context()->functions()->glDrawElements(GL_TRIANGLES,mesh->indexes().count(),GL_UNSIGNED_INT, 0);
+            context()->functions()->glDrawElements(GL_TRIANGLES,mesh->indexes().count(),GL_UNSIGNED_INT, 0);
 
         mesh->release();
 
