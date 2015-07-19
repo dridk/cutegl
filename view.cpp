@@ -50,10 +50,11 @@ void View::initializeGL()
 
     mScene->setContext(context());
 
-    mesh = new CubeMesh(this);
+    mesh = new PlaneMesh(this);
+
+    mesh->setRect(1,-1,-1,1);
 
     mScene->addMesh(mesh);
-    mesh->scale(0.3);
 
     mScene->createMeshs();
 

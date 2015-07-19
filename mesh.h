@@ -21,7 +21,9 @@ public:
     Mesh(QObject * parent = 0);
     ~Mesh();
     void setVertices(const QVector<Vertex>& vertices);
+    void setIndexes(const QVector<GLuint>& indexes);
     const QVector<Vertex>& vertices() const;
+    const QVector<GLuint>& indexes() const;
     int size() const;
     int count() const;
     void addVertex(const Vertex& v);
@@ -68,7 +70,9 @@ public:
 
 private:
     QVector<Vertex> mVertices;
-    QOpenGLBuffer mBuffer;
+    QVector<GLuint> mIndexes;
+    QOpenGLBuffer mVertexBuffer;
+    QOpenGLBuffer mIndexBuffer;
     QOpenGLVertexArrayObject mVao;
     QOpenGLShaderProgram * mProgram;
     QOpenGLTexture * mTexture;

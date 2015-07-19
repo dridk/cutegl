@@ -88,7 +88,12 @@ void Scene::draw()
         //        mesh->shaders()->setUniformValueArray("model",&mesh->model(),1);
         //        mesh->shaders()->setUniformValueArray("view",&mView,1);
 
+        if (mesh->indexes().isEmpty())
         context()->functions()->glDrawArrays(mesh->mode(),0,mesh->count());
+
+        else
+        context()->functions()->glDrawElements(GL_TRIANGLES,mesh->indexes().count(),GL_UNSIGNED_INT, 0);
+
         mesh->release();
 
     }

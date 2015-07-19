@@ -43,7 +43,7 @@ protected slots:
 
 private:
 Scene * mScene;
-CubeMesh * mesh;
+PlaneMesh * mesh;
 QOpenGLDebugLogger * mLogger;
 
 QVariantAnimation * mAnimation;

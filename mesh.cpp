@@ -6,6 +6,10 @@ Mesh::Mesh(QObject * parent )
 {
     mProgram = new QOpenGLShaderProgram(this);
     mTexture = NULL;
+
+    mVertexBuffer = QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
+    mIndexBuffer  = QOpenGLBuffer(QOpenGLBuffer::IndexBuffer);
+
     setMode(GL_TRIANGLES);
     resetTransform();
 }
@@ -13,7 +17,7 @@ Mesh::Mesh(QObject * parent )
 
 Mesh::~Mesh()
 {
-    mBuffer.destroy();
+    mVertexBuffer.destroy();
     mVao.destroy();
 }
 //----------------------------------------------------------
@@ -22,11 +26,24 @@ void cgl::Mesh::setVertices(const QVector<Vertex> &vertices)
 {
     mVertices = vertices;
 }
+
+void Mesh::setIndexes(const QVector<GLuint> &indexes)
+{
+    mIndexes = indexes;
+
+}
+
+
 //----------------------------------------------------------
 
 const QVector<Vertex> &Mesh::vertices() const
 {
     return mVertices;
+}
+
+const QVector<GLuint> &Mesh::indexes() const
+{
+    return mIndexes;
 }
 //----------------------------------------------------------
 
@@ -71,23 +88,38 @@ const QMatrix4x4& Mesh::model() const
 void cgl::Mesh::create()
 {
 
+    if (!mVertices.count())
+    {
+        qDebug()<<Q_FUNC_INFO<<"cannot create mesh. No vertices are defined";
+        return;
+    }
 
     setDefaultShaders();
 
-    // Create buffer and send it to graphics card
+    // Create Vertex buffer
     qDebug()<<Q_FUNC_INFO<<"create mesh...";
 
-    mBuffer.create();
-    mBuffer.bind();
-    mBuffer.allocate(mVertices.data(), mVertices.count() * sizeof(Vertex));
-    mBuffer.release();
+    mVertexBuffer.create();
+    mVertexBuffer.bind();
+    mVertexBuffer.allocate(mVertices.data(), mVertices.count() * sizeof(Vertex));
+    mVertexBuffer.release();
+
+    // Create Index Buffer only if indexes are defined
+
+    if (mIndexes.count() ) {
+        mIndexBuffer.create();
+        mIndexBuffer.bind();
+        mIndexBuffer.allocate(mIndexes.data(), mIndexes.count() * sizeof(GLuint));
+        mIndexBuffer.release();
+    }
 
     // Create VAO and send it to graphics cards
     mVao.create();
     mVao.bind();
 
     //---{
-    mBuffer.bind();
+    mIndexBuffer.bind();
+    mVertexBuffer.bind();
 
     shaders()->bind();
     shaders()->enableAttributeArray("position");
@@ -98,6 +130,7 @@ void cgl::Mesh::create()
 
     shaders()->enableAttributeArray("texCoord");
     shaders()->setAttributeBuffer("texCoord",GL_FLOAT,6*4 ,2, sizeof(Vertex));
+
 
     //---}
 
@@ -118,9 +151,8 @@ void Mesh::bind()
     else
         shaders()->setUniformValue("textureEnabled",false);
 
-
-
     mVao.bind();
+
 }
 //----------------------------------------------------------
 
