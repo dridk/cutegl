@@ -19,7 +19,7 @@ View::View()
 
 
     resize(800,600);
-    lastPos = QPoint(400,300);
+    mLastPos = QPoint(400,300);
 
     connect(mLogger,SIGNAL(messageLogged(QOpenGLDebugMessage)),this,SLOT(printLog(QOpenGLDebugMessage)));
 
@@ -42,9 +42,9 @@ View::View()
     setMouseGrabEnabled(true);
     mClick = false;
 
-    yaw = -90.0f;
-    pitch = 0.0f;
-    aspect = 45.0f;
+    mYaw = -90.0f;
+    mPitch = 0.0f;
+    mAspect = 45.0f;
 }
 
 void View::initializeGL()
@@ -68,7 +68,7 @@ void View::initializeGL()
 
 void View::paintGL()
 {
-    mScene->setPerspective(aspect, ((double)width()) / height(), 1, 100.0f);
+    mScene->setPerspective(mAspect, ((double)width()) / height(), 1, 100.0f);
     mScene->lookAt(mCameraPos, mCameraPos + mCameraFront, mCameraUp);
     mScene->draw();
 
@@ -145,29 +145,29 @@ void View::mouseMoveEvent(QMouseEvent * event)
     if (mClick)
     {
 
-        float xOffset  =  event->pos().x() - lastPos.x() ;
-        float yOffset  =  lastPos.y() - event->pos().y();
+        float xOffset  =  event->pos().x() - mLastPos.x() ;
+        float yOffset  =  mLastPos.y() - event->pos().y();
 
         QPointF offset(xOffset,yOffset);
 
-        lastPos = event->pos();
+        mLastPos = event->pos();
 
         float sensitivity = 0.05f;
 
         offset    *= sensitivity;
 
-        yaw   += offset.x();
-        pitch += offset.y();
+        mYaw   += offset.x();
+        mPitch += offset.y();
 
-        if(pitch > 89.0f)
-            pitch =  89.0f;
-        if(pitch < -89.0f)
-            pitch = -89.0f;
+        if(mPitch > 89.0f)
+            mPitch =  89.0f;
+        if(mPitch < -89.0f)
+            mPitch = -89.0f;
 
 
-        float x = qCos(qDegreesToRadians(pitch))  * cos(qDegreesToRadians(yaw));
-        float y = qSin(qDegreesToRadians(pitch));
-        float z = qCos(qDegreesToRadians(pitch))  * sin(qDegreesToRadians(yaw));
+        float x = qCos(qDegreesToRadians(mPitch))  * cos(qDegreesToRadians(mYaw));
+        float y = qSin(qDegreesToRadians(mPitch));
+        float z = qCos(qDegreesToRadians(mPitch))  * sin(qDegreesToRadians(mYaw));
 
         mCameraFront = QVector3D(x,y,z);
         mCameraFront.normalize();
@@ -185,14 +185,14 @@ void View::mouseReleaseEvent(QMouseEvent *)
 void View::wheelEvent(QWheelEvent * event)
 {
 
-    qDebug()<<event->angleDelta()<<aspect;
+    qDebug()<<event->angleDelta()<<mAspect;
 
-    if(aspect >= 1.0f && aspect <= 45.0f)
-      aspect -= event->delta()/120;
-    if(aspect <= 1.0f)
-      aspect = 1.0f;
-    if(aspect >= 45.0f)
-      aspect = 45.0f;
+    if(mAspect >= 1.0f && mAspect <= 45.0f)
+      mAspect -= event->delta()/120;
+    if(mAspect <= 1.0f)
+      mAspect = 1.0f;
+    if(mAspect >= 45.0f)
+      mAspect = 45.0f;
 
     update();
 }

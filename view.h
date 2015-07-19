@@ -38,8 +38,7 @@ protected:
 
 protected slots:
   void printLog(const QOpenGLDebugMessage& msg);
-
-    void anim(const QVariant& value);
+   void anim(const QVariant& value);
 
 
 private:
@@ -47,15 +46,16 @@ Scene * mScene;
 CubeMesh * mesh;
 QOpenGLDebugLogger * mLogger;
 QVariantAnimation * mAnim;
+
 QVector3D mCameraPos;
 QVector3D mCameraFront;
 QVector3D mCameraUp;
 
 bool mClick;
-QPointF lastPos;
-float yaw;
-float pitch;
-float aspect;
+QPointF mLastPos;
+float mYaw;
+float mPitch;
+float mAspect;
 
 };
 
