@@ -50,7 +50,7 @@ void View::initializeGL()
 
     mScene->setContext(context());
 
-    mesh = new ModelMesh("/home/sacha/man.obj",this);
+    mesh = new ModelMesh(":models/teapot.obj",this);
 
 
     mScene->addMesh(mesh);
