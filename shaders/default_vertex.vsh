@@ -20,5 +20,7 @@ void main(void)
     fragColor    = color;
     fragTexCoord = texCoord;
 
+    depth = gl_Position.z;
+
 }
 

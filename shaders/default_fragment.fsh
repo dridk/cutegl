@@ -10,11 +10,8 @@ uniform bool textureEnabled;
 out vec4 color;
 void main(void)
 {
-    if (textureEnabled == true)
-        color = texture(fragTexture, fragTexCoord) *(0.8-depth);
 
-    else
-        color = vec4(fragColor,1.0);
+        color = vec4(fragColor,1.0) * (1-depth*0.1);
 
 
 }
