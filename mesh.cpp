@@ -131,6 +131,8 @@ void cgl::Mesh::create()
     shaders()->enableAttributeArray("texCoord");
     shaders()->setAttributeBuffer("texCoord",GL_FLOAT,6*4 ,2, sizeof(Vertex));
 
+    shaders()->enableAttributeArray("normal");
+    shaders()->setAttributeBuffer("normal",GL_FLOAT,8*4 ,2, sizeof(Vertex));
 
     //---}
 

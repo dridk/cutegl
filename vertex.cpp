@@ -2,19 +2,19 @@
 namespace cgl {
 
 Vertex::Vertex()
-:mX(0), mY(0), mZ(0),mRed(1),mGreen(1),mBlue(1),mTexCoordX(0),mTexCoordY(0)
+:mX(0), mY(0), mZ(0),mRed(1),mGreen(1),mBlue(1),mTexCoordX(0),mTexCoordY(0),mNormalX(0),mNormalY(0),mNormalZ(0)
 {
 
 }
 
 Vertex::Vertex(float x, float y, float z, const QColor& col)
-    :mX(x), mY(y), mZ(z),mTexCoordX(0),mTexCoordY(0)
+    :mX(x), mY(y), mZ(z),mTexCoordX(0),mTexCoordY(0),mNormalX(0),mNormalY(0),mNormalZ(0)
 {
     setColor(col);
 }
 
 Vertex::Vertex(const QVector3D &coord,const QColor& col)
-    :mTexCoordX(0),mTexCoordY(0)
+    :mTexCoordX(0),mTexCoordY(0),mNormalX(0),mNormalY(0),mNormalZ(0)
 {
    setCoord(coord);
    setColor(col);
@@ -37,9 +37,9 @@ void Vertex::setCoord(const QVector3D &coord)
 
 void Vertex::setNormal(const QVector3D &normal)
 {
-//    mNormalX = normal.x();
-//    mNormalY = normal.y();
-//    mNormalZ = normal.z();
+    mNormalX = normal.x();
+    mNormalY = normal.y();
+    mNormalZ = normal.z();
 }
 
 void Vertex::setTexCoord(const QVector2D &texCoord)
@@ -72,17 +72,17 @@ float Vertex::z() const
 
 float Vertex::normalX() const
 {
-//    return mNormalX;
+    return mNormalX;
 }
 
 float Vertex::normalY() const
 {
-//    return mNormalY;
+    return mNormalY;
 }
 
 float Vertex::normalZ() const
 {
-//    return mNormalZ;
+    return mNormalZ;
 }
 
 QColor Vertex::color() const

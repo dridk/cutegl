@@ -51,9 +51,9 @@ private:
     float mTexCoordX;
     float mTexCoordY;
 
-//    float mNormalX;
-//    float mNormalY;
-//    float mNormalZ;
+    float mNormalX;
+    float mNormalY;
+    float mNormalZ;
 };
 }
 

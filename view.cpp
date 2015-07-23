@@ -50,8 +50,8 @@ void View::initializeGL()
 
     mScene->setContext(context());
 
-    mesh = new ModelMesh(":models/teapot.obj",this);
-
+    mesh = new ModelMesh(":models/man.obj",this);
+    mesh->scale(0.3);
 
     mScene->addMesh(mesh);
 
@@ -232,7 +232,6 @@ void View::printLog(const QOpenGLDebugMessage &msg)
 void View::anim(const QVariant &value)
 {
 
-    qDebug()<<mAnimation->currentValue().toFloat();
     mesh->resetTransform();
     mesh->rotate(mAnimation->currentValue().toFloat(), QVector3D(0,0,1));
     update();
