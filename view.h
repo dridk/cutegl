@@ -7,7 +7,7 @@
 #include "planemesh.h"
 #include "cubemesh.h"
 #include "modelmesh.h"
-
+#include "spheremesh.h"
 #include <QKeyEvent>
 #include <QWheelEvent>
 #include <QVariantAnimation>
@@ -43,7 +43,7 @@ protected slots:
 
 private:
 Scene * mScene;
-ModelMesh * mesh;
+SphereMesh * mesh;
 QOpenGLDebugLogger * mLogger;
 
 QVariantAnimation * mAnimation;

@@ -1,5 +1,6 @@
 #include "view.h"
 #include <QDebug>
+#include "spheremesh.h"
 namespace cgl {
 
 View::View()
@@ -11,7 +12,7 @@ View::View()
     QSurfaceFormat format;
     format.setMajorVersion(3);
     format.setMinorVersion(4);
-    format.setProfile(QSurfaceFormat::CompatibilityProfile);
+    format.setProfile(QSurfaceFormat::CoreProfile);
     format.setSamples(4);
     format.setDepthBufferSize(24);
     setFormat(format);
@@ -36,7 +37,7 @@ View::View()
     mAnimation->setLoopCount(-1);
     mAnimation->setDuration(5000);
 
-//    mAnimation->start();
+        mAnimation->start();
     connect(mAnimation,SIGNAL(valueChanged(QVariant)),this,SLOT(anim(QVariant)));
 
 
@@ -50,17 +51,24 @@ void View::initializeGL()
 
     mScene->setContext(context());
 
-    mesh = new ModelMesh(":models/man.obj",this);
-    mesh->scale(0.3);
+    for (int i=0; i< 100; ++i)
+    {
 
-    mScene->addMesh(mesh);
+        mesh = new SphereMesh(0.5, 10);
+        mesh->translate(qrand()%10,qrand()%10);
+        mScene->addMesh(mesh);
+
+        mesh->setTexture(QImage("/home/sacha/Earth.bmp"));
+
+    }
+
+
+
 
     mScene->createMeshs();
 
 
     context()->functions()->glViewport(0,0,width(),height());
-
-
 
 }
 
@@ -214,11 +222,11 @@ void View::wheelEvent(QWheelEvent * event)
 
 
     if(mAspect >= 1.0f && mAspect <= 45.0f)
-      mAspect -= event->delta()/120;
+        mAspect -= event->delta()/120;
     if(mAspect <= 1.0f)
-      mAspect = 1.0f;
+        mAspect = 1.0f;
     if(mAspect >= 45.0f)
-      mAspect = 45.0f;
+        mAspect = 45.0f;
 
     update();
 }
@@ -232,8 +240,10 @@ void View::printLog(const QOpenGLDebugMessage &msg)
 void View::anim(const QVariant &value)
 {
 
-    mesh->resetTransform();
-    mesh->rotate(mAnimation->currentValue().toFloat(), QVector3D(0,0,1));
+
+
+
+
     update();
 
 }

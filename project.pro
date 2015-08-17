@@ -9,7 +9,8 @@ SOURCES = main.cpp \
     axismesh.cpp \
     modelmesh.cpp \
     modelloader.cpp \
-    planemesh.cpp
+    planemesh.cpp \
+    spheremesh.cpp
 TARGET  = cutegl 
 
 RESOURCES += \
@@ -26,5 +27,6 @@ HEADERS += \
     axismesh.h \
     modelmesh.h \
     modelloader.h \
-    planemesh.h
+    planemesh.h \
+    spheremesh.h
 

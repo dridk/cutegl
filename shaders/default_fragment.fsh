@@ -18,19 +18,18 @@ out vec4 color;
 void main(void)
 {
 
-    vec3 ambient = ambientStrength * lightColor;
+     color = texture(fragTexture, fragTexCoord);
 
-    vec3 norm = normalize(fragNormal);
-    vec3 lightDir = normalize(lightPos - fragPos);
+//    vec3 ambient = ambientStrength * lightColor;
 
-    float diff = max(dot(norm, lightDir),0.0);
-    vec3 diffuse = diff * lightColor;
+//    vec3 norm = normalize(fragNormal);
+//    vec3 lightDir = normalize(lightPos - fragPos);
 
+//    float diff = max(dot(norm, lightDir),0.0);
+//    vec3 diffuse = diff * lightColor;
 
+//    vec3 result = (ambient + diffuse ) * fragColor;
 
-    vec3 result = (ambient + diffuse ) * fragColor;
-
-        color = vec4(result ,1.0);
 
 
 }

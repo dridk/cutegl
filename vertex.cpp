@@ -13,6 +13,12 @@ Vertex::Vertex(float x, float y, float z, const QColor& col)
     setColor(col);
 }
 
+Vertex::Vertex(float x, float y, float z, float u, float v)
+     :mX(x), mY(y), mZ(z),mTexCoordX(u),mTexCoordY(v),mNormalX(0),mNormalY(0),mNormalZ(0)
+{
+    setColor(Qt::white);
+}
+
 Vertex::Vertex(const QVector3D &coord,const QColor& col)
     :mTexCoordX(0),mTexCoordY(0),mNormalX(0),mNormalY(0),mNormalZ(0)
 {

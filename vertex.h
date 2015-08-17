@@ -16,6 +16,7 @@ public:
     };
     Vertex();
     Vertex(float x, float y, float z, const QColor& col = Qt::blue);
+    Vertex(float x, float y, float z, float u, float v);
     Vertex(const QVector3D& coord, const QColor& col = Qt::blue);
     Vertex(const QVector3D& coord, const QVector3D& normal, const QVector2D& texCoord, const QColor& col = Qt::white);
 
