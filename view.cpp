@@ -11,7 +11,7 @@ View::View()
     QSurfaceFormat format;
     format.setMajorVersion(3);
     format.setMinorVersion(4);
-    format.setProfile(QSurfaceFormat::CompatibilityProfile);
+    format.setProfile(QSurfaceFormat::CoreProfile);
     format.setSamples(4);
     format.setDepthBufferSize(24);
     setFormat(format);
