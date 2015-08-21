@@ -4,6 +4,7 @@ SOURCES = main.cpp \
     view.cpp \
     scene.cpp \
     vertex.cpp \
+    mesh.cpp
 
 
 TARGET  = cutegl 
@@ -17,6 +18,7 @@ HEADERS += \
     view.h \
     scene.h \
     vertex.h \
+    mesh.h
 
 
 
