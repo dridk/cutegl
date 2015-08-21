@@ -27,6 +27,9 @@ public:
   void paintGL();
   void resizeGL();
 
+  Scene * scene();
+
+
 public slots:
   void setDebugger(bool active);
 
