@@ -51,7 +51,6 @@ void View::initializeGL()
 
     mScene->setContext(context());
 
-    mesh->scale(0.3);
 
     mScene->addMesh(new SphereMesh(0.1, 20, this));
     mScene->createMeshs();
