@@ -1,3 +1,4 @@
+#include "spheremesh.h"
 #include "view.h"
 #include <QDebug>
 namespace cgl {
@@ -50,11 +51,9 @@ void View::initializeGL()
 
     mScene->setContext(context());
 
-    mesh = new ModelMesh(":models/man.obj",this);
     mesh->scale(0.3);
 
-    mScene->addMesh(mesh);
-
+    mScene->addMesh(new SphereMesh(0.1, 20, this));
     mScene->createMeshs();
 
 
