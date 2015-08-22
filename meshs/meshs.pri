@@ -8,7 +8,8 @@ HEADERS += \
     $$PWD/axismesh.h \
     $$PWD/spheremesh.h \
     $$PWD/trianglemesh.h \
-    $$PWD/polygonmesh.h
+    $$PWD/polygonmesh.h \
+    $$PWD/annulusmesh.h
 
 SOURCES += \
     $$PWD/planemesh.cpp \
@@ -18,4 +19,5 @@ SOURCES += \
     $$PWD/axismesh.cpp \
     $$PWD/spheremesh.cpp \
     $$PWD/trianglemesh.cpp \
-    $$PWD/polygonmesh.cpp
+    $$PWD/polygonmesh.cpp \
+    $$PWD/annulusmesh.cpp

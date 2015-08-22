@@ -1,4 +1,4 @@
-#include "polygonmesh.h"
+#include "annulusmesh.h"
 #include "view.h"
 #include <QDebug>
 namespace cgl {
@@ -52,7 +52,7 @@ void View::initializeGL()
     mScene->setContext(context());
 
 
-    mScene->addMesh(new PolygonMesh(1, 20, this));
+    mScene->addMesh(new AnnulusMesh(1, 3, 10, this));
     mScene->createMeshs();
 
 

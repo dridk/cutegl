@@ -33,6 +33,7 @@ public:
     void setMode(GLenum m);
     void setTexture(const QImage&  image);
     QOpenGLTexture * texture();
+    Vertex getVertex(int index) const { return mVertices.at(index); }
 
     // return the Model matrix transformation
     const QMatrix4x4& model() const;

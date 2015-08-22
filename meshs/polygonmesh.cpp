@@ -18,6 +18,7 @@ PolygonMesh::PolygonMesh(float radius, int nseg, QObject *parent) :  Mesh(parent
     center.setColor(Qt::blue);
 
     for( int count = 0; count < mSeg; count++) {
+        qDebug() << Q_FUNC_INFO << mSeg << count;
         addVertex(Vertex(QVector3D(mRadius * qCos(ang), mRadius * qSin(ang),0.0),
                          QVector3D(0.0, 0.0, 0.0),
                          QVector2D(0.5 + 0.5 * qCos(ang), 0.5 + 0.5 * qSin(ang)),
