@@ -7,7 +7,8 @@ HEADERS += \
     $$PWD/cubemesh.h \
     $$PWD/axismesh.h \
     $$PWD/spheremesh.h \
-    $$PWD/trianglemesh.h
+    $$PWD/trianglemesh.h \
+    $$PWD/polygonmesh.h
 
 SOURCES += \
     $$PWD/planemesh.cpp \
@@ -16,4 +17,5 @@ SOURCES += \
     $$PWD/cubemesh.cpp \
     $$PWD/axismesh.cpp \
     $$PWD/spheremesh.cpp \
-    $$PWD/trianglemesh.cpp
+    $$PWD/trianglemesh.cpp \
+    $$PWD/polygonmesh.cpp
