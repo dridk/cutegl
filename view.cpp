@@ -1,4 +1,4 @@
-#include "spheremesh.h"
+#include "trianglemesh.h"
 #include "view.h"
 #include <QDebug>
 namespace cgl {
@@ -52,7 +52,7 @@ void View::initializeGL()
     mScene->setContext(context());
 
 
-    mScene->addMesh(new SphereMesh(0.1, 20, this));
+    mScene->addMesh(new TriangleMesh(4, 2, TriangleMesh::ISOC, 0.0, this));
     mScene->createMeshs();
 
 

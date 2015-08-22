@@ -6,7 +6,8 @@ HEADERS += \
     $$PWD/modelloader.h \
     $$PWD/cubemesh.h \
     $$PWD/axismesh.h \
-    $$PWD/spheremesh.h
+    $$PWD/spheremesh.h \
+    $$PWD/trianglemesh.h
 
 SOURCES += \
     $$PWD/planemesh.cpp \
@@ -14,4 +15,5 @@ SOURCES += \
     $$PWD/modelloader.cpp \
     $$PWD/cubemesh.cpp \
     $$PWD/axismesh.cpp \
-    $$PWD/spheremesh.cpp
+    $$PWD/spheremesh.cpp \
+    $$PWD/trianglemesh.cpp
