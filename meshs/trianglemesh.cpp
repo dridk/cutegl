@@ -44,15 +44,25 @@ TriangleMesh::TriangleMesh(double b, double h, TriangleMesh::TriangleType type, 
     addVertex(v1);
     addVertex(v2);
     addVertex(v3);
+
+    mPolygon.append(QPointF(v1.x(), v1.y()));
+    mPolygon.append(QPointF(v2.x(), v2.y()));
+    mPolygon.append(QPointF(v3.x(), v3.y()));
+
 }
 
-void TriangleMesh::Cdg()
+const QPolygonF &TriangleMesh::toPolygon() const
+{
+ return mPolygon;
+}
+
+void TriangleMesh::computeGravityCenter()
 {
     // calculates center of gravity
     double num =  2 * mH / mB / (mXc - mB / 2.0) - mB * mH / (mXc - 2.0 * mB);
     double den = mH / (mXc - mB / 2.0) - mH / (mXc - 2.0 * mB);
-    mXg = num / den;
-    mYg = mH * mXg / (mXc - 2.0 * mB) - mB * mH / (mXc - 2.0 * mB);
+    mGravityCenter.setX(num / den);
+    mGravityCenter.setY(mH * mGravityCenter.y() / (mXc - 2.0 * mB) - mB * mH / (mXc - 2.0 * mB));
 }
 
 }

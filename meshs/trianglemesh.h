@@ -2,6 +2,7 @@
 #define TRIANGLEMESH_H
 
 #include <QObject>
+#include <QPolygonF>
 #include "mesh.h"
 
 namespace cgl {
@@ -13,14 +14,17 @@ public:
 
     explicit TriangleMesh(double b, double h, TriangleType type, double xc = 0.0, QObject *parent = 0);
 
-private:
-    void    Cdg();
+    const QPolygonF& toPolygon() const;
+
+protected:
+    void    computeGravityCenter();
 
     double mB;          // Base width
     double mH;          // Height
     TriangleType mType; // Type of tiangle
     double mXc;         // x coordinate of apex (in case of general triangle)
-    double mXg, mYg;    // coordinates of center of gravity
+    QPointF mGravityCenter;
+    QPolygonF mPolygon;
 };
 
 }
