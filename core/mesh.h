@@ -37,6 +37,7 @@ public:
     void                   setDefaultShaders();
     void                   setTexture(const QImage &image);
     void                   setTextureImage(const QString filename) {mTextureImage.load(filename); }
+    void                   setMode(GLenum mode) { mMode = mode;}
     QImage                 textureImage() const { return mTextureImage; }
     QOpenGLShaderProgram   *shaderProgram() const { return mShaderProgram; }
     void                   translate(float x, float y, float z) { mModelMatrix.translate(x, y, z); }

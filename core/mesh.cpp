@@ -134,4 +134,6 @@ void Mesh::setTexture(const QImage &image)
     mTexture = new QOpenGLTexture(image);
     mTexture->create();
 }
+
+
 }
