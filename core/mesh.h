@@ -22,6 +22,8 @@ public:
     ~Mesh();
 
     void                   addVertex(const Vertex &ver) { mVertices.append(ver); }
+    void                   addVertex(const QVector<Vertex>& ver) {mVertices.append(ver);}
+    void                   clearVertices(){mVertices.clear();}
     void                   bind();
     void                   create();
     int                    indicesCount() const { return mIndices.count(); }
@@ -33,6 +35,8 @@ public:
     void                   release();
     void                   resetTransform() { mModelMatrix.setToIdentity(); }
     void                   rotate(float angle, float x, float y, float z) { mModelMatrix.rotate(angle, x, y, z); }
+    void                   scale(float x, float y, float z) {mModelMatrix.scale(x,y,z);}
+    void                   scale(float f) { mModelMatrix.scale(f);}
     void                   setShaders(const QString &vertexFile, const QString &fragmentFile);
     void                   setDefaultShaders();
     void                   setTexture(const QImage &image);

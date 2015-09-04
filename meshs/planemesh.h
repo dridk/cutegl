@@ -8,15 +8,14 @@ class PlaneMesh : public Mesh
 {
 public:
     PlaneMesh(QObject * parent = 0);
-    PlaneMesh(float top, float bottom, float left, float right, QObject * parent = 0);
+    PlaneMesh(float x, float y, float width, float height, QObject * parent = 0);
+    PlaneMesh(const QRectF& rect, QObject * parent = 0);
 
-    void setRect(float top, float bottom, float left, float right, float z=0);
+    void setRect(const QRectF& rect);
 
+    void makeMesh();
 private:
-    float top;
-    float bottom;
-    float left;
-    float right;
+  QRectF mRect;
 
 };
 

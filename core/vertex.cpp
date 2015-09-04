@@ -30,18 +30,17 @@ Vertex::Vertex(const QVector3D &pos):
     setPos(pos);
 
 }
-//===================================================================
 
-Vertex::Vertex(const QVector3D &pos, const QVector3D &normal):
+Vertex::Vertex(const QVector3D &pos, const QVector2D &tex):
     mRed(1.0), mGreen(1.0), mBlue(1.0),
-    mU(0.0), mV(0.0)
+    mNx(0.0), mNy(0.0), mNz(0.0)
 {
     setPos(pos);
-    setNormal(normal);
+    setTex(tex);
 }
 //===================================================================
 
-Vertex::Vertex(const QVector3D &pos, const QVector3D &normal, const QVector2D &tex):
+Vertex::Vertex(const QVector3D &pos, const QVector2D &tex, const QVector3D &normal):
     mRed(1.0), mGreen(1.0), mBlue(1.0)
 {
     setPos(pos);

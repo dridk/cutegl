@@ -5,19 +5,20 @@ namespace cgl {
 ModelMesh::ModelMesh(const QString &filename, QObject *parent)
     :Mesh(parent)
 {
-
-    setMode(GL_TRIANGLES);
-    setTexture(QImage(":/textures/wood.jpg"));
-
     setModel(filename);
-
 }
 
 void ModelMesh::setModel(const QString &filename)
 {
 
     mLoader.load(filename);
-    setVertices(mLoader.vertices());
+    makeMesh();
+
+}
+
+void ModelMesh::makeMesh()
+{
+    addVertex(mLoader.vertices());
 
 }
 

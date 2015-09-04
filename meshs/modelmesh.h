@@ -12,6 +12,8 @@ public:
 
     void setModel(const QString& filename);
 
+    void makeMesh();
+
 private:
     ModelLoader mLoader;
 

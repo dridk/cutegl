@@ -3,35 +3,38 @@ namespace cgl {
 PlaneMesh::PlaneMesh(QObject * parent)
     :Mesh(parent)
 {
-
-setMode(GL_TRIANGLES);
-
-
 }
 
-PlaneMesh::PlaneMesh(float top, float bottom, float left, float right, QObject *parent)
+PlaneMesh::PlaneMesh(float x, float y, float width, float height, QObject * parent)
     :Mesh(parent)
 {
-    setRect(top,bottom,left, right);
+    setRect(QRect(x,y, width, height));
 }
 
-void PlaneMesh::setRect(float top, float bottom, float left, float right, float z)
+PlaneMesh::PlaneMesh(const QRectF &rect, QObject *parent)
+{
+    setRect(rect);
+}
+
+void PlaneMesh::setRect(const QRectF &rect)
+{
+    mRect  = rect ;
+    makeMesh();
+
+}
+
+
+
+void PlaneMesh::makeMesh()
 {
 
-    QVector<Vertex> vertices;
-
-    vertices.append(Vertex(QVector3D(0.5,0.5,0)));
-    vertices.append(Vertex(QVector3D(0.5,-0.5,0)));
-    vertices.append(Vertex(QVector3D(-0.5,-0.5,0)));
-    vertices.append(Vertex(QVector3D(-0.5,0.5,0)));
-
-    setVertices(vertices);
+    clearVertices();
+    addVertex(Vertex(mRect.left() , mRect.top(),0,     0,0, 1,1,1));
+    addVertex(Vertex(mRect.right(), mRect.top(),0,     1,0, 1,1,1));
+    addVertex(Vertex(mRect.left() , mRect.bottom(),0,  0,1, 1,1,1));
+    addVertex(Vertex(mRect.right() , mRect.bottom(),0,  1,1, 1,1,1));
 
 
-    QVector<GLuint> ids;
-    ids<<0<<1<<3<<1<<2<<3;
-
-    setIndexes(ids);
 }
 
 

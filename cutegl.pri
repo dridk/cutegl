@@ -20,7 +20,9 @@ HEADERS += \
     $$PWD/meshs/annulusmesh.h \
     $$PWD/meshs/polygonmesh.h \
     $$PWD/meshs/cubemesh.h \
-    $$PWD/meshs/modelloader.h
+    $$PWD/meshs/modelloader.h \
+    $$PWD/meshs/modelmesh.h \
+    $$PWD/meshs/planemesh.h
 
 SOURCES += \
     $$PWD/core/view.cpp \
@@ -41,7 +43,9 @@ SOURCES += \
     $$PWD/meshs/annulusmesh.cpp \
     $$PWD/meshs/polygonmesh.cpp \
     $$PWD/meshs/cubemesh.cpp \
-    $$PWD/meshs/modelloader.cpp
+    $$PWD/meshs/modelloader.cpp \
+    $$PWD/meshs/modelmesh.cpp \
+    $$PWD/meshs/planemesh.cpp
 
 RESOURCES += \
     $$PWD/shaders/shaders.qrc \

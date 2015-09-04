@@ -11,6 +11,8 @@ class CubeMesh : public Mesh
 public:
     explicit CubeMesh(QObject *parent = 0);
 
+    void makeMesh();
+
 
 };
 }

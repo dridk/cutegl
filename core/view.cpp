@@ -41,7 +41,8 @@ View::View(int refreshRate) : QOpenGLWindow(),
     int timerInterval = second / refreshRate;
     mTimer = new QTimer(this);
     connect(mTimer, SIGNAL(timeout()), this, SLOT(timeOutSlot()));
-    mTimer->start(timerInterval);
+   // mTimer->start(timerInterval);
+    // Tu fais pas un jeux video! Tu appel update() qd tu veux rafrachir!
 }
 
 Scene *View::scene()
@@ -117,6 +118,8 @@ void View::keyPressEvent(QKeyEvent *event)
     default:
         break;
     }
+
+    update();
 }
 
 //===================================================================
@@ -139,6 +142,9 @@ void View::mouseMoveEvent(QMouseEvent *event)
 
         mMousePosition = event->pos();
     }
+
+    update();
+
 }
 
 //===================================================================

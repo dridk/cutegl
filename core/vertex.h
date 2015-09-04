@@ -18,8 +18,8 @@ public:
     Vertex();
     Vertex(float x, float y,  float z, float u=0, float v=0, float nx=0, float ny=0, float nz=0);
     Vertex(const QVector3D &pos);
-    Vertex(const QVector3D &pos, const QVector3D &normal);
-    Vertex(const QVector3D &pos, const QVector3D &normal, const QVector2D &tex);
+    Vertex(const QVector3D &pos, const QVector2D &tex);
+    Vertex(const QVector3D &pos, const QVector2D &tex, const QVector3D &normal);
 
     void setColor(const QColor &col);
     void setNormal(const QVector3D &normal);
