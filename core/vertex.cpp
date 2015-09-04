@@ -7,36 +7,45 @@ Vertex::Vertex() :
     mX(0.0), mY(0.0), mZ(0.0),
     mRed(1.0), mGreen(1.0), mBlue(1.0),
     mU(0.0), mV(0.0),
-    mNormX(0.0), mNormY(0.0), mNormZ(0.0)
+    mNx(0.0), mNy(0.0), mNz(0.0)
 {
     // ctor
 }
 
-//===================================================================
-Vertex::Vertex(float x, float y, float z, float u, float v, const QColor &col) :
+Vertex::Vertex(float x, float y, float z, float u, float v, float nx, float ny, float nz):
     mX(x), mY(y), mZ(z),
+    mRed(1.0), mGreen(1.0), mBlue(1.0),
     mU(u), mV(v),
-    mNormX(0.0), mNormY(0.0), mNormZ(0.0)
+    mNx(nx), mNy(ny), mNz(nz)
 {
-    // ctor no texture no normal
-    setColor(col);
-}
-
-//===================================================================
-Vertex::Vertex(const QVector3D &pos, const QColor &col)
-{
-    // ctor no texture no normal
-    setPos(pos);
-    setColor(col);
 
 }
-
 //===================================================================
-Vertex::Vertex(const QVector3D &pos, const QVector3D &norm, const QVector2D &tex, const QColor &col)
+
+Vertex::Vertex(const QVector3D &pos):
+    mRed(1.0), mGreen(1.0), mBlue(1.0),
+    mU(0.0), mV(0.0),
+    mNx(0.0), mNy(0.0), mNz(0.0)
 {
-    // ctor position, normal and texture
     setPos(pos);
-    setNorm(norm);
+
+}
+//===================================================================
+
+Vertex::Vertex(const QVector3D &pos, const QVector3D &normal):
+    mRed(1.0), mGreen(1.0), mBlue(1.0),
+    mU(0.0), mV(0.0)
+{
+    setPos(pos);
+    setNormal(normal);
+}
+//===================================================================
+
+Vertex::Vertex(const QVector3D &pos, const QVector3D &normal, const QVector2D &tex):
+    mRed(1.0), mGreen(1.0), mBlue(1.0)
+{
+    setPos(pos);
+    setNormal(normal);
     setTex(tex);
 }
 
@@ -50,12 +59,12 @@ void Vertex::setColor(const QColor &col)
 }
 
 //===================================================================
-void Vertex::setNorm(const QVector3D &norm)
+void Vertex::setNormal(const QVector3D &normal)
 {
     // set normal coordinates at this vertex
-    mNormX = norm.x();
-    mNormY = norm.y();
-    mNormZ = norm.z();
+    mNx = normal.x();
+    mNy = normal.y();
+    mNz = normal.z();
 }
 
 //===================================================================

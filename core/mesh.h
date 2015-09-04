@@ -22,14 +22,14 @@ public:
     ~Mesh();
 
     void                   addVertex(const Vertex &ver) { mVertices.append(ver); }
-    void                   bind(); 
+    void                   bind();
     void                   create();
-    int                    countIndices() const { return mIndices.count(); }
-    int                    countVertices() const { return mVertices.count(); }
+    int                    indicesCount() const { return mIndices.count(); }
+    int                    verticesCount() const { return mVertices.count(); }
     virtual void           makeMesh() = 0;
     GLenum                 mode() const { return mMode; }
     QMatrix4x4             modelMatrix() const { return mModelMatrix; }
-    bool                   noIndices() const { return mIndices.isEmpty(); }
+    bool                   hasIndices() const { return mIndices.isEmpty(); }
     void                   release();
     void                   resetTransform() { mModelMatrix.setToIdentity(); }
     void                   rotate(float angle, float x, float y, float z) { mModelMatrix.rotate(angle, x, y, z); }
@@ -39,8 +39,10 @@ public:
     void                   setTextureImage(const QString filename) {mTextureImage.load(filename); }
     QImage                 textureImage() const { return mTextureImage; }
     QOpenGLShaderProgram   *shaderProgram() const { return mShaderProgram; }
-    void                   translate(float x, float y, float z) { mModelMatrix.translate(x, y, z); } 
+    void                   translate(float x, float y, float z) { mModelMatrix.translate(x, y, z); }
     QVector<Vertex>        vertices() const { return mVertices; }
+    Vertex&                vertex(int index){ return mVertices[index];}
+
 
 protected:
     QVector<Vertex>          mVertices;         // list of vertexes for this mesh

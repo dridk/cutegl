@@ -38,16 +38,16 @@ void AnnulusMesh::makeMesh()
 
     int index = 0;
 
-    for (int count = 0; count < polOu.countVertices() / 3; count++) {
+    for (int count = 0; count < polOu.verticesCount() / 3; count++) {
         addVertex(polOu.vertices().at(index));
         addVertex(polOu.vertices().at(index+1));
-        polIn.vertices()[index].setU(0.5 + mRin/mRou * 0.5 * qCos(ang));
-        polIn.vertices()[index].setV(0.5 + mRin/mRou * 0.5 * qSin(ang));
+        polIn.vertex(index).setU(0.5 + mRin/mRou * 0.5 * qCos(ang));
+        polIn.vertex(index).setV(0.5 + mRin/mRou * 0.5 * qSin(ang));
         addVertex(polIn.vertices().at(index));
 
         addVertex(polOu.vertices().at(index+1));
-        polIn.vertices()[index+1].setU(0.5 + mRin/mRou * 0.5 * qCos(ang + angStep));
-        polIn.vertices()[index+1].setV(0.5 + mRin/mRou * 0.5 * qSin(ang + angStep));
+        polIn.vertex(index+1).setU(0.5 + mRin/mRou * 0.5 * qCos(ang + angStep));
+        polIn.vertex(index+1).setV(0.5 + mRin/mRou * 0.5 * qSin(ang + angStep));
         addVertex(polIn.vertices().at(index+1));
         addVertex(polIn.vertices().at(index));
         index +=3;

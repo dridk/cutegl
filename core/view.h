@@ -6,7 +6,7 @@
 #include <QOpenGLDebugLogger>
 #include <QVector3D>
 
-class QOpenGLContext; 
+class QOpenGLContext;
 class QPointF;
 class QTimer;
 
@@ -20,8 +20,8 @@ class View : public QOpenGLWindow
 public:
     View(int refreshRate = 1000);
 
-    Scene * scene();
-    void setScene(Scene * scene);
+    Scene *scene();
+    void setScene(Scene *scene);
 
 
 private slots:

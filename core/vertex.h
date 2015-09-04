@@ -16,16 +16,45 @@ public:
     };
 
     Vertex();
-    Vertex(float x, float y, float z, float u, float v, const QColor &col = Qt::white);
-    Vertex(const QVector3D &pos, const QColor &col = Qt::white);
-    Vertex(const QVector3D &pos, const QVector3D &norm, const QVector2D &tex, const QColor &col);
+    Vertex(float x, float y,  float z, float u=0, float v=0, float nx=0, float ny=0, float nz=0);
+    Vertex(const QVector3D &pos);
+    Vertex(const QVector3D &pos, const QVector3D &normal);
+    Vertex(const QVector3D &pos, const QVector3D &normal, const QVector2D &tex);
 
     void setColor(const QColor &col);
-    void setNorm(const QVector3D &norm);
+    void setNormal(const QVector3D &normal);
     void setPos(const QVector3D &pos);
+    void setTex(const QVector2D &tex);
+
     void setU(float val) { mU = val; }
     void setV(float val) { mV = val; }
-    void setTex(const QVector2D &tex);
+    void setX(float val) { mX = val; }
+    void setY(float val) { mY = val; }
+    void setNx(float val) { mNx = val; }
+    void setNy(float val) { mNy = val; }
+    void setNz(float val) { mNz = val; }
+
+    float x() const {return mX;}
+    float y() const {return mX;}
+    float z() const {return mX;}
+
+    float red() const   {return mRed;}
+    float green() const {return mGreen;}
+    float blue() const  {return mBlue;}
+
+    float u() const {return mU;}
+    float v() const {return mV;}
+
+    float nx() const {return mNx;}
+    float ny() const {return mNy;}
+    float nz() const {return mNz;}
+
+    QVector3D pos() const;
+    QVector2D text() const;
+    QVector3D normal() const;
+
+
+
 
 
 private:
@@ -40,9 +69,9 @@ private:
     float mU;      // x coordinate of the texture at this vertex
     float mV;      // y coordinate of the texture at this vertex
 
-    float mNormX;  // normal x direction at this vertex
-    float mNormY;  // normal y direction at this vertex
-    float mNormZ;  // normal z direction at this vertex
+    float mNx;  // normal x direction at this vertex
+    float mNy;  // normal y direction at this vertex
+    float mNz;  // normal z direction at this vertex
 };
 }
 #endif // VERTEX_H

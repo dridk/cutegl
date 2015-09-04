@@ -130,7 +130,9 @@ void ModelLoader::load(const QString &filename)
                             QVector3D coord   = mVData.at(vindex-1);
                             QVector2D texture = mVtData.at(vtindex-1);
                             QVector3D normal  = mVnData.at(vnindex-1);
-                            mVertices.append(Vertex(coord, normal, texture, Qt::red));
+                            Vertex vertex(coord, normal, texture);
+                            vertex.setColor(Qt::red);
+                            mVertices.append(vertex);
                         }
                     }
                 }

@@ -64,10 +64,9 @@ void View::initializeGL()
     setDebugger(true);
     mScene->setContext(context());
 
-   // stage(); // to be implemented by derived class
+    // stage(); // to be implemented by derived class
 
 
-    mScene->addMesh(new SphereMesh(10,20));
 
     mScene->createMeshes();
     context()->functions()->glViewport(0, 0, width(), height());
@@ -124,7 +123,7 @@ void View::keyPressEvent(QKeyEvent *event)
 void View::mouseMoveEvent(QMouseEvent *event)
 {
     // define action in response to mouse moved
-    if(mMouseClicked) {
+    if (mMouseClicked) {
         float xOffset = (event->pos().x() - mMousePosition.x());
         float yOffset = (event->pos().y() - mMousePosition.y());
 
@@ -207,7 +206,7 @@ void View::toggleFullScreen()
 void View::setDebugger(bool active)
 {
     // start/stop QOpenGL debug logging
-    if(active) {
+    if (active) {
         mDebugLogger->initialize();
         mDebugLogger->startLogging();
     } else {

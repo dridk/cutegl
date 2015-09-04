@@ -28,11 +28,11 @@ Mesh::~Mesh()
 void Mesh::bind()
 {
     // binds vertex and sdhadder and texture
-    
+
     if (mTexture) {
         mTexture->bind();
         mShaderProgram->setUniformValue("textureEnabled", true);
-    } else 
+    } else
         mShaderProgram->setUniformValue("textureEnabled", false);
 
     mVao.bind();
@@ -76,13 +76,13 @@ void Mesh::create()
     mShaderProgram->setAttributeBuffer("posCoord", GL_FLOAT, 0, 3, sizeof(Vertex));
 
     mShaderProgram->enableAttributeArray("color");
-    mShaderProgram->setAttributeBuffer("color", GL_FLOAT, 3*4, 3, sizeof(Vertex));
+    mShaderProgram->setAttributeBuffer("color", GL_FLOAT, 3 * 4, 3, sizeof(Vertex));
 
     mShaderProgram->enableAttributeArray("texCoord");
-    mShaderProgram->setAttributeBuffer("texCoord", GL_FLOAT, 6*4, 2, sizeof(Vertex));
+    mShaderProgram->setAttributeBuffer("texCoord", GL_FLOAT, 6 * 4, 2, sizeof(Vertex));
 
     mShaderProgram->enableAttributeArray("normal");
-    mShaderProgram->setAttributeBuffer("normal", GL_FLOAT, 8*4, 2, sizeof(Vertex));
+    mShaderProgram->setAttributeBuffer("normal", GL_FLOAT, 8 * 4, 2, sizeof(Vertex));
 
     mShaderProgram->release();
     mIndexBuffer.release();

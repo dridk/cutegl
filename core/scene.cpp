@@ -42,10 +42,10 @@ void Scene::draw()
         mesh->bind();
         QMatrix4x4 all = mProjection * mView * mesh->modelMatrix();
         mesh->shaderProgram()->setUniformValueArray("all", &all, 1);
-        if (mesh->noIndices())
-            mContext->functions()->glDrawArrays(mesh->mode(), 0, mesh->countVertices());
+        if (mesh->hasIndices())
+            mContext->functions()->glDrawArrays(mesh->mode(), 0, mesh->verticesCount());
         else
-            mContext->functions()->glDrawElements(mesh->mode(), mesh->countIndices(), GL_UNSIGNED_INT, 0);
+            mContext->functions()->glDrawElements(mesh->mode(), mesh->indicesCount(), GL_UNSIGNED_INT, 0);
         mesh->release();
     }
 }

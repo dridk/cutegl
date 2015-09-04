@@ -19,7 +19,6 @@ HEADERS += \
     $$PWD/meshs/cylindermesh.h \
     $$PWD/meshs/annulusmesh.h \
     $$PWD/meshs/polygonmesh.h \
-    $$PWD/meshs/tubemesh.h \
     $$PWD/meshs/cubemesh.h \
     $$PWD/meshs/modelloader.h
 
@@ -41,7 +40,6 @@ SOURCES += \
     $$PWD/meshs/cylindermesh.cpp \
     $$PWD/meshs/annulusmesh.cpp \
     $$PWD/meshs/polygonmesh.cpp \
-    $$PWD/meshs/tubemesh.cpp \
     $$PWD/meshs/cubemesh.cpp \
     $$PWD/meshs/modelloader.cpp
 
