@@ -1,22 +1,21 @@
-#ifndef POLYGONMESH_H
-#define POLYGONMESH_H
+#ifndef POLYGON_H
+#define POLYGON_H
 
-#include <QObject>
 #include "mesh.h"
-
 namespace cgl {
 class PolygonMesh : public Mesh
 {
     Q_OBJECT
+
 public:
-    explicit PolygonMesh(float radius, int nseg, QObject *parent = 0);
+    PolygonMesh(QObject *parent = 0);
+    PolygonMesh(float radius, int nseg, QObject *parent = 0);
 
+    void makeMesh();
 
-private: 
-    float mRadius; 
-    int   mSeg; 
+private:
+    float mRadius ; // radius cercle circonscrit
+    int   mSeg;     // number of segments
 };
-
 }
-
-#endif // POLYGONMESH_H
+#endif // POLYGON_H

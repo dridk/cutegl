@@ -153,8 +153,8 @@ void ModelLoader::load(const QString &filename)
                             QVector3D coord   = mVData.at(vindex);
                             QVector3D normal  = mVnData.at(vnindex);
                             Vertex vertex;
-                            vertex.setCoord(coord);
-                            vertex.setNormal(normal);
+//                            vertex.setCoord(coord);
+//                            vertex.setNormal(normal);
                             mVertices.append(vertex);
                         }
                     }
@@ -184,6 +184,6 @@ int ModelLoader::texCoordVertexCount()
 {
     return mVtData.count();
 }
+}
 
 
-} // End namespace

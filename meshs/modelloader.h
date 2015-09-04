@@ -34,6 +34,6 @@ private:
 
 };
 
-} // end namespace
+}
 
 #endif // MODELLOADER_H

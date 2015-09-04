@@ -7,47 +7,47 @@ TriangleMesh::TriangleMesh(double b, double h, TriangleMesh::TriangleType type, 
 {
    // Calculate the vertices for the triangle: centered at (0,0)
 
-    setMode(GL_TRIANGLES);
+//    setMode(GL_TRIANGLES);
 
-    setTexture(QImage(":/textures/wood.jpg"));
-    Vertex v1, v2, v3;
-    v1.setCoord(QVector3D(-1.0, -1.0, 0.0));
-    v1.setNormal(QVector3D(0.0 ,0.0 ,0.0));
-    v1.setTexCoord(QVector2D(0.0, 0.0));
-    v1.setColor(Qt::red);
-    v2.setCoord(QVector3D( 1.0, -1.0, 0.0));
-    v2.setNormal(QVector3D(0.0 ,0.0 ,0.0));
-    v2.setTexCoord(QVector2D(1.0, 0.0));
-    v2.setColor(Qt::red);
-    switch (mType) {
-    case ISOC:
-        v3.setCoord(QVector3D(0.0, 1.0, 0.0));
-        v3.setNormal(QVector3D(0.0 ,0.0 ,0.0));
-        v3.setTexCoord(QVector2D(0.5, 1.0));
-        v3.setColor(Qt::red);
-        break;
-    case RECT:
-        v3.setCoord(QVector3D(-1.0, 1.0, 0.0));
-        v3.setNormal(QVector3D(0.0 ,0.0 ,0.0));
-        v3.setTexCoord(QVector2D(0.5, 1.0));
-        v3.setColor(Qt::red);
-        break;
-    case GEN:
-        v3.setCoord(QVector3D(mXc, 1.0, 0.0));
-        v3.setNormal(QVector3D(0.0 ,0.0 ,0.0));
-        v3.setTexCoord(QVector2D(0.5, 1.0));
-        v3.setColor(Qt::red);
-        break;
-    default:
-        break;
-    }
-    addVertex(v1);
-    addVertex(v2);
-    addVertex(v3);
+//    setTexture(QImage(":/textures/wood.jpg"));
+//    Vertex v1, v2, v3;
+//    v1.setCoord(QVector3D(-1.0, -1.0, 0.0));
+//    v1.setNormal(QVector3D(0.0 ,0.0 ,0.0));
+//    v1.setTexCoord(QVector2D(0.0, 0.0));
+//    v1.setColor(Qt::red);
+//    v2.setCoord(QVector3D( 1.0, -1.0, 0.0));
+//    v2.setNormal(QVector3D(0.0 ,0.0 ,0.0));
+//    v2.setTexCoord(QVector2D(1.0, 0.0));
+//    v2.setColor(Qt::red);
+//    switch (mType) {
+//    case ISOC:
+//        v3.setCoord(QVector3D(0.0, 1.0, 0.0));
+//        v3.setNormal(QVector3D(0.0 ,0.0 ,0.0));
+//        v3.setTexCoord(QVector2D(0.5, 1.0));
+//        v3.setColor(Qt::red);
+//        break;
+//    case RECT:
+//        v3.setCoord(QVector3D(-1.0, 1.0, 0.0));
+//        v3.setNormal(QVector3D(0.0 ,0.0 ,0.0));
+//        v3.setTexCoord(QVector2D(0.5, 1.0));
+//        v3.setColor(Qt::red);
+//        break;
+//    case GEN:
+//        v3.setCoord(QVector3D(mXc, 1.0, 0.0));
+//        v3.setNormal(QVector3D(0.0 ,0.0 ,0.0));
+//        v3.setTexCoord(QVector2D(0.5, 1.0));
+//        v3.setColor(Qt::red);
+//        break;
+//    default:
+//        break;
+//    }
+//    addVertex(v1);
+//    addVertex(v2);
+//    addVertex(v3);
 
-    mPolygon.append(QPointF(v1.x(), v1.y()));
-    mPolygon.append(QPointF(v2.x(), v2.y()));
-    mPolygon.append(QPointF(v3.x(), v3.y()));
+//    mPolygon.append(QPointF(v1.x(), v1.y()));
+//    mPolygon.append(QPointF(v2.x(), v2.y()));
+//    mPolygon.append(QPointF(v3.x(), v3.y()));
 
 }
 

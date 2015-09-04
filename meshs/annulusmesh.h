@@ -1,24 +1,22 @@
-#ifndef ANNULUSMESH_H
-#define ANNULUSMESH_H
+#ifndef ANNULUS_H
+#define ANNULUS_H
 
-#include <QObject>
 #include "mesh.h"
-
-class PolygonMesh;
-
 namespace cgl {
-
 class AnnulusMesh : public Mesh
 {
     Q_OBJECT
+
 public:
-    explicit AnnulusMesh(float rout, float rin, int nseg, QObject *parent = 0);
+    AnnulusMesh(QObject *parent = 0);
+    AnnulusMesh(float rou, float rin, int nseg, QObject *parent = 0);
+
+    void makeMesh();
 
 private:
-    float       mRIn;
-    float       mROu;
-    int         mSeg;
+    float mRin;  // inner radius
+    float mRou;  // outer radius
+    int   mSeg;  // number of segments to aproximate circle
 };
-
 }
-#endif // ANNULUSMESH_H
+#endif // ANNULUS_H
