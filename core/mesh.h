@@ -39,8 +39,8 @@ public:
     void                   scale(float f) { mModelMatrix.scale(f);}
     void                   setShaders(const QString &vertexFile, const QString &fragmentFile);
     void                   setDefaultShaders();
-    void                   setTexture(const QImage &image);
-    void                   setTextureImage(const QString filename) {mTextureImage.load(filename); }
+    void                   setTextureImage(const QImage &image);
+    void                   setTextureImage(const QString filename) {setTextureImage(QImage(filename));}
     void                   setMode(GLenum mode) { mMode = mode;}
     QImage                 textureImage() const { return mTextureImage; }
     QOpenGLShaderProgram   *shaderProgram() const { return mShaderProgram; }

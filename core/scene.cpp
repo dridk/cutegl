@@ -21,7 +21,7 @@ void Scene::createMeshes()
     foreach (Mesh *mesh, mMeshes) {
         mesh->setDefaultShaders();
         mesh->create();
-        mesh->setTexture(mesh->textureImage());
+//        mesh->setTexture(mesh->textureImage());
     }
 }
 

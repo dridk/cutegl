@@ -48,6 +48,8 @@ void ModelLoader::load(const QString &filename)
                     float x = split.at(0).toFloat();
                     float y = split.at(1).toFloat();
                     float z = split.at(2).toFloat();
+
+                    qDebug()<<x<<y<<z;
                     mVData.append(QVector3D(x,y,z));
                 }
             }
@@ -155,8 +157,8 @@ void ModelLoader::load(const QString &filename)
                             QVector3D coord   = mVData.at(vindex);
                             QVector3D normal  = mVnData.at(vnindex);
                             Vertex vertex;
-//                            vertex.setCoord(coord);
-//                            vertex.setNormal(normal);
+                            vertex.setPos(coord);
+                            vertex.setNormal(normal);
                             mVertices.append(vertex);
                         }
                     }

@@ -2,6 +2,7 @@
 #define VERTEX_H
 
 #include <QColor>
+#include <QVector2D>
 class QVector3D;
 class QVector2D;
 namespace cgl {
@@ -49,10 +50,10 @@ public:
     float ny() const {return mNy;}
     float nz() const {return mNz;}
 
-    QVector3D pos() const;
-    QVector2D text() const;
-    QVector3D normal() const;
+    QVector3D pos()const    { return QVector3D(mX,mY, mZ) ;}
+    QVector3D normal()const { return QVector3D(mNx,mNy, mNz) ;}
 
+    QVector2D text()const   { return QVector2D(mU, mV) ;}
 
 
 

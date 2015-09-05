@@ -11,6 +11,7 @@ Mesh::Mesh(QObject *parent) : QObject(parent), mMode(GL_TRIANGLES), mTexture(0),
 
     mVertexBuffer = QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
     mIndexBuffer  = QOpenGLBuffer(QOpenGLBuffer::IndexBuffer);
+    mTexture      = new QOpenGLTexture(QOpenGLTexture::Target2D);
 
     resetTransform();
 }
@@ -29,11 +30,13 @@ void Mesh::bind()
 {
     // binds vertex and sdhadder and texture
 
-    if (mTexture) {
+    if (mTexture->isCreated()) {
         mTexture->bind();
         mShaderProgram->setUniformValue("textureEnabled", true);
-    } else
+    }
+    else {
         mShaderProgram->setUniformValue("textureEnabled", false);
+    }
 
     mVao.bind();
 }
@@ -48,8 +51,15 @@ void Mesh::create()
         return;
     }
 
-    glGetError();
     setDefaultShaders();
+
+    //    qDebug()<<mTextureImage;
+    if (!mTextureImage.isNull()) {   // ca crash si on test pas ...
+        mTexture  = new QOpenGLTexture(mTextureImage);
+        mTexture->create();
+    }
+
+
 
     mVertexBuffer.create();
     mVertexBuffer.bind();
@@ -64,7 +74,7 @@ void Mesh::create()
     }
 
     mVao.create();
-    mVao.bind();;
+    mVao.bind();
 
 
     mIndexBuffer.bind();
@@ -101,8 +111,9 @@ void Mesh::create()
 void Mesh::release()
 {
     mVao.release();
-    if (mTexture)
+    if (mTexture->isCreated())
         mTexture->release();
+
     mShaderProgram->release();
 }
 
@@ -123,17 +134,17 @@ void Mesh::setDefaultShaders()
     setShaders(":/shaders/default_vertex.vsh", ":/shaders/default_fragment.fsh");
 }
 
-//===================================================================
-void Mesh::setTexture(const QImage &image)
+void Mesh::setTextureImage(const QImage &image)
 {
-    // create the texture from image
-    if (mTexture) {
-        mTexture->destroy();
-        delete mTexture;
-    }
-    mTexture = new QOpenGLTexture(image);
-    mTexture->create();
+    if (image.isNull())
+        qDebug()<<Q_FUNC_INFO<<"image is null";
+
+        mTextureImage = image;
+
+
 }
+
+//===================================================================
 
 
 }
