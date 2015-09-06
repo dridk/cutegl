@@ -112,11 +112,16 @@ void Mesh::release()
 }
 
 //===================================================================
-void Mesh::setShaders(const QString &vertexFile, const QString &fragmentFile)
+void Mesh::setShaders(const QString &vertexFile, const QString &fragmentFile, const QString &geometryFile)
 {
     mShaderProgram->removeAllShaders();
     mShaderProgram->addShaderFromSourceFile(QOpenGLShader::Vertex, vertexFile);
     mShaderProgram->addShaderFromSourceFile(QOpenGLShader::Fragment, fragmentFile);
+
+    if (!geometryFile.isEmpty())
+     mShaderProgram->addShaderFromSourceFile(QOpenGLShader::Geometry, geometryFile);
+
+
     mShaderProgram->link();
 }
 

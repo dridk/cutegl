@@ -37,7 +37,7 @@ public:
     void                   rotate(float angle, float x, float y, float z) { mModelMatrix.rotate(angle, x, y, z); }
     void                   scale(float x, float y, float z) {mModelMatrix.scale(x,y,z);}
     void                   scale(float f) { mModelMatrix.scale(f);}
-    void                   setShaders(const QString &vertexFile, const QString &fragmentFile);
+    void                   setShaders(const QString &vertexFile, const QString &fragmentFile, const QString& geometryFile = QString());
     void                   setDefaultShaders();
     void                   setTextureImage(const QImage &image);
     void                   setTextureImage(const QString filename) {setTextureImage(QImage(filename));}
