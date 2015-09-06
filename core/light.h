@@ -5,10 +5,20 @@
 class Light
 {
 public:
-    Light();
+    Light(const QVector3D& pos, const QColor& col = Qt::white);
+    Light(float x, float y, float z, const QColor& col = Qt::white);
+    const QVector3D& position() const;
+    const QVector3D& colorVector() const;
+    QColor color() const;
+
+    void setPosition(const QVector3D& pos);
+
+
+private:
 
     QVector3D mPos;
-    QColor mCol;
+    QVector3D mColVector;
+
 
 };
 

@@ -15,6 +15,9 @@ Mesh::Mesh(QObject *parent) : QObject(parent), mMode(GL_TRIANGLES), mTexture(0),
     mTexture      = new QOpenGLTexture(QOpenGLTexture::Target2D);
 
     resetTransform();
+
+
+    addMaterial(Material());
 }
 
 //===================================================================
@@ -130,7 +133,7 @@ void Mesh::setDefaultShaders()
 {
     // set the vertex and fragment program names
 
-    setShaders(":/shaders/default_vertex.vsh", ":/shaders/default_fragment.fsh");
+    setShaders(":/shaders/light_vertex.vsh", ":/shaders/light_fragment.fsh");
 }
 
 void Mesh::setTextureImage(const QImage &image)

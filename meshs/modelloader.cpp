@@ -49,7 +49,6 @@ void ModelLoader::load(const QString &filename)
                     float y = split.at(1).toFloat();
                     float z = split.at(2).toFloat();
 
-                    qDebug()<<x<<y<<z;
                     mVData.append(QVector3D(x,y,z));
                 }
             }

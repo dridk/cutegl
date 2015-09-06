@@ -7,8 +7,9 @@
 #include <QOpenGLBuffer>
 #include <QOpenGLVertexArrayObject>
 
-#include <mesh.h>
-#include <vertex.h>
+#include "mesh.h"
+#include "vertex.h"
+#include "material.h"
 
 class QOpenGLShaderProgram;
 class QOpenGLTexture;
@@ -23,6 +24,7 @@ public:
 
     void                   addVertex(const Vertex &ver) { mVertices.append(ver); }
     void                   addVertex(const QVector<Vertex>& ver) {mVertices.append(ver);}
+    void                   addMaterial(const Material& material) {mMaterials.append(material);}
     void                   clearVertices(){mVertices.clear();}
     void                   bind();
     void                   create();
@@ -51,6 +53,7 @@ public:
 
 protected:
     QVector<Vertex>          mVertices;         // list of vertexes for this mesh
+    QVector<Material>        mMaterials;        // lis of material. Only one for now
 
 private:
     QOpenGLBuffer            mIndexBuffer;      // the indexes to the verices in graphic card
