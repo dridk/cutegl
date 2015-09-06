@@ -1,5 +1,6 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLTexture>
+#include <QOpenGLContext>
 #include "mesh.h"
 namespace cgl {
 //===================================================================
@@ -76,14 +77,14 @@ void Mesh::create()
 
 
     mShaderProgram->bind();
-    mShaderProgram->enableAttributeArray("posCoord");
-    mShaderProgram->setAttributeBuffer("posCoord", GL_FLOAT, 0, 3, sizeof(Vertex));
+    mShaderProgram->enableAttributeArray("position");
+    mShaderProgram->setAttributeBuffer("position", GL_FLOAT, 0, 3, sizeof(Vertex));
 
     mShaderProgram->enableAttributeArray("color");
     mShaderProgram->setAttributeBuffer("color", GL_FLOAT, 3 * 4, 3, sizeof(Vertex));
 
-    mShaderProgram->enableAttributeArray("texCoord");
-    mShaderProgram->setAttributeBuffer("texCoord", GL_FLOAT, 6 * 4, 2, sizeof(Vertex));
+    mShaderProgram->enableAttributeArray("uv");
+    mShaderProgram->setAttributeBuffer("uv", GL_FLOAT, 6 * 4, 2, sizeof(Vertex));
 
     mShaderProgram->enableAttributeArray("normal");
     mShaderProgram->setAttributeBuffer("normal", GL_FLOAT, 8 * 4, 2, sizeof(Vertex));
@@ -114,10 +115,14 @@ void Mesh::release()
 //===================================================================
 void Mesh::setShaders(const QString &vertexFile, const QString &fragmentFile)
 {
+    if (QOpenGLContext::currentContext()){
     mShaderProgram->removeAllShaders();
     mShaderProgram->addShaderFromSourceFile(QOpenGLShader::Vertex, vertexFile);
     mShaderProgram->addShaderFromSourceFile(QOpenGLShader::Fragment, fragmentFile);
     mShaderProgram->link();
+    }
+    else
+        qDebug()<<Q_FUNC_INFO<<"cannot set shaders. No context avaible";
 }
 
 //===================================================================

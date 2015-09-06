@@ -22,7 +22,9 @@ HEADERS += \
     $$PWD/meshs/cubemesh.h \
     $$PWD/meshs/modelloader.h \
     $$PWD/meshs/modelmesh.h \
-    $$PWD/meshs/planemesh.h
+    $$PWD/meshs/planemesh.h \
+    $$PWD/core/material.h \
+    $$PWD/core/light.h
 
 SOURCES += \
     $$PWD/core/view.cpp \
@@ -45,10 +47,14 @@ SOURCES += \
     $$PWD/meshs/cubemesh.cpp \
     $$PWD/meshs/modelloader.cpp \
     $$PWD/meshs/modelmesh.cpp \
-    $$PWD/meshs/planemesh.cpp
+    $$PWD/meshs/planemesh.cpp \
+    $$PWD/core/material.cpp \
+    $$PWD/core/light.cpp
 
 RESOURCES += \
     $$PWD/shaders/shaders.qrc \
     $$PWD/models/models.qrc \
     $$PWD/textures/textures.qrc
+
+DISTFILES +=
 

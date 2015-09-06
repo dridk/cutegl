@@ -1,15 +1,15 @@
 #version 330 core
-in vec3 posCoord;
+in vec3 position;
 in vec3 color;
-in vec2 texCoord;
+in vec2 uv;
 in vec3 normal;
 
-out vec2 fragTexCoord;
+out vec2 frag_uv;
 
 uniform mat4 all;
 
 void main(void)
 {
-    gl_Position =  all * vec4(posCoord.xyz, 1.0);
-    fragTexCoord = vec2(texCoord.x, texCoord.y);
+    gl_Position =  all * vec4(position.xyz, 1.0);
+    frag_uv     = vec2(uv.x, uv.y);
 }
