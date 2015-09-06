@@ -44,6 +44,8 @@ void Scene::draw()
         mesh->bind();
         QMatrix4x4 all = mProjection * mView * mesh->modelMatrix();
 
+//        mesh->shaderProgram()->setUniformValue("viewPos");
+
         if (!mLights.isEmpty())
         {
 
@@ -53,8 +55,8 @@ void Scene::draw()
 
 //           mLights.first()->setPosition(np);
 
-            mesh->shaderProgram()->setUniformValue("lightPos",np);
-            mesh->shaderProgram()->setUniformValue("lightColor",  mLights.first()->colorVector());
+            mesh->shaderProgram()->setUniformValue("light.position",np);
+            mesh->shaderProgram()->setUniformValue("light.ambient",  mLights.first()->colorVector());
         }
 
         mesh->shaderProgram()->setUniformValueArray("all", &all, 1);

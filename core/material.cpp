@@ -2,7 +2,7 @@
 
 Material::Material()
 {
-    mAmbient =   QVector3D (1,1,1);
+    mAmbient =   QVector3D (1,0.4,1);
     mDiffuse =   QVector3D (1,1,1);
     mSpecular=   QVector3D (1,1,1);
 

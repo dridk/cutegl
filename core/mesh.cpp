@@ -39,6 +39,14 @@ void Mesh::bind()
     if (mTexture->isCreated())
         mTexture->bind();
 
+    if (!mMaterials.isEmpty()) {
+        Material material = mMaterials.first();
+        mShaderProgram->setUniformValue("material.ambient", material.mAmbient );
+        mShaderProgram->setUniformValue("material.diffuse", material.mDiffuse );
+        mShaderProgram->setUniformValue("material.specular",material.mSpecular );
+        mShaderProgram->setUniformValue("material.shininess",material.mShininess );
+    }
+
     mVao.bind();
 }
 
