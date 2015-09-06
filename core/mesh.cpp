@@ -23,6 +23,8 @@ Mesh::~Mesh()
     mVertexBuffer.destroy();
     mIndexBuffer.destroy();
     mVao.destroy();
+    delete mTexture;
+    delete mShaderProgram;
 }
 
 //===================================================================
@@ -30,13 +32,8 @@ void Mesh::bind()
 {
     // binds vertex and sdhadder and texture
 
-    if (mTexture->isCreated()) {
+    if (mTexture->isCreated())
         mTexture->bind();
-        mShaderProgram->setUniformValue("textureEnabled", true);
-    }
-    else {
-        mShaderProgram->setUniformValue("textureEnabled", false);
-    }
 
     mVao.bind();
 }
@@ -59,8 +56,6 @@ void Mesh::create()
         mTexture->create();
     }
 
-
-
     mVertexBuffer.create();
     mVertexBuffer.bind();
     mVertexBuffer.allocate(mVertices.data(), mVertices.count() * sizeof(Vertex));
@@ -75,7 +70,6 @@ void Mesh::create()
 
     mVao.create();
     mVao.bind();
-
 
     mIndexBuffer.bind();
     mVertexBuffer.bind();
