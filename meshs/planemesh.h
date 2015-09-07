@@ -11,12 +11,11 @@ public:
     PlaneMesh(float x, float y, float width, float height, QObject * parent = 0);
     PlaneMesh(const QRectF& rect, QObject * parent = 0);
 
+ private:
+    void makeMesh();
     void setRect(const QRectF& rect);
 
-    void makeMesh();
-private:
-  QRectF mRect;
-
+    QRectF mRect;
 };
 
 }

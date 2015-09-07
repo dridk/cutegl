@@ -11,9 +11,9 @@ public:
     SphereMesh(QObject *parent = 0);
     SphereMesh(float radius, int nseg, QObject *parent = 0);
 
+private:
     void makeMesh() ;
 
-protected:
     float mRadius; // sphere radius
     int   mSeg;    // number of segments to approximate sphere
 };
