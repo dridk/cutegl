@@ -1,7 +1,6 @@
 #ifndef CUBEMESH_H
 #define CUBEMESH_H
 
-#include <QObject>
 #include "mesh.h"
 
 namespace cgl {

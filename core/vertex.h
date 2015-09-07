@@ -28,8 +28,14 @@ public:
     void  setColor(const QColor &col);
     void  setNormal(const QVector3D &normal);
     void  setPos(const QVector3D &pos);
+    void  setX(float val)  { mX = val; }
+    void  setY(float val)  { mY = val; }
+    void  setZ(float val)  { mZ = val; }
     void  setU(float val)  { mU = val; }
     void  setV(float val)  { mV = val; }
+    float x() const        { return mX; }
+    float y() const        { return mX; }
+    float z() const        { return mX; }
 
 private:
     float green() const     { return mGreen; }
@@ -44,14 +50,9 @@ private:
     void  setNy(float val) { mNy = val; }
     void  setNz(float val) { mNz = val; }
     void  setTex(const QVector2D &tex);
-    void  setX(float val)  { mX = val; }
-    void  setY(float val)  { mY = val; }
     QVector2D text()const  { return QVector2D(mU, mV); }
     float u() const        { return mU; }
     float v() const        { return mV; }
-    float x() const        { return mX; }
-    float y() const        { return mX; }
-    float z() const        { return mX; }
 
     float mX;      // x coordinate of the vertex
     float mY;      // y coordinate of the vertex
@@ -64,9 +65,9 @@ private:
     float mU;      // x coordinate of the texture at this vertex
     float mV;      // y coordinate of the texture at this vertex
 
-    float mNx;  // normal x direction at this vertex
-    float mNy;  // normal y direction at this vertex
-    float mNz;  // normal z direction at this vertex
+    float mNx;    // normal x direction at this vertex
+    float mNy;    // normal y direction at this vertex
+    float mNz;    // normal z direction at this vertex
 };
 }
 #endif // VERTEX_H
