@@ -25,6 +25,7 @@ public:
     void         setOrtho(float left, float right, float bottom, float top, float nearPlane, float farPlane);
     void         setPerspective(float verticalAngle, float aspectRatio, float nearPlane, float farPlane);
     void         setDebug(bool enable = true);
+    bool         isDebug(){return mDebug;}
 
 
     QOpenGLContext *mContext;   // the OpenGL context of the scene
@@ -35,6 +36,7 @@ public:
 
     
     QOpenGLTexture *testTExture;
+    bool mDebug;
 };
 }
 #endif // SCENE_H

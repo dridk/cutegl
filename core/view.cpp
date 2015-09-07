@@ -101,6 +101,12 @@ void View::keyPressEvent(QKeyEvent *event)
         mEyeR += 10;
         setEyePosition();
         break;
+
+    case Qt::Key_F5:
+        mScene->setDebug(!mScene->isDebug());
+        break;
+
+
     default:
         break;
     }

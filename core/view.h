@@ -60,6 +60,7 @@ private:
     QTimer             *mTimer;        // timer to control the screen refresment
     Scene              *mScene;        // the container of the objects to be drawn
 
+
 };
 }
 #endif // VIEW_H

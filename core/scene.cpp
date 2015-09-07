@@ -5,7 +5,7 @@
 #include "scene.h"
 namespace cgl {
 //===================================================================
-Scene::Scene(QObject *parent) : QObject(parent), mContext(0)
+Scene::Scene(QObject *parent) : QObject(parent), mContext(0), mDebug(false)
 {
         // Add default light... Otherwise black screen !
        addLight(new Light(5,5,5));
@@ -90,9 +90,10 @@ void Scene::setPerspective(float verticalAngle, float aspectRatio, float nearPla
 
 void Scene::setDebug(bool enable)
 {
+    mDebug = enable;
    foreach (Mesh * mesh, meshes())
    {
-       mesh->setDebug(enable);
+       mesh->setDebug(mDebug);
    }
 }
 
