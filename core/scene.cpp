@@ -70,5 +70,4 @@ void Scene::setPerspective(float verticalAngle, float aspectRatio, float nearPla
     mProjection.setToIdentity();
     mProjection.perspective(verticalAngle, aspectRatio, nearPlane, farPlane);
 }
-
 }

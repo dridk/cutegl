@@ -12,37 +12,42 @@ Vertex::Vertex() :
     // ctor
 }
 
+//===================================================================
 Vertex::Vertex(float x, float y, float z, float u, float v, float nx, float ny, float nz):
     mX(x), mY(y), mZ(z),
     mRed(1.0), mGreen(1.0), mBlue(1.0),
     mU(u), mV(v),
     mNx(nx), mNy(ny), mNz(nz)
 {
-
+    // ctor
 }
-//===================================================================
 
+//===================================================================
 Vertex::Vertex(const QVector3D &pos):
     mRed(1.0), mGreen(1.0), mBlue(1.0),
     mU(0.0), mV(0.0),
     mNx(0.0), mNy(0.0), mNz(0.0)
 {
+    //ctor
     setPos(pos);
 
 }
 
+//===================================================================
 Vertex::Vertex(const QVector3D &pos, const QVector2D &tex):
     mRed(1.0), mGreen(1.0), mBlue(1.0),
     mNx(0.0), mNy(0.0), mNz(0.0)
 {
+    // ctor
     setPos(pos);
     setTex(tex);
 }
-//===================================================================
 
+//===================================================================
 Vertex::Vertex(const QVector3D &pos, const QVector2D &tex, const QVector3D &normal):
     mRed(1.0), mGreen(1.0), mBlue(1.0)
 {
+    //ctor
     setPos(pos);
     setNormal(normal);
     setTex(tex);

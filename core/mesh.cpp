@@ -53,13 +53,10 @@ void Mesh::create()
 
     setDefaultShaders();
 
-    //    qDebug()<<mTextureImage;
     if (!mTextureImage.isNull()) {   // ca crash si on test pas ...
         mTexture  = new QOpenGLTexture(mTextureImage);
         mTexture->create();
     }
-
-
 
     mVertexBuffer.create();
     mVertexBuffer.bind();
@@ -76,10 +73,8 @@ void Mesh::create()
     mVao.create();
     mVao.bind();
 
-
     mIndexBuffer.bind();
     mVertexBuffer.bind();
-
 
     mShaderProgram->bind();
     mShaderProgram->enableAttributeArray("posCoord");
@@ -134,17 +129,12 @@ void Mesh::setDefaultShaders()
     setShaders(":/shaders/default_vertex.vsh", ":/shaders/default_fragment.fsh");
 }
 
+//===================================================================
 void Mesh::setTextureImage(const QImage &image)
 {
     if (image.isNull())
         qDebug()<<Q_FUNC_INFO<<"image is null";
 
         mTextureImage = image;
-
-
 }
-
-//===================================================================
-
-
 }
