@@ -92,7 +92,7 @@ void Scene::setDebug(bool enable)
 {
    foreach (Mesh * mesh, meshes())
    {
-       mesh->setDebugView(enable);
+       mesh->setDebug(enable);
    }
 }
 

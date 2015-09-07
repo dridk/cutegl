@@ -10,7 +10,7 @@
 namespace cgl {
 //===================================================================
 View::View(int refreshRate) : QOpenGLWindow(),
-    mAspect(45.0), mEyePhi(0.0), mEyeR(10.0), mEyeTheta(0.0)
+    mAspect(45.0), mEyePhi(0.0), mEyeR(10.0), mEyeTheta(0.0), mMouseClicked(false)
 {
     // ctor
 
@@ -135,8 +135,13 @@ void View::mousePressEvent(QMouseEvent */*event*/)
 {
     // set mouse clicked
 
-    mMouseClicked = !mMouseClicked;
+    mMouseClicked = true;
 
+}
+
+void View::mouseReleaseEvent(QMouseEvent *)
+{
+    mMouseClicked = false;
 }
 
 //===================================================================

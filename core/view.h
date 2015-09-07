@@ -40,6 +40,7 @@ private:
     void         keyPressEvent(QKeyEvent *event);
     void         mouseMoveEvent(QMouseEvent *event);
     void         mousePressEvent(QMouseEvent *);
+    void         mouseReleaseEvent(QMouseEvent*);
     void         setContext(QOpenGLContext *context) { mContext = context; }
     void         setEyePosition();
     void         toggleFullScreen();

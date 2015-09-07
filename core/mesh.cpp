@@ -167,7 +167,7 @@ void Mesh::setTextureImage(const QImage &image)
     mTextureImage = image;
 }
 
-void Mesh::setDebugView(bool enable)
+void Mesh::setDebug(bool enable)
 {
     mDebugView = enable;
 
