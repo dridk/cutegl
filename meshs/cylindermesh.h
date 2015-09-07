@@ -11,9 +11,9 @@ public:
     CylinderMesh(QObject *parent = 0);
     CylinderMesh(float radius, int nseg, float length, QObject *parent = 0);
 
+private:
     void makeMesh();
 
-private:
     float mLength;  // length of cylinder
     float mRadius;  // radius of cylinder
     int   mSeg;     // number of segments to approximate circle

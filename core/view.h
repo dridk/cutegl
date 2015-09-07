@@ -20,8 +20,8 @@ class View : public QOpenGLWindow
 public:
     View(int refreshRate = 1000);
 
-    Scene *scene();
-    void setScene(Scene *scene);
+    Scene *scene() const         { return mScene; }
+    void setScene(Scene *scene)  { mScene = scene; }
 
 
 private slots:
@@ -35,9 +35,6 @@ protected:
     void         initializeGL();
     void         paintGL();
     void         resizeGL(int w, int h);
-
-
-
 
 private:
     void         keyPressEvent(QKeyEvent *event);

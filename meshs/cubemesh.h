@@ -1,7 +1,6 @@
 #ifndef CUBEMESH_H
 #define CUBEMESH_H
 
-#include <QObject>
 #include "mesh.h"
 
 namespace cgl {
@@ -11,9 +10,8 @@ class CubeMesh : public Mesh
 public:
     explicit CubeMesh(QObject *parent = 0);
 
+private:
     void makeMesh();
-
-
 };
 }
 

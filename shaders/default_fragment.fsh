@@ -7,7 +7,6 @@ uniform sampler2D fragTexture;
 out vec4 color;
 void main(void)
 {
-
     if (textureSize(fragTexture, 0).x > 0)
         color = texture(fragTexture, fragTexCoord);
     else

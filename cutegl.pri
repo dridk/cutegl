@@ -22,7 +22,10 @@ HEADERS += \
     $$PWD/meshs/cubemesh.h \
     $$PWD/meshs/modelloader.h \
     $$PWD/meshs/modelmesh.h \
-    $$PWD/meshs/planemesh.h
+    $$PWD/meshs/planemesh.h \
+    $$PWD/meshs/tubemesh.h \
+    $$PWD/meshs/parallelogrammesh.h \
+    $$PWD/meshs/trianglemesh.h
 
 SOURCES += \
     $$PWD/core/view.cpp \
@@ -45,7 +48,10 @@ SOURCES += \
     $$PWD/meshs/cubemesh.cpp \
     $$PWD/meshs/modelloader.cpp \
     $$PWD/meshs/modelmesh.cpp \
-    $$PWD/meshs/planemesh.cpp
+    $$PWD/meshs/planemesh.cpp \
+    $$PWD/meshs/tubemesh.cpp \
+    $$PWD/meshs/parallelogrammesh.cpp \
+    $$PWD/meshs/trianglemesh.cpp
 
 RESOURCES += \
     $$PWD/shaders/shaders.qrc \
