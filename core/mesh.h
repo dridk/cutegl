@@ -48,7 +48,7 @@ public:
     void                   setMode(GLenum mode) { mMode = mode;}
     void                   resetTransform() { mModelMatrix.setToIdentity(); }
     QImage                 textureImage() const { return mTextureImage; }
-    void                   setDebugView(bool enable = true);
+    void                   setDebug(bool enable = true);
 
 protected:
     virtual void           makeMesh() = 0;
