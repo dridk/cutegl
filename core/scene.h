@@ -24,7 +24,7 @@ public:
     void         setContext(QOpenGLContext *context) { mContext = context; } // replace by currentContext static ?
     void         setOrtho(float left, float right, float bottom, float top, float nearPlane, float farPlane);
     void         setPerspective(float verticalAngle, float aspectRatio, float nearPlane, float farPlane);
-    void         setDebugView(bool enable = true);
+    void         setDebug(bool enable = true);
 
 
     QOpenGLContext *mContext;   // the OpenGL context of the scene

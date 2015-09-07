@@ -88,7 +88,7 @@ void Scene::setPerspective(float verticalAngle, float aspectRatio, float nearPla
 }
 //===================================================================
 
-void Scene::setDebugView(bool enable)
+void Scene::setDebug(bool enable)
 {
    foreach (Mesh * mesh, meshes())
    {
