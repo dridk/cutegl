@@ -14,10 +14,7 @@ ModelLoader::ModelLoader(const QString &filename)
 //===================================================================
 ModelLoader::ModelLoader()
 {
-    // default ctor, not to be called
 
-    qFatal("ModelLoader::ModelLoader --> Call Modeloader(filename");
-    exit(QtFatalMsg);
 }
 
 //===================================================================
@@ -55,7 +52,6 @@ void ModelLoader::load(const QString &filename)
                     float y = split.at(1).toFloat();
                     float z = split.at(2).toFloat();
 
-                    qDebug()<<x<<y<<z;
                     mVData.append(QVector3D(x,y,z));
                 }
             }
