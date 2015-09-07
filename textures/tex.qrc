@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/textures">
         <file>wood.jpg</file>
+        <file>damier.png</file>
     </qresource>
 </RCC>

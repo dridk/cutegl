@@ -7,7 +7,8 @@ namespace cgl {
 //===================================================================
 Scene::Scene(QObject *parent) : QObject(parent), mContext(0)
 {
-
+        // Add default light... Otherwise black screen !
+       addLight(new Light(5,5,5));
 }
 
 //===================================================================
@@ -44,17 +45,13 @@ void Scene::draw()
         mesh->bind();
         QMatrix4x4 all = mProjection * mView * mesh->modelMatrix();
 
-//        mesh->shaderProgram()->setUniformValue("viewPos");
-
+        // Apply light uniform value
         if (!mLights.isEmpty())
         {
 
 //           QVector3D np =   mProjection* mView * mLights.first()->position();
 //           QVector3D np =   all* mLights.first()->position();
              QVector3D np =   mLights.first()->position();
-
-//           mLights.first()->setPosition(np);
-
             mesh->shaderProgram()->setUniformValue("light.position",np);
             mesh->shaderProgram()->setUniformValue("light.ambient",  mLights.first()->colorVector());
         }
@@ -88,6 +85,15 @@ void Scene::setPerspective(float verticalAngle, float aspectRatio, float nearPla
 {
     mProjection.setToIdentity();
     mProjection.perspective(verticalAngle, aspectRatio, nearPlane, farPlane);
+}
+//===================================================================
+
+void Scene::setDebugView(bool enable)
+{
+   foreach (Mesh * mesh, meshes())
+   {
+       mesh->setDebugView(enable);
+   }
 }
 
 }

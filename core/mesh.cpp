@@ -4,7 +4,7 @@
 #include "mesh.h"
 namespace cgl {
 //===================================================================
-Mesh::Mesh(QObject *parent) : QObject(parent), mMode(GL_TRIANGLES), mTexture(0), mTextureImage(0)
+Mesh::Mesh(QObject *parent) : QObject(parent), mMode(GL_TRIANGLES), mTexture(0), mTextureImage(0),mDebugView(false)
 {
     // ctor
 
@@ -35,9 +35,13 @@ Mesh::~Mesh()
 void Mesh::bind()
 {
     // binds vertex and sdhadder and texture
+    // From this place, shaders program is active by the scene
+    if (mTexture->isCreated()){
 
-    if (mTexture->isCreated())
         mTexture->bind();
+        mShaderProgram->setUniformValue("has_texture",true);
+
+    }
 
     if (!mMaterials.isEmpty()) {
         Material material = mMaterials.first();
@@ -60,12 +64,18 @@ void Mesh::create()
         return;
     }
 
-    setDefaultShaders();
+    if (mDebugView)
+        setShaders(":/shaders/light_vertex.vsh", ":/shaders/debug_fragment.fsh",":/shaders/debug_geometry.gsh" );
 
-    //    qDebug()<<mTextureImage;
+    else
+        setDefaultShaders();
+
+
+
     if (!mTextureImage.isNull()) {   // ca crash si on test pas ...
         mTexture  = new QOpenGLTexture(mTextureImage);
         mTexture->create();
+
     }
 
     mVertexBuffer.create();
@@ -85,7 +95,6 @@ void Mesh::create()
 
     mIndexBuffer.bind();
     mVertexBuffer.bind();
-
 
     mShaderProgram->bind();
     mShaderProgram->enableAttributeArray("position");
@@ -124,13 +133,18 @@ void Mesh::release()
 }
 
 //===================================================================
-void Mesh::setShaders(const QString &vertexFile, const QString &fragmentFile)
+void Mesh::setShaders(const QString &vertexFile, const QString &fragmentFile, const QString &geometryFile)
 {
     if (QOpenGLContext::currentContext()){
-    mShaderProgram->removeAllShaders();
-    mShaderProgram->addShaderFromSourceFile(QOpenGLShader::Vertex, vertexFile);
-    mShaderProgram->addShaderFromSourceFile(QOpenGLShader::Fragment, fragmentFile);
-    mShaderProgram->link();
+        mShaderProgram->removeAllShaders();
+        mShaderProgram->addShaderFromSourceFile(QOpenGLShader::Vertex, vertexFile);
+        mShaderProgram->addShaderFromSourceFile(QOpenGLShader::Fragment, fragmentFile);
+
+        if (!geometryFile.isEmpty())
+            mShaderProgram->addShaderFromSourceFile(QOpenGLShader::Geometry, geometryFile);
+
+
+        mShaderProgram->link();
     }
     else
         qDebug()<<Q_FUNC_INFO<<"cannot set shaders. No context avaible";
@@ -141,20 +155,57 @@ void Mesh::setDefaultShaders()
 {
     // set the vertex and fragment program names
 
-    setShaders(":/shaders/light_vertex.vsh", ":/shaders/light_fragment.fsh");
+    setShaders(":/shaders/light_vertex.vsh", ":/shaders/light_fragment.fsh" );
 }
 
+//===================================================================
 void Mesh::setTextureImage(const QImage &image)
 {
     if (image.isNull())
         qDebug()<<Q_FUNC_INFO<<"image is null";
 
-        mTextureImage = image;
+    mTextureImage = image;
+}
+
+void Mesh::setDebugView(bool enable)
+{
+    mDebugView = enable;
+
+    if (QOpenGLContext::currentContext())
+        create();
+}
+//===================================================================
+
+void Mesh::computeNormal()
+{
+
+
+    for (int i=0; i<verticesCount(); i++)
+    {
+
+        if ( i+2 < verticesCount())
+        {
+            // On récupere les vecteurs du plan formé par le triangle
+            QVector3D U = vertex(i+1).pos() - vertex(i).pos();
+            QVector3D V = vertex(i+2).pos() - vertex(i).pos();
+
+            // Caclul de la normal
+            vertex(i).setNx((U.y() * V.z()) - (U.z() * V.y())) ;
+            vertex(i).setNy((U.z() * V.x()) - (U.x() * V.z())) ;
+            vertex(i).setNz((U.x() * V.y()) - (U.y() * V.x())) ;
+
+
+        }
+
+    }
+
+
+
+
+
+
+
 
 
 }
-
-//===================================================================
-
-
 }

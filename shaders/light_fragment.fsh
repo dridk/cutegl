@@ -21,7 +21,7 @@ struct Light {
 
 uniform Material material;
 uniform Light light;
-
+uniform bool has_texture;
 
 out vec4 color;
 void main(void)
@@ -39,7 +39,11 @@ void main(void)
     vec3 diffuse = diff * light.ambient;
 
 
+
     vec3 result = (ambient + diffuse) ;
 
-    color = vec4(result,1) ;
+    if (has_texture)
+     color = vec4(result,1) *  texture(fragTexture, frag_uv);
+    else
+     color = vec4(result,1);
 }

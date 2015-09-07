@@ -11,9 +11,9 @@ public:
     PolygonMesh(QObject *parent = 0);
     PolygonMesh(float radius, int nseg, QObject *parent = 0);
 
+ private:
     void makeMesh();
 
-private:
     float mRadius ; // radius cercle circonscrit
     int   mSeg;     // number of segments
 };

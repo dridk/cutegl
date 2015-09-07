@@ -2,6 +2,8 @@
 #include <QDebug>
 #include <QRegularExpression>
 namespace cgl {
+
+//===================================================================
 ModelLoader::ModelLoader(const QString &filename)
 {
 
@@ -9,11 +11,13 @@ ModelLoader::ModelLoader(const QString &filename)
 
 }
 
+//===================================================================
 ModelLoader::ModelLoader()
 {
 
 }
 
+//===================================================================
 void ModelLoader::load(const QString &filename)
 {
     mFile.setFileName(filename);
@@ -23,7 +27,6 @@ void ModelLoader::load(const QString &filename)
     mVData.clear();
     mVnData.clear();
     mVtData.clear();
-
 
     QRegularExpression vReg("^v\\s{1,5}");
     QRegularExpression vtReg("^vt\\s{1,5}");
@@ -165,28 +168,8 @@ void ModelLoader::load(const QString &filename)
             }
         }
     }
-
 }
 
-const QVector<Vertex> &ModelLoader::vertices() const
-{
-    return mVertices;
-}
-
-int ModelLoader::coordVertexCount()
-{
-    return mVData.count();
-}
-
-int ModelLoader::normalVertexCount()
-{
-    return mVnData.count();
-}
-
-int ModelLoader::texCoordVertexCount()
-{
-    return mVtData.count();
-}
 }
 
 

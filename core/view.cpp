@@ -45,17 +45,6 @@ View::View(int refreshRate) : QOpenGLWindow(),
     // Tu fais pas un jeux video! Tu appel update() qd tu veux rafrachir!
 }
 
-Scene *View::scene()
-{
-    return mScene;
-}
-
-void View::setScene(Scene *scene)
-{
-    mScene = scene;
-
-}
-
 //===================================================================
 void View::initializeGL()
 {
@@ -67,11 +56,8 @@ void View::initializeGL()
 
     // stage(); // to be implemented by derived class
 
-
-
     mScene->createMeshes();
     context()->functions()->glViewport(0, 0, width(), height());
-
 }
 
 //===================================================================
@@ -118,7 +104,6 @@ void View::keyPressEvent(QKeyEvent *event)
     default:
         break;
     }
-
     update();
 }
 
@@ -142,9 +127,7 @@ void View::mouseMoveEvent(QMouseEvent *event)
 
         mMousePosition = event->pos();
     }
-
     update();
-
 }
 
 //===================================================================
@@ -223,9 +206,6 @@ void View::setDebugger(bool active)
 //===================================================================
 void View::timeOutSlot()
 {
-//    foreach (Mesh *mesh, mScene->meshes()) {
-//        mesh->rotate( 0.5, 1.0, 0.0, 1.0);
-//    }
     update();
 }
 

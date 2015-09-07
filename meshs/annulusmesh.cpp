@@ -54,6 +54,11 @@ void AnnulusMesh::makeMesh()
         ang += angStep;
     }
 
+  computeNormal();
+
+
 }
+
+
 
 }

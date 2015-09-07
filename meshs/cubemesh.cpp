@@ -81,6 +81,7 @@ void CubeMesh::makeMesh()
     addVertex(faces5);
     addVertex(faces6);
 
+    computeNormal();
 
 }
 }

@@ -24,8 +24,9 @@ public:
     void         setContext(QOpenGLContext *context) { mContext = context; } // replace by currentContext static ?
     void         setOrtho(float left, float right, float bottom, float top, float nearPlane, float farPlane);
     void         setPerspective(float verticalAngle, float aspectRatio, float nearPlane, float farPlane);
+    void         setDebugView(bool enable = true);
 
-private:
+
     QOpenGLContext *mContext;   // the OpenGL context of the scene
     QList<Mesh*>   mMeshes;     // list of meshes
     QList<Light*>  mLights;     // List of light.. Currently works only with one

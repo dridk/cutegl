@@ -4,6 +4,8 @@
         <file>default_fragment.fsh</file>
         <file>light_fragment.fsh</file>
         <file>light_vertex.vsh</file>
+        <file>debug_geometry.gsh</file>
+        <file>debug_fragment.fsh</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>
