@@ -69,6 +69,7 @@ void Scene::draw()
 //===================================================================
 void Scene::lookAt(const QVector3D &eye, const QVector3D &center, const QVector3D &up)
 {
+    // position the camera
     mView.setToIdentity();
     mView.lookAt(eye, center, up);
 }
@@ -76,6 +77,7 @@ void Scene::lookAt(const QVector3D &eye, const QVector3D &center, const QVector3
 //===================================================================
 void Scene::setOrtho(float left, float right, float bottom, float top, float nearPlane, float farPlane)
 {
+    // set orthogonal view
     mProjection.setToIdentity();
     mProjection.ortho(left, right, bottom, top, nearPlane, farPlane);
 }
@@ -83,18 +85,18 @@ void Scene::setOrtho(float left, float right, float bottom, float top, float nea
 //===================================================================
 void Scene::setPerspective(float verticalAngle, float aspectRatio, float nearPlane, float farPlane)
 {
+    // set the perspective view
     mProjection.setToIdentity();
     mProjection.perspective(verticalAngle, aspectRatio, nearPlane, farPlane);
 }
-//===================================================================
 
+//===================================================================
 void Scene::setDebug(bool enable)
 {
-    mDebug = enable;
-   foreach (Mesh * mesh, meshes())
-   {
-       mesh->setDebug(mDebug);
-   }
-}
+    // set debug mode for all meshes in the scene to view normals
 
+    mDebug = enable;
+    foreach (Mesh * mesh, meshes())
+       mesh->setDebug(mDebug);
+}
 }

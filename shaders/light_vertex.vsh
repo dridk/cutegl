@@ -7,6 +7,7 @@ in vec3 normal;
 out vec2 frag_uv;
 out vec3 frag_position;
 out vec3 frag_normal;
+out vec3 geom_normal;
 
 uniform mat4 all;
 
@@ -16,5 +17,5 @@ void main(void)
     frag_uv       = uv;
     frag_position = position;
     frag_normal   = normal;
-
+    geom_normal   = normal;
 }

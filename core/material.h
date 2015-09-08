@@ -7,10 +7,10 @@ class Material
 public:
     Material();
 
-    QVector3D mAmbient;
-    QVector3D mDiffuse;
-    QVector3D mSpecular;
-    float mShininess;
+    QVector3D mAmbient;    // what is that ?
+    QVector3D mDiffuse;    // what is that ?
+    float     mShininess;  // what is that ?
+    QVector3D mSpecular;   // what is that ?
 
 };
 

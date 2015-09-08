@@ -38,12 +38,4 @@ frag_color = vec3(0.4,0.4,0.4);
      gl_Position = gl_in[2].gl_Position - vec4(geom_normal[2].xyz, 1);
      EmitVertex();
      EndPrimitive();
-
-
-
-
-
-
-
-
 }
