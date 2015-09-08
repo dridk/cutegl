@@ -22,20 +22,20 @@ frag_color = vec3(0.4,0.4,0.4);
 
      gl_Position = gl_in[0].gl_Position;
      EmitVertex();
-     gl_Position = gl_in[0].gl_Position - vec4(geom_normal[0].xyz, 1);
+     gl_Position = gl_in[0].gl_Position - vec4(geom_normal[0].xyz, 1) * 0.1;
      EmitVertex();
      EndPrimitive();
 
      gl_Position = gl_in[1].gl_Position;
      EmitVertex();
-     gl_Position = gl_in[1].gl_Position - vec4(geom_normal[1].xyz, 1);
+     gl_Position = gl_in[1].gl_Position - vec4(geom_normal[1].xyz, 1) * 0.1;;
      EmitVertex();
      EndPrimitive();
 
 
      gl_Position = gl_in[2].gl_Position;
      EmitVertex();
-     gl_Position = gl_in[2].gl_Position - vec4(geom_normal[2].xyz, 1);
+     gl_Position = gl_in[2].gl_Position - vec4(geom_normal[2].xyz, 1) * 0.1;;
      EmitVertex();
      EndPrimitive();
 }
