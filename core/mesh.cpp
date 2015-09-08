@@ -178,10 +178,10 @@ void Mesh::setDebug(bool enable)
 
     if (QOpenGLContext::currentContext())
         create();
-    else {
-        qFatal("Mesh::setDebug --> no current context defined");
-        exit(QtFatalMsg);
-    }
+//    else {
+//        qFatal("Mesh::setDebug --> no current context defined");
+//        exit(QtFatalMsg);
+//    }
 }
 
 //===================================================================
@@ -201,6 +201,8 @@ void Mesh::computeNormal()
             vertex(index).setNx((v1.y() * v2.z()) - (v1.z() * v2.y()));
             vertex(index).setNy((v1.z() * v2.x()) - (v1.x() * v2.z()));
             vertex(index).setNz((v1.x() * v2.y()) - (v1.y() * v2.x()));
+
+            vertex(index).setNormal(vertex(index).normal().normalized());
         }
     }
 }

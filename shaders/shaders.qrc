@@ -7,5 +7,4 @@
         <file>debug_geometry.gsh</file>
         <file>debug_fragment.fsh</file>
     </qresource>
-    <qresource prefix="/"/>
 </RCC>
