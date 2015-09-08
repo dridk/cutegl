@@ -161,51 +161,47 @@ void Mesh::setDefaultShaders()
 //===================================================================
 void Mesh::setTextureImage(const QImage &image)
 {
-    if (image.isNull())
-        qDebug()<<Q_FUNC_INFO<<"image is null";
+    // defines the image to texture the object
 
+    if (image.isNull()) {
+        qFatal("Mesh::setTexture --> image not defined");
+        exit(QtFatalMsg);
+    }
     mTextureImage = image;
 }
 
+//===================================================================
 void Mesh::setDebug(bool enable)
 {
+    // set the debug mode allowing to vizualizes normals
     mDebugView = enable;
 
     if (QOpenGLContext::currentContext())
         create();
+    else {
+        qFatal("Mesh::setDebug --> no current context defined");
+        exit(QtFatalMsg);
+    }
 }
-//===================================================================
 
+//===================================================================
 void Mesh::computeNormal()
 {
+    // calculates the vector components normal to the plane containing the vertices
 
-
-    for (int i=0; i<verticesCount(); i++)
+    for (int index = 0; index <verticesCount(); index++)
     {
-
-        if ( i+2 < verticesCount())
+        if ( index + 2 < verticesCount())
         {
-            // On récupere les vecteurs du plan formé par le triangle
-            QVector3D U = vertex(i+1).pos() - vertex(i).pos();
-            QVector3D V = vertex(i+2).pos() - vertex(i).pos();
+            // 2 vectors of the triangle that define this vertex plan
+            QVector3D v1 = vertex(index + 1).pos() - vertex(index).pos();
+            QVector3D v2 = vertex(index + 2).pos() - vertex(index).pos();
 
-            // Caclul de la normal
-            vertex(i).setNx((U.y() * V.z()) - (U.z() * V.y())) ;
-            vertex(i).setNy((U.z() * V.x()) - (U.x() * V.z())) ;
-            vertex(i).setNz((U.x() * V.y()) - (U.y() * V.x())) ;
-
-
+            // Caclulates the normal vector
+            vertex(index).setNx((v1.y() * v2.z()) - (v1.z() * v2.y()));
+            vertex(index).setNy((v1.z() * v2.x()) - (v1.x() * v2.z()));
+            vertex(index).setNz((v1.x() * v2.y()) - (v1.y() * v2.x()));
         }
-
     }
-
-
-
-
-
-
-
-
-
 }
 }

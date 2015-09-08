@@ -47,8 +47,8 @@ public:
     int                    verticesCount() const { return mVertices.count(); }
     void                   setMode(GLenum mode) { mMode = mode;}
     void                   resetTransform() { mModelMatrix.setToIdentity(); }
-    QImage                 textureImage() const { return mTextureImage; }
     void                   setDebug(bool enable = true);
+    QImage                 textureImage() const { return mTextureImage; }
 
 protected:
     virtual void           makeMesh() = 0;
