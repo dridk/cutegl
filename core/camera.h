@@ -12,6 +12,8 @@ public:
     QVector3D eye() const                      { return mEyePos; }
     void      incEyePhi(short int sign = +1)   { mEyePhi = mEyePhi + sign * mInc; setEyePosition(); }
     void      incEyeTheta(short int sign = +1) { mEyeTheta = mEyeTheta + sign * mInc; setEyePosition(); }
+    void      incX(short int sign = +1)        { mEyePos.setX(mEyePos.x() + sign * mInc); }
+    void      incY(short int sign = +1)        { mEyePos.setY(mEyePos.y() + sign * mInc); }
     void      setEyePosition();
     void      setEyePhi(double val)            { mEyePhi   += val; setEyePosition(); }
     void      setEyeTheta(double val)          { mEyeTheta += val; setEyePosition(); }

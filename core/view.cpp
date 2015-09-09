@@ -67,16 +67,28 @@ void View::keyPressEvent(QKeyEvent *event)
         toggleFullScreen();
         break;
     case Qt::Key_Right:
-        mScene->camera()->incEyeTheta(+1);
+        if (event->modifiers().testFlag(Qt::ShiftModifier))
+            mScene->camera()->incX(+1);
+        else
+            mScene->camera()->incEyeTheta(+1);
         break;
     case Qt::Key_Left:
-        mScene->camera()->incEyeTheta(-1);
+        if (event->modifiers().testFlag(Qt::ShiftModifier))
+            mScene->camera()->incX(-1);
+        else
+            mScene->camera()->incEyeTheta(-1);
         break;
     case Qt::Key_Up:
-        mScene->camera()->incEyePhi(-1);
+        if (event->modifiers().testFlag(Qt::ShiftModifier))
+            mScene->camera()->incY(+1);
+        else
+            mScene->camera()->incEyePhi(+1);
          break;
     case Qt::Key_Down:
-        mScene->camera()->incEyePhi(+1);
+        if (event->modifiers().testFlag(Qt::ShiftModifier))
+            mScene->camera()->incY(-1);
+        else
+            mScene->camera()->incEyePhi(-1);
         break;
     case Qt::Key_PageUp:
         mScene->camera()->zoom(-1);
