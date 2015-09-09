@@ -9,19 +9,20 @@ class Camera
 public:
     Camera();
 
-    QVector3D eye() const                      { return mEyePos; }
-    void      incEyePhi(short int sign = +1)   { mEyePhi = mEyePhi + sign * mInc; setEyePosition(); }
-    void      incEyeTheta(short int sign = +1) { mEyeTheta = mEyeTheta + sign * mInc; setEyePosition(); }
-    void      incX(short int sign = +1)        { mEyePos.setX(mEyePos.x() + sign * mInc); }
-    void      incY(short int sign = +1)        { mEyePos.setY(mEyePos.y() + sign * mInc); }
-    void      setEyePhi(double val)            { mEyePhi   += val; setEyePosition(); }
-    void      setEyeTheta(double val)          { mEyeTheta += val; setEyePosition(); }
-    QVector3D up() const                       { return mEyeUp; }
-    QVector3D view() const                     { return mViewCenter; }
-    void      zoom(short int sign = +1)        { mEyeR = mEyeR + sign * mInc; setEyePosition();}
+    const QVector3D& eye() const                      { return mEyePos; }
+    void             incEyePhi(short int sign = +1)   { mEyePhi = mEyePhi + sign * mInc; setEyePosition(); }
+    void             incEyeTheta(short int sign = +1) { mEyeTheta = mEyeTheta + sign * mInc; setEyePosition(); }
+    void             incX(short int sign = +1)        { mEyePos.setX(mEyePos.x() + sign * mInc); }
+    void             incY(short int sign = +1)        { mEyePos.setY(mEyePos.y() + sign * mInc); }
+    void             setEyePhi(double val)            { mEyePhi   += val; setEyePosition(); }
+    void             setEyeTheta(double val)          { mEyeTheta += val; setEyePosition(); }
+    const QVector3D& up() const                       { return mEyeUp; }
+    const QVector3D& view() const                     { return mViewCenter; }
+    void             zoom(short int sign = +1)        { mEyeR = mEyeR + sign * mInc; setEyePosition();}
 
 private:
     void      setEyePosition();
+
     QVector3D          mEyePos;        // eye position
     double             mEyePhi;        // azimuth angle of eye
     double             mEyeR;          // distance of eye from view center
