@@ -40,18 +40,10 @@ private:
     void         keyPressEvent(QKeyEvent *event);
     void         mouseMoveEvent(QMouseEvent *event);
     void         mousePressEvent(QMouseEvent *);
-    void         mouseReleaseEvent(QMouseEvent*);
     void         setContext(QOpenGLContext *context) { mContext = context; }
-    void         setEyePosition();
     void         toggleFullScreen();
 
     float              mAspect;        // aspect ratio
-    QVector3D          mViewCenter;    // center of view tha the eye is looking at
-    QVector3D          mEyePos;        // eye position
-    double             mEyePhi;        // azimuth angle of eye
-    double             mEyeR;          // distance of eye from view center
-    double             mEyeTheta;      // polar angle of eye
-    QVector3D          mEyeUp;         // up direction with respect to eye
     QOpenGLContext     *mContext;      // the context of the scene
     QOpenGLDebugLogger *mDebugLogger;  // engine to log debug messages from QOpenGL
     bool               mFullScreen;    // full screen mode yes or no

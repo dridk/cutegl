@@ -28,6 +28,7 @@ HEADERS += \
     $$PWD/meshs/trianglemesh.h \
     $$PWD/core/material.h \
     $$PWD/core/light.h \
+    $$PWD/core/camera.h
 
 
 SOURCES += \
@@ -56,7 +57,8 @@ SOURCES += \
     $$PWD/meshs/parallelogrammesh.cpp \
     $$PWD/meshs/trianglemesh.cpp\
     $$PWD/core/material.cpp \
-    $$PWD/core/light.cpp
+    $$PWD/core/light.cpp \
+    $$PWD/core/camera.cpp
 
 RESOURCES += \
     $$PWD/shaders/shaders.qrc \

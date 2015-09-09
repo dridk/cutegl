@@ -39,19 +39,15 @@ void AnnulusMesh::makeMesh()
     int index = 0;
 
     for (int count = 0; count < polOu.verticesCount() / 3; count++) {
-        qDebug() << Q_FUNC_INFO << ang;
         addVertex(polOu.vertices().at(index));
         addVertex(polOu.vertices().at(index+1));
         polIn.vertex(index).setU(0.5 + mRin/mRou * 0.5 * qCos(ang));
         polIn.vertex(index).setV(0.5 + mRin/mRou * 0.5 * qSin(ang));
-        qDebug() << Q_FUNC_INFO << mRin / mRou;
-        qDebug() << Q_FUNC_INFO << polIn.vertex(index).u() << polIn.vertex(index).v();
         addVertex(polIn.vertices().at(index));
 
         addVertex(polOu.vertices().at(index+1));
         polIn.vertex(index+1).setU(0.5 + mRin/mRou * 0.5 * qCos(ang + angStep));
         polIn.vertex(index+1).setV(0.5 + mRin/mRou * 0.5 * qSin(ang + angStep));
-        qDebug() << Q_FUNC_INFO << polIn.vertex(index+1).u() << polIn.vertex(index+1).v();
         addVertex(polIn.vertices().at(index+1));
         addVertex(polIn.vertices().at(index));
         index +=3;

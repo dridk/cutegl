@@ -2,15 +2,15 @@
 #include <qmath.h>
 #include <QOpenGLFunctions>
 #include <QTimer>
-#include "spheremesh.h"
-#include "annulusmesh.h"
-#include "cylindermesh.h"
+
+#include "camera.h"
 #include "scene.h"
 #include "view.h"
+
 namespace cgl {
 //===================================================================
 View::View(int refreshRate) : QOpenGLWindow(),
-    mAspect(45.0), mEyePhi(0.0), mEyeR(10.0), mEyeTheta(0.0), mMouseClicked(false)
+    mAspect(45.0), mMouseClicked(false)
 {
     // ctor
 
@@ -30,12 +30,6 @@ View::View(int refreshRate) : QOpenGLWindow(),
 
     resize(800, 600);
     mMousePosition = QPointF(width() / 2, height() / 2);
-
-    setEyePosition();
-
-    mEyeUp.setX(0.0);
-    mEyeUp.setY(1.0);
-    mEyeUp.setZ(0.0);
 
     int second = 10000; // 1 second = 1000 ms
     int timerInterval = second / refreshRate;
@@ -73,40 +67,27 @@ void View::keyPressEvent(QKeyEvent *event)
         toggleFullScreen();
         break;
     case Qt::Key_Right:
-        mEyeTheta += 10.;
-        setEyePosition();
+        mScene->camera()->incEyeTheta(+1);
         break;
     case Qt::Key_Left:
-        mEyeTheta -= 10.;
-        setEyePosition();
+        mScene->camera()->incEyeTheta(-1);
         break;
     case Qt::Key_Up:
-        mEyePhi += 10.;
-        if (mEyePhi >= 80.0)
-            mEyePhi = 80;
-        setEyePosition();
-        break;
+        mScene->camera()->incEyePhi(-1);
+         break;
     case Qt::Key_Down:
-        mEyePhi -= 10.;
-        if (mEyePhi <= -80.0)
-            mEyePhi = -80;
-        setEyePosition();
-        qDebug() << Q_FUNC_INFO << mEyePhi << mEyePos;
+        mScene->camera()->incEyePhi(+1);
         break;
     case Qt::Key_PageUp:
-        mEyeR -= 10;
-        setEyePosition();
+        mScene->camera()->zoom(-1);
+        qDebug() << Q_FUNC_INFO;
         break;
     case Qt::Key_PageDown:
-        mEyeR += 10;
-        setEyePosition();
+        mScene->camera()->zoom(+1);
         break;
-
     case Qt::Key_F5:
         mScene->setDebug(!mScene->isDebug());
         break;
-
-
     default:
         break;
     }
@@ -121,15 +102,8 @@ void View::mouseMoveEvent(QMouseEvent *event)
         float xOffset = (event->pos().x() - mMousePosition.x());
         float yOffset = (event->pos().y() - mMousePosition.y());
 
-        mEyeTheta += xOffset;
-        mEyePhi   += yOffset;
-
-        if (mEyePhi > 89.9)
-            mEyePhi = 89.9;
-        if (mEyePhi < -89.9)
-            mEyePhi = -89.9;
-
-        setEyePosition();
+        mScene->camera()->setEyeTheta(xOffset);
+        mScene->camera()->setEyePhi(yOffset);
 
         mMousePosition = event->pos();
     }
@@ -140,14 +114,8 @@ void View::mouseMoveEvent(QMouseEvent *event)
 void View::mousePressEvent(QMouseEvent */*event*/)
 {
     // set mouse clicked
+    mMouseClicked = !mMouseClicked;
 
-    mMouseClicked = true;
-
-}
-
-void View::mouseReleaseEvent(QMouseEvent *)
-{
-    mMouseClicked = false;
 }
 
 //===================================================================
@@ -155,7 +123,7 @@ void View::paintGL()
 {
     // makes the drawing; called each time screen is refreshed
     mScene->setPerspective(mAspect, ((double) width()) / ((double)height()), 1, 100.0f);
-    mScene->lookAt(mEyePos, mEyePos + mViewCenter, mEyeUp);
+    mScene->lookAt(mScene->camera()->eye(), mScene->camera()->eye() + mScene->camera()->view(), mScene->camera()->up());
     mScene->draw();
 }
 
@@ -165,28 +133,6 @@ void View::resizeGL(int w, int h)
     // resizes the screen
 
     context()->functions()->glViewport(0, 0, w, h);
-}
-
-//===================================================================
-void View::setEyePosition()
-{
-    // position the eye viewing the scene
-
-    double rtheta = qDegreesToRadians(mEyeTheta);
-    double rphi   = qDegreesToRadians(mEyePhi);
-
-    double x = mEyeR * qSin(rtheta) * qCos(rphi);
-    double z = mEyeR * qCos(rtheta) * qCos(rphi);
-    double y = mEyeR * qSin(rphi);
-
-    mEyePos.setX(x);
-    mEyePos.setZ(z);
-    mEyePos.setY(y);
-
-    mViewCenter.setX(-x);
-    mViewCenter.setY(-y);
-    mViewCenter.setZ(-z);
-    mViewCenter.normalize();
 }
 
 //===================================================================

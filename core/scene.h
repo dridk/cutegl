@@ -2,8 +2,10 @@
 #define SCENE_H
 
 #include <QObject>
-#include "mesh.h"
+
+#include "camera.h"
 #include "light.h"
+#include "mesh.h"
 
 class QOpenGLContext;
 class QOpenGLTexture;
@@ -14,9 +16,10 @@ class Scene : public QObject
     Q_OBJECT
 public:
     explicit Scene(QObject *parent = 0);
-
+    ~Scene() { delete mCamera; }
     void         addMesh(Mesh *mesh) { mMeshes.append(mesh); }
     void         addLight(Light* light) { mLights.append(light);}
+    Camera       *camera() const { return mCamera; }
     void         createMeshes();
     void         draw();
     bool         isDebug(){ return mDebug; }
@@ -28,12 +31,13 @@ public:
     void         setPerspective(float verticalAngle, float aspectRatio, float nearPlane, float farPlane);
 
 
+    Camera         *mCamera;      // the camera looking at the scene
     QOpenGLContext *mContext;    // the OpenGL context of the scene
     bool           mDebug;       // debug mode allowing to view normals to mesh
     QList<Mesh*>   mMeshes;      // list of meshes
     QList<Light*>  mLights;      // List of light.. Currently works only with one
     QMatrix4x4     mProjection;  // projection mtrix
-    QOpenGLTexture *testTExture; // what is this ?
+//    QOpenGLTexture *testTExture; // what is this ?
     QMatrix4x4     mView;        // view matrix
 };
 }

@@ -2,11 +2,13 @@
 #include <QOpenGLFunctions>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLTexture>
+
 #include "scene.h"
 namespace cgl {
 //===================================================================
-Scene::Scene(QObject *parent) : QObject(parent), mContext(0), mDebug(false)
+Scene::Scene(QObject *parent) : QObject(parent), mCamera(new Camera()), mContext(0), mDebug(false)
 {
+
         // Add default light... Otherwise black screen !
        addLight(new Light(5,5,5));
 }
@@ -71,6 +73,7 @@ void Scene::lookAt(const QVector3D &eye, const QVector3D &center, const QVector3
 {
     // position the camera
     mView.setToIdentity();
+
     mView.lookAt(eye, center, up);
 }
 
