@@ -97,7 +97,7 @@ void View::keyPressEvent(QKeyEvent *event)
     case Qt::Key_PageDown:
         mScene->camera()->zoom(+1);
         break;
-    case Qt::Key_F5:
+    case Qt::Key_D:
         mScene->setDebug(!mScene->isDebug());
         break;
     default:
