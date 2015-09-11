@@ -4,7 +4,7 @@
 #include "camera.h"
 namespace cgl {
 //===================================================================
-Camera::Camera() : mPhi(0.0), mR(50.0), mTheta(0.0), mInc(10.0)
+Camera::Camera() : mDeltaX(0.0), mDeltaY(0.0), mInc(10.0), mPhi(0.0), mR(50.0), mTheta(0.0)
 {
     // ctor
 
@@ -13,6 +13,7 @@ Camera::Camera() : mPhi(0.0), mR(50.0), mTheta(0.0), mInc(10.0)
     mUp.setX(0.0);
     mUp.setY(1.0);
     mUp.setZ(0.0);
+    qDebug() << Q_FUNC_INFO << mTarget;
 }
 
 //===================================================================
@@ -25,6 +26,7 @@ void Camera::updatePosition()
    if (mPhi <= -89.9)
         mPhi = -89.9;
 
+
     double rtheta = qDegreesToRadians(mTheta);
     double rphi   = qDegreesToRadians(mPhi);
 
@@ -36,8 +38,8 @@ void Camera::updatePosition()
     mPos.setZ(z);
     mPos.setY(y);
 
-    mTarget.setX(-x);
-    mTarget.setY(-y);
+    mTarget.setX(-x + mDeltaX);
+    mTarget.setY(-y + mDeltaY);
     mTarget.setZ(-z);
     mTarget.normalize();
 }
