@@ -1,4 +1,4 @@
-#include <QKeyEvent>
+#include <QKeyevent>
 #include <qmath.h>
 #include <QOpenGLFunctions>
 #include <QTimer>
@@ -70,25 +70,25 @@ void View::keyPressEvent(QKeyEvent *event)
         if (event->modifiers().testFlag(Qt::ShiftModifier))
             mScene->camera()->incX(+1);
         else
-            mScene->camera()->incEyeTheta(+1);
+            mScene->camera()->incTheta(+1);
         break;
     case Qt::Key_Left:
         if (event->modifiers().testFlag(Qt::ShiftModifier))
             mScene->camera()->incX(-1);
         else
-            mScene->camera()->incEyeTheta(-1);
+            mScene->camera()->incTheta(-1);
         break;
     case Qt::Key_Up:
         if (event->modifiers().testFlag(Qt::ShiftModifier))
             mScene->camera()->incY(+1);
         else
-            mScene->camera()->incEyePhi(+1);
+            mScene->camera()->incPhi(+1);
          break;
     case Qt::Key_Down:
         if (event->modifiers().testFlag(Qt::ShiftModifier))
             mScene->camera()->incY(-1);
         else
-            mScene->camera()->incEyePhi(-1);
+            mScene->camera()->incPhi(-1);
         break;
     case Qt::Key_PageUp:
         mScene->camera()->zoom(-1);
@@ -114,8 +114,8 @@ void View::mouseMoveEvent(QMouseEvent *event)
         float xOffset = (event->pos().x() - mMousePosition.x());
         float yOffset = (event->pos().y() - mMousePosition.y());
 
-        mScene->camera()->setEyeTheta(xOffset);
-        mScene->camera()->setEyePhi(yOffset);
+        mScene->camera()->setTheta(xOffset);
+        mScene->camera()->setPhi(yOffset);
 
         mMousePosition = event->pos();
     }
@@ -135,7 +135,7 @@ void View::paintGL()
 {
     // makes the drawing; called each time screen is refreshed
     mScene->setPerspective(mAspect, ((double) width()) / ((double)height()), 1, 100.0f);
-    mScene->lookAt(mScene->camera()->eye(), mScene->camera()->eye() + mScene->camera()->view(), mScene->camera()->up());
+    mScene->lookAt(mScene->camera()->Position(), mScene->camera()->Position() + mScene->camera()->view(), mScene->camera()->up());
     mScene->draw();
 }
 

@@ -9,27 +9,28 @@ class Camera
 public:
     Camera();
 
-    const QVector3D& eye() const                      { return mEyePos; }
-    void             incEyePhi(short int sign = +1)   { mEyePhi = mEyePhi + sign * mInc; setEyePosition(); }
-    void             incEyeTheta(short int sign = +1) { mEyeTheta = mEyeTheta + sign * mInc; setEyePosition(); }
-    void             incX(short int sign = +1)        { mEyePos.setX(mEyePos.x() + sign * mInc); }
-    void             incY(short int sign = +1)        { mEyePos.setY(mEyePos.y() + sign * mInc); }
-    void             setEyePhi(double val)            { mEyePhi   += val; setEyePosition(); }
-    void             setEyeTheta(double val)          { mEyeTheta += val; setEyePosition(); }
-    const QVector3D& up() const                       { return mEyeUp; }
-    const QVector3D& view() const                     { return mViewCenter; }
-    void             zoom(short int sign = +1)        { mEyeR = mEyeR + sign * mInc; setEyePosition();}
+    const QVector3D& Position() const              { return mPos; }
+    void             incPhi(short int sign = +1)   { mPhi = mPhi + sign * mInc; updatePosition(); }
+    void             incTheta(short int sign = +1) { mTheta = mTheta + sign * mInc; updatePosition(); }
+    void             incX(short int sign = +1)     { mPos.setX(mPos.x() + sign * mInc); }
+    void             incY(short int sign = +1)     { mPos.setY(mPos.y() + sign * mInc); }
+    void             setPhi(double val)            { mPhi   += val; updatePosition(); }
+    void             setTheta(double val)          { mTheta += val; updatePosition(); }
+    const QVector3D& up() const                    { return mUp; }
+    const QVector3D& view() const                  { return mViewCenter; }
+    void             zoom(short int sign = +1)     { mR = mR + sign * mInc; updatePosition();}
+
+protected:
+    void      updatePosition();
 
 private:
-    void      setEyePosition();
-
-    QVector3D          mEyePos;        // eye position
-    double             mEyePhi;        // azimuth angle of eye
-    double             mEyeR;          // distance of eye from view center
-    double             mEyeTheta;      // polar angle of eye
-    QVector3D          mEyeUp;         // up direction with respect to eye
-    double             mInc;           // incremental step of camera position
-    QVector3D          mViewCenter;    // center of the scene that the eye is looking at
+    QVector3D          mPos;        //  position
+    double             mPhi;        // azimuth angle of
+    double             mR;          // distance of  from view center
+    double             mTheta;      // polar angle of
+    QVector3D          mUp;         // up direction with respect to
+    double             mInc;        // incremental step of camera position
+    QVector3D          mViewCenter; // center of the scene that the  is looking at
 
 };
 }
