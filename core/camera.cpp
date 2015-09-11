@@ -4,16 +4,30 @@
 #include "camera.h"
 namespace cgl {
 //===================================================================
-Camera::Camera() : mDeltaX(0.0), mDeltaY(0.0), mInc(10.0), mPhi(0.0), mR(50.0), mTheta(0.0)
+Camera::Camera()
 {
     // ctor
 
-    updatePosition();
+    reset();
+}
+
+//===================================================================
+void Camera::reset()
+{
+    // sets the camera at (0, 0, z) pointing to (0, 0, -z) and up being y direction
+
+    mDeltaX =  0.0;
+    mDeltaY =  0.0;
+    mInc    = 10.0;
+    mPhi    =  0.0;
+    mR      = 50.0;
+    mTheta  =  0.0;
 
     mUp.setX(0.0);
     mUp.setY(1.0);
     mUp.setZ(0.0);
-    qDebug() << Q_FUNC_INFO << mTarget;
+
+    updatePosition();
 }
 
 //===================================================================

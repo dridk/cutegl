@@ -92,13 +92,15 @@ void View::keyPressEvent(QKeyEvent *event)
         break;
     case Qt::Key_PageUp:
         mScene->camera()->zoom(-1);
-        qDebug() << Q_FUNC_INFO;
         break;
     case Qt::Key_PageDown:
         mScene->camera()->zoom(+1);
         break;
     case Qt::Key_D:
         mScene->setDebug(!mScene->isDebug());
+        break;
+    case Qt::Key_R:
+        mScene->camera()->reset();
         break;
     default:
         break;
@@ -145,7 +147,7 @@ void View::wheelEvent(QWheelEvent *event)
     if (event->modifiers().testFlag(Qt::ShiftModifier))
         mScene->camera()->incY(-sign);
     else if (event->modifiers().testFlag((Qt::AltModifier)))
-        mScene->camera()->incX(-sign);
+        mScene->camera()->incX(sign);
     else {
         mScene->camera()->zoom(sign);
     }

@@ -17,6 +17,7 @@ public:
     void             setInc(double val)            { mInc *= val; }
     void             setPhi(double val)            { mPhi   += val; updatePosition(); }
     void             setTheta(double val)          { mTheta += val; updatePosition(); }
+    void             reset();
     const QVector3D& target() const                { return mTarget; }
     const QVector3D& up() const                    { return mUp; }
     void             zoom(short int sign = +1)     { mR += sign * mInc; updatePosition();}
