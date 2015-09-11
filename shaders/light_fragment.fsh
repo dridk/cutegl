@@ -43,7 +43,7 @@ void main(void)
     vec3 result = (ambient + diffuse) ;
 
     if (has_texture)
-     color = vec4(result,1) *  texture(fragTexture, frag_uv);
+     color = vec4(result,0.5) *  texture(fragTexture, frag_uv);
     else
-     color = vec4(result,1);
+     color = vec4(result,0.5);
 }

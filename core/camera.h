@@ -9,7 +9,7 @@ class Camera
 public:
     Camera();
 
-    const QVector3D& Position() const              { return mPos; }
+    const QVector3D& position() const              { return mPos; }
     void             incPhi(short int sign = +1)   { mPhi = mPhi + sign * mInc; updatePosition(); }
     void             incTheta(short int sign = +1) { mTheta = mTheta + sign * mInc; updatePosition(); }
     void             incX(short int sign = +1)     { mPos.setX(mPos.x() + sign * mInc); }
@@ -17,7 +17,7 @@ public:
     void             setPhi(double val)            { mPhi   += val; updatePosition(); }
     void             setTheta(double val)          { mTheta += val; updatePosition(); }
     const QVector3D& up() const                    { return mUp; }
-    const QVector3D& view() const                  { return mViewCenter; }
+    const QVector3D& target() const                  { return mTarget; }
     void             zoom(short int sign = +1)     { mR = mR + sign * mInc; updatePosition();}
 
 protected:
@@ -30,7 +30,7 @@ private:
     double             mTheta;      // polar angle of
     QVector3D          mUp;         // up direction with respect to
     double             mInc;        // incremental step of camera position
-    QVector3D          mViewCenter; // center of the scene that the  is looking at
+    QVector3D          mTarget; // center of the scene that the  is looking at
 
 };
 }

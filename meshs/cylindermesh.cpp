@@ -38,5 +38,7 @@ void CylinderMesh::makeMesh()
         addVertex(Vertex(mRadius * qCos(ang + angStep), mRadius * qSin(ang + angStep),  mLength / 2.0, 0.0, (ang + angStep ) / M_PI / 2)); //5
         ang += angStep;
     }
+
+    computeNormal();
 }
 }

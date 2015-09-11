@@ -38,6 +38,8 @@ void Scene::draw()
     }
 
     mContext->functions()->glEnable(GL_DEPTH_TEST);
+    mContext->functions()->glEnable(GL_BLEND);
+    mContext->functions()->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     mContext->functions()->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
