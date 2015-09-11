@@ -36,9 +36,9 @@ void Camera::updatePosition()
     mPos.setZ(z);
     mPos.setY(y);
 
-    mViewCenter.setX(-x);
-    mViewCenter.setY(-y);
-    mViewCenter.setZ(-z);
-    mViewCenter.normalize();
+    mTarget.setX(-x);
+    mTarget.setY(-y);
+    mTarget.setZ(-z);
+    mTarget.normalize();
 }
 }

@@ -1,4 +1,4 @@
-#include <QKeyevent>
+#include <QKeyEvent>
 #include <qmath.h>
 #include <QOpenGLFunctions>
 #include <QTimer>
@@ -135,7 +135,7 @@ void View::paintGL()
 {
     // makes the drawing; called each time screen is refreshed
     mScene->setPerspective(mAspect, ((double) width()) / ((double)height()), 1, 100.0f);
-    mScene->lookAt(mScene->camera()->Position(), mScene->camera()->Position() + mScene->camera()->view(), mScene->camera()->up());
+    mScene->lookAt(mScene->camera()->position(), mScene->camera()->position() + mScene->camera()->target(), mScene->camera()->up());
     mScene->draw();
 }
 
