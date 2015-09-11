@@ -39,7 +39,8 @@ protected:
 private:
     void         keyPressEvent(QKeyEvent *event);
     void         mouseMoveEvent(QMouseEvent *event);
-    void         mousePressEvent(QMouseEvent *);
+    void         mousePressEvent(QMouseEvent *event);
+    void         wheelEvent(QWheelEvent *event);
     void         setContext(QOpenGLContext *context) { mContext = context; }
     void         toggleFullScreen();
 

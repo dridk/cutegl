@@ -131,6 +131,29 @@ void View::mousePressEvent(QMouseEvent */*event*/)
 }
 
 //===================================================================
+void View::wheelEvent(QWheelEvent *event)
+{
+    // when wheel used
+    const double kSensitivity = 0.1;
+    mScene->camera()->setInc(kSensitivity);
+
+    double delta = event->delta();
+    if (delta == 0)
+        delta = 1;
+    short int sign = delta / qAbs(delta);
+
+    if (event->modifiers().testFlag(Qt::ShiftModifier))
+        mScene->camera()->incY(-sign);
+    else if (event->modifiers().testFlag((Qt::AltModifier)))
+        mScene->camera()->incX(-sign);
+    else {
+        mScene->camera()->zoom(sign);
+    }
+    update();
+    mScene->camera()->setInc(1.0 / kSensitivity);
+}
+
+//===================================================================
 void View::paintGL()
 {
     // makes the drawing; called each time screen is refreshed

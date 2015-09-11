@@ -1,6 +1,6 @@
 #ifndef CAMERA_H
 #define CAMERA_H
-
+#include <QDebug>
 #include <QVector3D>
 
 namespace cgl {
@@ -14,11 +14,12 @@ public:
     void             incTheta(short int sign = +1) { mTheta = mTheta + sign * mInc; updatePosition(); }
     void             incX(short int sign = +1)     { mDeltaX += sign * mInc; updatePosition(); }
     void             incY(short int sign = +1)     { mDeltaY += sign * mInc; updatePosition(); }
+    void             setInc(double val)            { mInc *= val; }
     void             setPhi(double val)            { mPhi   += val; updatePosition(); }
     void             setTheta(double val)          { mTheta += val; updatePosition(); }
-    const QVector3D& up() const                    { return mUp; }
     const QVector3D& target() const                { return mTarget; }
-    void             zoom(short int sign = +1)     { mR = mR + sign * mInc; updatePosition();}
+    const QVector3D& up() const                    { return mUp; }
+    void             zoom(short int sign = +1)     { mR += sign * mInc; updatePosition();}
 
 protected:
     void      updatePosition();
