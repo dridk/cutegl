@@ -10,7 +10,7 @@ uniform mat4 all;
 
 void main(void)
 {
-    gl_Position =  all * vec4(position.xyz, 1.0);
+    gl_Position =  all * vec4(position.xyz), 1.0);
     frag_uv     = vec2(uv.x, uv.y);
     geom_normal = normal;
 }

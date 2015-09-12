@@ -61,6 +61,7 @@ void Scene::draw()
         }
 
         mesh->shaderProgram()->setUniformValueArray("all", &all, 1);
+        mesh->shaderProgram()->setUniformValue("opacity", mesh->opacity());
 
         if (mesh->hasIndices())
             mContext->functions()->glDrawArrays(mesh->mode(), 0, mesh->verticesCount());

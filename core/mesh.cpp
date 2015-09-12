@@ -4,7 +4,8 @@
 #include "mesh.h"
 namespace cgl {
 //===================================================================
-Mesh::Mesh(QObject *parent) : QObject(parent), mMode(GL_TRIANGLES), mTexture(0), mTextureImage(0),mDebugView(false)
+Mesh::Mesh(QObject *parent) : QObject(parent)
+  , mMode(GL_TRIANGLES), mTexture(0), mTextureImage(0),mDebugView(false),mOpacity(1)
 {
     // ctor
 

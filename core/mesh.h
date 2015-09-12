@@ -40,6 +40,8 @@ public:
     void                   setDefaultShaders();
     void                   setTextureImage(const QString filename) {setTextureImage(QImage(filename));}
     void                   setTextureImage(const QImage &image);
+    void                   setOpacity(float alpha) {mOpacity = alpha;}
+    float                  opacity() const {return mOpacity;}
     QOpenGLShaderProgram   *shaderProgram() const { return mShaderProgram; }
     void                   translate(float x, float y, float z) { mModelMatrix.translate(x, y, z); }
     Vertex&                vertex(int index){ return mVertices[index];}
@@ -66,6 +68,7 @@ private:
     QOpenGLBuffer            mVertexBuffer;     // the buffer that holds the lis of vertices in graphic card
     QVector<Vertex>          mVertices;         // list of vertexes for this mesh
     QVector<Material>        mMaterials;
+    float                    mOpacity;
     bool mDebugView;
 };
 }

@@ -5,6 +5,7 @@ in vec3 frag_position;
 in vec3 frag_normal;
 
 uniform sampler2D fragTexture;
+uniform float opacity;
 
 
 struct Material {
@@ -43,7 +44,7 @@ void main(void)
     vec3 result = (ambient + diffuse) ;
 
     if (has_texture)
-     color = vec4(result,0.5) *  texture(fragTexture, frag_uv);
+     color = vec4(result,opacity) *  texture(fragTexture, frag_uv);
     else
-     color = vec4(result,0.5);
+     color = vec4(result,opacity);
 }
