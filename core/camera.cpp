@@ -4,7 +4,8 @@
 #include "camera.h"
 namespace cgl {
 //===================================================================
-Camera::Camera()
+Camera::Camera(QObject * parent)
+    :QObject(parent)
 {
     // ctor
 

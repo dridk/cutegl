@@ -17,6 +17,8 @@ namespace cgl {
 class Mesh : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(float scale WRITE scale)
+
 
 public:
     Mesh(QObject *parent = 0);
