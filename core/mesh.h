@@ -48,6 +48,7 @@ public:
     void                   translate(float x, float y, float z) { mModelMatrix.translate(x, y, z); }
     Vertex&                vertex(int index){ return mVertices[index];}
     QVector<Vertex>        vertices() const { return mVertices; }
+    QVector<Material>      materials() const {return mMaterials;}
     int                    verticesCount() const { return mVertices.count(); }
     void                   setMode(GLenum mode) { mMode = mode;}
     void                   resetTransform() { mModelMatrix.setToIdentity(); }

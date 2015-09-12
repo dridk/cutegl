@@ -44,12 +44,12 @@ void Mesh::bind()
 
     }
 
-    if (!mMaterials.isEmpty()) {
+    if (!materials().isEmpty()) {
         Material material = mMaterials.first();
-        mShaderProgram->setUniformValue("material.ambient", material.mAmbient );
-        mShaderProgram->setUniformValue("material.diffuse", material.mDiffuse );
-        mShaderProgram->setUniformValue("material.specular",material.mSpecular );
-        mShaderProgram->setUniformValue("material.shininess",material.mShininess );
+        mShaderProgram->setUniformValue("material.ambient", material.ambient() );
+        mShaderProgram->setUniformValue("material.diffuse", material.diffuse());
+        mShaderProgram->setUniformValue("material.specular",material.specular() );
+        mShaderProgram->setUniformValue("material.shininess",material.shininess() );
     }
 
     mVao.bind();

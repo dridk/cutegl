@@ -6,6 +6,7 @@ in vec3 frag_normal;
 
 uniform sampler2D fragTexture;
 uniform float opacity;
+uniform vec3 cameraPosition;
 
 
 struct Material {
@@ -39,9 +40,18 @@ void main(void)
     float diff = max(dot(norm, lightDir), 0.0);
     vec3 diffuse = diff * light.ambient;
 
+    //========== Compute Specular ===========
+    vec3 viewPos = vec3(0,0,0);
+    vec3 viewDir = normalize(cameraPosition - frag_position);
+    vec3 reflectDir = reflect(-lightDir, norm);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+    vec3 specular = light.ambient * (spec  * material.specular);
 
 
-    vec3 result = (ambient + diffuse) ;
+
+    //========== Compute Specular ===========
+
+    vec3 result = (ambient + diffuse + specular) ;
 
     if (has_texture)
      color = vec4(result,opacity) *  texture(fragTexture, frag_uv);

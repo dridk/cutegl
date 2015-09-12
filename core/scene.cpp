@@ -10,7 +10,7 @@ Scene::Scene(QObject *parent) : QObject(parent), mCamera(new Camera()), mContext
 {
 
         // Add default light... Otherwise black screen !
-       addLight(new Light(5,5,5));
+       addLight(new Light(5,20,5));
 }
 
 //===================================================================
@@ -49,19 +49,25 @@ void Scene::draw()
         mesh->bind();
         QMatrix4x4 all = mProjection * mView * mesh->modelMatrix();
 
+
         // Apply light uniform value
         if (!mLights.isEmpty())
         {
 
 //           QVector3D np =   mProjection* mView * mLights.first()->position();
 //           QVector3D np =   all* mLights.first()->position();
-             QVector3D np =   mLights.first()->position();
+             QVector3D np =   mLights.first()->position();             
             mesh->shaderProgram()->setUniformValue("light.position",np);
             mesh->shaderProgram()->setUniformValue("light.ambient",  mLights.first()->colorVector());
         }
 
+
+
+
         mesh->shaderProgram()->setUniformValueArray("all", &all, 1);
         mesh->shaderProgram()->setUniformValue("opacity", mesh->opacity());
+        mesh->shaderProgram()->setUniformValue("cameraPosition", camera()->position());
+
 
         if (mesh->hasIndices())
             mContext->functions()->glDrawArrays(mesh->mode(), 0, mesh->verticesCount());
