@@ -57,19 +57,19 @@ protected:
     void computeNormal();
 
 private:
+    bool                     mDebugView;        // allows to visualize meshes
     QOpenGLBuffer            mIndexBuffer;      // the indexes to the verices in graphic card
     QVector<GLuint>          mIndices;          // the indices list
     GLenum                   mMode;             // drawing mode to connect vertices
     QMatrix4x4               mModelMatrix;      // the model matrix
     QOpenGLShaderProgram     *mShaderProgram;   // the shadder program
     QOpenGLTexture           *mTexture;         // texture od the mesh
-    QImage                   mTextureImage;    // image of the texture
-    QOpenGLVertexArrayObject mVao;              // the array ....
+    QImage                   mTextureImage;     // image of the texture
+    QOpenGLVertexArrayObject mVao;              // the buffer tha stores object data in graphic card
     QOpenGLBuffer            mVertexBuffer;     // the buffer that holds the lis of vertices in graphic card
     QVector<Vertex>          mVertices;         // list of vertexes for this mesh
-    QVector<Material>        mMaterials;
-    float                    mOpacity;
-    bool mDebugView;
+    QVector<Material>        mMaterials;        // what is this ?
+    float                    mOpacity;          // what is this ?
 };
 }
 #endif // MESH_H
