@@ -17,7 +17,7 @@ PlaneMesh::PlaneMesh(float x, float y, float width, float height, QObject * pare
 }
 
 //===================================================================
-PlaneMesh::PlaneMesh(const QRectF &rect, QObject *parent)
+PlaneMesh::PlaneMesh(const QRectF &rect, QObject */*parent*/)
 {
     // ctor
     setRect(rect);

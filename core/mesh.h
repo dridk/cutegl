@@ -54,7 +54,7 @@ public:
 
 protected:
     virtual void           makeMesh() = 0;
-    void computeNormal();
+    void                   computeNormal();
 
 private:
     bool                     mDebugView;        // allows to visualize meshes

@@ -9,7 +9,7 @@ class PlaneMesh : public Mesh
 public:
     PlaneMesh(QObject * parent = 0);
     PlaneMesh(float x, float y, float width, float height, QObject * parent = 0);
-    PlaneMesh(const QRectF& rect, QObject * parent = 0);
+    PlaneMesh(const QRectF& rect, QObject * = 0);
 
  private:
     void makeMesh();
