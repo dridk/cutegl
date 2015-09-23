@@ -102,6 +102,12 @@ void View::keyPressEvent(QKeyEvent *event)
     case Qt::Key_R:
         mScene->camera()->reset();
         break;
+    case Qt::Key_Minus:
+        scale(0.5);
+        break;
+    case Qt::Key_Plus:
+        scale(1.5);
+        break;
     default:
         break;
     }
@@ -170,6 +176,14 @@ void View::resizeGL(int w, int h)
     // resizes the screen
 
     context()->functions()->glViewport(0, 0, w, h);
+}
+
+//===================================================================
+void View::scale(float updown)
+{
+    // scales all objects in the scene (can be overwritten)
+
+    scene()->scale(updown);
 }
 
 //===================================================================

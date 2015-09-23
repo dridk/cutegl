@@ -25,6 +25,7 @@ public:
     bool         isDebug(){ return mDebug; }
     void         lookAt(const QVector3D &eye, const QVector3D &center, const QVector3D &up);
     QList<Mesh*> meshes() const { return mMeshes; }
+    void         scale(float updown);
     void         setContext(QOpenGLContext *context) { mContext = context; } // replace by currentContext static ?
     void         setDebug(bool enable = true);
     void         setOrtho(float left, float right, float bottom, float top, float nearPlane, float farPlane);

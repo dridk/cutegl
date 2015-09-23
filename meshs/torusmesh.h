@@ -10,6 +10,9 @@ class TorusMesh : public Mesh
 public:
     TorusMesh(QObject *parent = 0);
     TorusMesh(float sRadius, float radius, int seg, QObject *parent = 0);
+
+    float radius() const { return mRadiusTorus; }
+
 private:
     void makeMesh();
 

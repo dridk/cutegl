@@ -11,6 +11,7 @@ public:
     TubeMesh(QObject * parent = 0);
     TubeMesh(float rou, float rin, int nseg, float length, QObject *parent = 0);
 
+    float length() const { return mLength; }
 
 private:
     void makeMesh();

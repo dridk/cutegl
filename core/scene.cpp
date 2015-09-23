@@ -81,6 +81,14 @@ void Scene::lookAt(const QVector3D &eye, const QVector3D &center, const QVector3
 }
 
 //===================================================================
+void Scene::scale(float updown)
+{
+    // scale all meshes in the scen
+    for(int index = 0; index < mMeshes.size(); index++)
+        mMeshes.at(index)->scale(updown, updown, updown);
+}
+
+//===================================================================
 void Scene::setOrtho(float left, float right, float bottom, float top, float nearPlane, float farPlane)
 {
     // set orthogonal view

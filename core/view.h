@@ -35,6 +35,7 @@ protected:
     void         initializeGL();
     void         paintGL();
     void         resizeGL(int w, int h);
+    virtual void scale(float updown);
 
 private:
     void         keyPressEvent(QKeyEvent *event);
