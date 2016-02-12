@@ -54,8 +54,8 @@ void Scene::draw()
         {
 
 //           QVector3D np =   mProjection* mView * mLights.first()->position();
-//           QVector3D np =   all* mLights.first()->position();
-             QVector3D np =   mLights.first()->position();
+           QVector3D np =   all* mLights.first()->position();
+//             QVector3D np =   mLights.first()->position();
             mesh->shaderProgram()->setUniformValue("light.position",np);
             mesh->shaderProgram()->setUniformValue("light.ambient",  mLights.first()->colorVector());
         }

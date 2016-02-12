@@ -2,13 +2,13 @@
 #include "torusmesh.h"
 namespace cgl {
 TorusMesh::TorusMesh(QObject *parent) : Mesh(parent),
-    mRadiusTorus(0.0), mRadiusTube(0.0), mSeg(0)
+    mRadiusTorus(0.0), mRadiusTube(0.0), mSector(0), mSeg(0)
 {
     // default ctor
 }
 
-TorusMesh::TorusMesh(float sRadius, float radius, int seg, QObject *parent) : Mesh(parent),
-    mRadiusTorus(radius), mRadiusTube(sRadius), mSeg(seg)
+TorusMesh::TorusMesh(float sRadius, float radius, int seg, int sector, QObject *parent) : Mesh(parent),
+    mRadiusTorus(radius), mRadiusTube(sRadius), mSector(sector), mSeg(seg)
 {
     // ctor
 
@@ -22,7 +22,7 @@ void TorusMesh::makeMesh()
 {
     // calculates the vertices of the mesh
 
-    float angStep  = qDegreesToRadians(360. / mSeg);
+    float angStep  = qDegreesToRadians(360. / mSeg / mSector);
     float angTorus = 0.0;
 
     for (int countTorus = 0; countTorus < mSeg; countTorus++) {

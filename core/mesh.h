@@ -53,7 +53,7 @@ public:
     QImage                 textureImage() const { return mTextureImage; }
 
 protected:
-    virtual void           makeMesh() = 0;
+    virtual void           makeMesh(){;}
     void                   computeNormal();
 
 private:

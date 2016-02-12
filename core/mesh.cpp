@@ -190,21 +190,18 @@ void Mesh::computeNormal()
 {
     // calculates the vector components normal to the plane containing the vertices
 
-    for (int index = 0; index <verticesCount(); index++)
-    {
-        if ( index + 2 < verticesCount())
-        {
-            // 2 vectors of the triangle that define this vertex plan
-            QVector3D v1 = vertex(index + 1).pos() - vertex(index).pos();
-            QVector3D v2 = vertex(index + 2).pos() - vertex(index).pos();
+    for (int index = 0; index < verticesCount(); index += 3) {
+        QVector3D v1 = vertex(index + 1).pos() - vertex(index).pos();
+        QVector3D v2 = vertex(index + 2).pos() - vertex(index).pos();
 
-            // Caclulates the normal vector
-            vertex(index).setNx((v1.y() * v2.z()) - (v1.z() * v2.y()));
-            vertex(index).setNy((v1.z() * v2.x()) - (v1.x() * v2.z()));
-            vertex(index).setNz((v1.x() * v2.y()) - (v1.y() * v2.x()));
+        // Caclulates the normal vector
+        vertex(index).setNx((v1.y() * v2.z()) - (v2.y() * v1.z()));
+        vertex(index).setNy((v1.x() * v2.z()) - (v2.x() * v1.z()));
+        vertex(index).setNz((v1.x() * v2.y()) - (v2.x() * v1.y()));
 
-            vertex(index).setNormal(vertex(index).normal().normalized());
-        }
+        vertex(index).setNormal(vertex(index).normal().normalized());
+        vertex(index + 1).setNormal(vertex(index).normal().normalized());
+        vertex(index + 2).setNormal(vertex(index).normal().normalized());
     }
 }
 }

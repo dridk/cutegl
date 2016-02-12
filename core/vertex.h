@@ -39,19 +39,19 @@ public:
 
     float      green() const     { return mGreen; }
     float      blue()  const     { return mBlue; }
-    QVector3D  normal()const { return QVector3D(mNx,mNy, mNz); }
+    QVector3D  normal()const     { return QVector3D(mNx, mNy, mNz); }
     float      nx() const        { return mNx; }
     float      ny() const        { return mNy; }
     float      nz() const        { return mNz; }
-    QVector3D  pos() const   { return QVector3D(mX,mY, mZ); }
+    QVector3D  pos() const       { return QVector3D(mX, mY, mZ); }
     float      red() const       {return mRed;}
-    void       setNx(float val) { mNx = val; }
-    void       setNy(float val) { mNy = val; }
-    void       setNz(float val) { mNz = val; }
+    void       setNx(float val)  { mNx = val; }
+    void       setNy(float val)  { mNy = val; }
+    void       setNz(float val)  { mNz = val; }
     void       setTex(const QVector2D &tex);
-    QVector2D  text()const  { return QVector2D(mU, mV); }
-    float      u() const        { return mU; }
-    float      v() const        { return mV; }
+    QVector2D  text()const       { return QVector2D(mU, mV); }
+    float      u() const         { return mU; }
+    float      v() const         { return mV; }
 
 private:
     float mX;      // x coordinate of the vertex
