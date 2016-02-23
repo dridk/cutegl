@@ -30,7 +30,8 @@ Mesh::Mesh(const Mesh &mesh)
     mDebugView = mesh.mDebugView;
     mIndexBuffer = QOpenGLBuffer(mesh.mIndexBuffer);
     mMode = mesh.mMode;
-    mTexture  = new QOpenGLTexture(mesh.mTextureImage);
+    mTextureImage = mesh.mTextureImage;
+    setTextureImage(mTextureImage);
 
     for (int index = 0; index < mesh.mVertices.count(); index++)
           mVertices.append(mesh.vertices().at(index)) ;
@@ -200,7 +201,7 @@ void Mesh::setDebug(bool enable)
 //    else {
 //        qFatal("Mesh::setDebug --> no current context defined");
 //        exit(QtFatalMsg);
-//    }
+    //    }
 }
 
 //===================================================================

@@ -52,6 +52,7 @@ public:
     void                   resetTransform() { mModelMatrix.setToIdentity(); }
     void                   setDebug(bool enable = true);
     QImage                 textureImage() const { return mTextureImage; }
+    void test();
 
 protected:
     virtual void           makeMesh(){;}
