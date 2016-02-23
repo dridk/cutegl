@@ -183,7 +183,10 @@ void View::scale(float updown)
 {
     // scales all objects in the scene (can be overwritten)
 
+
     scene()->scale(updown);
+
+
 }
 
 //===================================================================
