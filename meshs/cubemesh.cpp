@@ -1,6 +1,8 @@
 #include "cubemesh.h"
 
 namespace cgl {
+
+//===================================================================
 CubeMesh::CubeMesh(double width, double length, double depth, QObject *parent) : Mesh(parent),
     mWidth(width), mLength(length), mDepth(depth)
 {
@@ -9,6 +11,13 @@ CubeMesh::CubeMesh(double width, double length, double depth, QObject *parent) :
 
 }
 
+//===================================================================
+CubeMesh::CubeMesh(CubeMesh &cube) : Mesh(cube)
+{
+
+}
+
+//===================================================================
 void CubeMesh::makeMesh()
 {
     clearVertices();

@@ -20,6 +20,7 @@ class Mesh : public QObject
 
 public:
     Mesh(QObject *parent = 0);
+    Mesh(const Mesh &mesh);
     ~Mesh();
 
     void                   addVertex(const Vertex &ver) { mVertices.append(ver); }
@@ -44,7 +45,7 @@ public:
     float                  opacity() const {return mOpacity;}
     QOpenGLShaderProgram   *shaderProgram() const { return mShaderProgram; }
     void                   translate(float x, float y, float z) { mModelMatrix.translate(x, y, z); }
-    Vertex&                vertex(int index){ return mVertices[index];}
+    Vertex&                vertex(int index)  { return mVertices[index];}
     QVector<Vertex>        vertices() const { return mVertices; }
     int                    verticesCount() const { return mVertices.count(); }
     void                   setMode(GLenum mode) { mMode = mode;}
@@ -65,7 +66,7 @@ private:
     QOpenGLShaderProgram     *mShaderProgram;   // the shadder program
     QOpenGLTexture           *mTexture;         // texture od the mesh
     QImage                   mTextureImage;     // image of the texture
-    QOpenGLVertexArrayObject mVao;              // the buffer tha stores object data in graphic card
+    QOpenGLVertexArrayObject mVao;              // the buffer that stores object data in graphic card
     QOpenGLBuffer            mVertexBuffer;     // the buffer that holds the lis of vertices in graphic card
     QVector<Vertex>          mVertices;         // list of vertexes for this mesh
     QVector<Material>        mMaterials;        // what is this ?

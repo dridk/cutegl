@@ -22,6 +22,24 @@ Mesh::Mesh(QObject *parent) : QObject(parent),
 }
 
 //===================================================================
+Mesh::Mesh(const Mesh &mesh)
+{
+    // copy ctor
+    mShaderProgram = new QOpenGLShaderProgram(this);
+
+    mDebugView = mesh.mDebugView;
+    mIndexBuffer = QOpenGLBuffer(mesh.mIndexBuffer);
+    mMode = mesh.mMode;
+    mTexture  = new QOpenGLTexture(mesh.mTextureImage);
+
+    for (int index = 0; index < mesh.mVertices.count(); index++)
+          mVertices.append(mesh.vertices().at(index)) ;
+
+    addMaterial(Material());
+    mOpacity = mesh.mOpacity;
+}
+
+//===================================================================
 Mesh::~Mesh()
 {
     // dtor

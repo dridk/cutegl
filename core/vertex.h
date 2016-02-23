@@ -53,6 +53,8 @@ public:
     float      u() const         { return mU; }
     float      v() const         { return mV; }
 
+    Vertex& operator = (const Vertex &vertex);
+
 private:
     float mX;      // x coordinate of the vertex
     float mY;      // y coordinate of the vertex

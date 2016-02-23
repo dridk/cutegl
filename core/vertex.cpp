@@ -87,4 +87,24 @@ void Vertex::setTex(const QVector2D &tex)
     mU = tex.x();
     mV = tex.y();
 }
+
+//===================================================================
+ Vertex &Vertex::operator = (const Vertex &vertex)
+{
+    // copy assignement
+
+    mX = vertex.mX;
+    mY = vertex.mY;
+    mZ = vertex.mZ;
+    mRed = vertex.mRed;
+    mGreen = vertex.mGreen;
+    mBlue = vertex.mBlue;
+    mU = vertex.mU;
+    mV = vertex.mV;
+    mNx = vertex.mNx;
+    mNy = vertex.mNy;
+    mNz = vertex.mNz;
+
+    return *this;
+}
 }

@@ -76,7 +76,6 @@ void Scene::lookAt(const QVector3D &eye, const QVector3D &center, const QVector3
 {
     // position the camera
     mView.setToIdentity();
-
     mView.lookAt(eye, center, up);
 }
 
