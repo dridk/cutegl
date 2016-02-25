@@ -10,12 +10,14 @@
 namespace cgl {
 //===================================================================
 View::View(int refreshRate) : QOpenGLWindow(),
-    mAspect(45.0), mMouseClicked(false)
+    mAspect(45.0), mMouseClicked(false), mOpacity(false)
 {
     // ctor
 
     setTitle("titre");
     setScene(new Scene);
+
+    mObjectsInView.clear();
 
     QSurfaceFormat format;
     format.setMajorVersion(3);
@@ -60,6 +62,20 @@ void View::keyPressEvent(QKeyEvent *event)
     // define action in response to keyboard key pressed
 
     switch (event->key()) {
+    case Qt::Key_O:
+    {
+        for (int index = 0; index < mObjectsInView.size(); index++) {
+            if (mOpacity) {
+                mObjectsInView.at(index)->setOpacity(1);
+                mOpacity = false;
+            }
+            else {
+                mObjectsInView.at(index)->setOpacity(0.5);
+                mOpacity = true;
+            }
+        }
+    }
+        break;
     case Qt::Key_Escape:
         close();
         break;

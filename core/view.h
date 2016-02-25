@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QOpenGLWindow>
 #include <QOpenGLDebugLogger>
+#include <QVector>
 #include <QVector3D>
 
 class QOpenGLContext;
@@ -11,6 +12,8 @@ class QPointF;
 class QTimer;
 
 #include "scene.h"
+#include "viewobject.h"
+
 namespace cgl {
 class View : public QOpenGLWindow
 {
@@ -32,6 +35,8 @@ protected slots:
     void printLog(const QOpenGLDebugMessage &msg);
 
 protected:
+    void         addObject(int index, ViewObject * obj) { mObjectsInView.insert(index, obj); }
+    QObject *    getObject(int index) { return dynamic_cast<QObject*>(mObjectsInView.at(index)); }
     void         initializeGL();
     void         paintGL();
     void         resizeGL(int w, int h);
@@ -45,14 +50,16 @@ private:
     void         setContext(QOpenGLContext *context) { mContext = context; }
     void         toggleFullScreen();
 
-    float              mAspect;        // aspect ratio
-    QOpenGLContext     *mContext;      // the context of the scene
-    QOpenGLDebugLogger *mDebugLogger;  // engine to log debug messages from QOpenGL
-    bool               mFullScreen;    // full screen mode yes or no
-    QPointF            mMousePosition; // current position of the mouse
-    bool               mMouseClicked;  // mose clicked yes or no
-    QTimer             *mTimer;        // timer to control the screen refresment
-    Scene              *mScene;        // the container of the objects to be drawn
+    float                 mAspect;        // aspect ratio
+    QOpenGLContext        *mContext;      // the context of the scene
+    QOpenGLDebugLogger    *mDebugLogger;  // engine to log debug messages from QOpenGL
+    bool                  mFullScreen;    // full screen mode yes or no
+    QPointF               mMousePosition; // current position of the mouse
+    bool                  mMouseClicked;  // mose clicked yes or no
+    QVector<ViewObject*>  mObjectsInView; // list of objects added to the view
+    bool                  mOpacity;       // opacity set or not
+    QTimer                *mTimer;        // timer to control the screen refresment
+    Scene                 *mScene;        // the container of the objects to be drawn
 
 
 };

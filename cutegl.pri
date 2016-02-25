@@ -30,7 +30,8 @@ HEADERS += \
     $$PWD/core/light.h \
     $$PWD/core/camera.h \
     $$PWD/meshs/torusmesh.h \
-    $$PWD/core/manymesh.h
+    $$PWD/core/manymesh.h \
+    $$PWD/core/viewobject.h
 
 
 SOURCES += \
@@ -62,7 +63,8 @@ SOURCES += \
     $$PWD/core/light.cpp \
     $$PWD/core/camera.cpp \
     $$PWD/meshs/torusmesh.cpp \
-    $$PWD/core/manymesh.cpp
+    $$PWD/core/manymesh.cpp \
+    $$PWD/core/viewobject.cpp
 
 RESOURCES += \
     $$PWD/shaders/shaders.qrc \
