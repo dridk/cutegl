@@ -104,6 +104,18 @@ void Scene::setPerspective(float verticalAngle, float aspectRatio, float nearPla
 }
 
 //===================================================================
+QString Scene::whereIs(QVector3D pointer) const
+{
+    // checks in which mesh the pointer is
+
+    for(int index = 0; index < meshes().size(); index++) {
+        if (meshes().at(index)->isInside(pointer))
+            return meshes().at(index)->objectName();
+    }
+    return "OUTSIDE";
+}
+
+//===================================================================
 void Scene::setDebug(bool enable)
 {
     // set debug mode for all meshes in the scene to view normals

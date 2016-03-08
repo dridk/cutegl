@@ -17,8 +17,6 @@ View::View(int refreshRate) : QOpenGLWindow(),
     setTitle("titre");
     setScene(new Scene);
 
-    mObjectsInView.clear();
-
     QSurfaceFormat format;
     format.setMajorVersion(3);
     format.setMinorVersion(4);
@@ -62,20 +60,6 @@ void View::keyPressEvent(QKeyEvent *event)
     // define action in response to keyboard key pressed
 
     switch (event->key()) {
-    case Qt::Key_O:
-    {
-        for (int index = 0; index < mObjectsInView.size(); index++) {
-            if (mOpacity) {
-                mObjectsInView.at(index)->setOpacity(1);
-                mOpacity = false;
-            }
-            else {
-                mObjectsInView.at(index)->setOpacity(0.5);
-                mOpacity = true;
-            }
-        }
-    }
-        break;
     case Qt::Key_Escape:
         close();
         break;
@@ -112,12 +96,6 @@ void View::keyPressEvent(QKeyEvent *event)
     case Qt::Key_PageDown:
         mScene->camera()->zoom(+1);
         break;
-    case Qt::Key_D:
-        mScene->setDebug(!mScene->isDebug());
-        break;
-    case Qt::Key_R:
-        mScene->camera()->reset();
-        break;
     case Qt::Key_Minus:
         scale(0.5);
         break;
@@ -125,6 +103,26 @@ void View::keyPressEvent(QKeyEvent *event)
         scale(1.5);
         break;
     default:
+        break;
+    case Qt::Key_D:
+        mScene->setDebug(!mScene->isDebug());
+        break;
+    case Qt::Key_O:
+    {
+        for (int index = 0; index < scene()->meshes().size(); index++) {
+            if (mOpacity) {
+                scene()->meshes().at(index)->setOpacity(1);
+                mOpacity = false;
+            }
+            else {
+                scene()->meshes().at(index)->setOpacity(0.5);
+                mOpacity = true;
+            }
+        }
+    }
+        break;
+    case Qt::Key_R:
+        mScene->camera()->reset();
         break;
     }
     update();
@@ -134,23 +132,63 @@ void View::keyPressEvent(QKeyEvent *event)
 void View::mouseMoveEvent(QMouseEvent *event)
 {
     // define action in response to mouse moved
+
     if (mMouseClicked) {
         float xOffset = (event->pos().x() - mMousePosition.x());
         float yOffset = (event->pos().y() - mMousePosition.y());
 
         mScene->camera()->setTheta(xOffset);
         mScene->camera()->setPhi(yOffset);
-
         mMousePosition = event->pos();
+
+    } else {
+
+        // see http://antongerdelan.net/opengl/raycasting.html
+
+        float x =  ( 2.0 * event->pos().x() ) / width() -1.0;
+        float y = 1.0 - ( 2.0 * event->pos().y()) / height();              // revert the orientation of y ( 1 on the top)
+        float z = 1.0; // dummy
+
+        QVector3D posMouse(x, y, z);                                         // normalized mouse position x and y in [-1, 1], z dummy
+
+
+        float w = 1.0; // dummy
+        QVector4D rayClip(posMouse.x(), posMouse.y(), -posMouse.z(), w);     // clip coordinates, z negative is pointing forwards, w dummy
+
+        QVector4D rayEye = scene()->projectionMatrix().inverted() * rayClip; // transform in the camera coordinate system
+        rayEye.setZ(-1.0);
+        rayEye.setW(0.0);
+
+
+        QVector4D tempo = scene()->viewMatrix().inverted() * rayEye;    // in the world coordinate system
+        QVector3D rayWorld;
+        rayWorld.setX(tempo.x());
+        rayWorld.setY(tempo.y());
+        rayWorld.setZ(tempo.z());
+        rayWorld.normalize();
+
+        qDebug() << Q_FUNC_INFO << "rayWorld" << rayWorld;
+
+        qDebug() << Q_FUNC_INFO << scene()->whereIs(rayWorld);
+
+//        for (int index = 0; index < scene()->mMeshes.at(1)->verticesCount(); index++) {
+//            QVector3D pos =  scene()->mMeshes.at(1)->vertices().at(index).pos();
+//            QVector3D popo = scene()->projectionMatrix() * scene()->viewMatrix() * pos;
+//            qDebug() << Q_FUNC_INFO << "before" <<  popo;
+//            popo = scene()->projectionMatrix() * scene()->viewMatrix() * scene()->mMeshes.at(1)->modelMatrix() * pos;
+//            qDebug() << Q_FUNC_INFO <<  "after" << popo;
+//        }
     }
     update();
 }
 
 //===================================================================
-void View::mousePressEvent(QMouseEvent */*event*/)
+void View::mousePressEvent(QMouseEvent *event)
+
 {
     // set mouse clicked
-    mMouseClicked = !mMouseClicked;
+        qDebug() << Q_FUNC_INFO;
+        mMouseClicked = !mMouseClicked;
 
 }
 

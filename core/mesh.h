@@ -31,6 +31,7 @@ public:
     void                   create();
     bool                   hasIndices() const { return mIndices.isEmpty(); }
     int                    indicesCount() const { return mIndices.count(); }
+    bool                   isInside(QVector3D pointer) const { qDebug() << pointer << "Implement for" << objectName(); return false;}
     GLenum                 mode() const { return mMode; }
     QMatrix4x4             modelMatrix() const { return mModelMatrix; }
     void                   release();
